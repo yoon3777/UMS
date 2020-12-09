@@ -1,0 +1,21 @@
+#top {
+	height: 70px;
+	text-align: left;
+	background-color: #EAEAEA;
+}
+
+#side {
+	float: left;
+	width: 7%;
+	background-color: gray;
+}
+
+#content {
+	float: left;
+}
+
+#bottom {
+	text-align: center;
+	color: white;
+	background-color: black;
+}
