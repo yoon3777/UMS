@@ -17,7 +17,7 @@ public class TestController {
 	@RequestMapping("/test")
 	public String test(Model model) {
 		model.addAttribute("view", testService.viewAll());
-		return "test/test";
+		return "test/test.page";
 	}
 	
 	@RequestMapping("/aaaPage")
@@ -32,7 +32,7 @@ public class TestController {
 	
 	@RequestMapping("/aaa")
 	public String aa(){
-		return "aaa";
+		return "test/aaa";
 	}
 
 }
