@@ -20,19 +20,10 @@ public class TestController {
 		return "test/test.page";
 	}
 	
-	@RequestMapping("/aaaPage")
+	@RequestMapping("/aaa")
 	public String aaPage(){
 		return "aaa.page";
 	}
 	
-	@RequestMapping("/aaaPart")
-	public String aaPart(){
-		return "aaa.part";
-	}
-	
-	@RequestMapping("/aaa")
-	public String aa(){
-		return "test/aaa";
-	}
 
 }
