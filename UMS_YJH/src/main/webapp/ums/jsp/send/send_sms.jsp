@@ -7,6 +7,10 @@
 .card {
 	text-align: center;
 }
+#tab {
+	overflow:auto;
+	white-space:nowrap;
+}
 </style>
 <div class="pt-3"></div>
 <div class="container-fluid" id="con">
@@ -46,38 +50,109 @@
 			<button type="button" class="btn btn-danger btn-lg btn-block">삭제</button>
 		</div>
 		<div class="col-sm-8 pt-4">
-		<table class="table table-bordered">
-			<tr style="background-color:gray">
-				<td style="width:80px;">번호</td>
-				<td>이름</td>
-				<td>수신 번호</td>
-				<td>변수1</td>
-				<td>변수2</td>
-				<td>변수3</td>
-				<td>변수4</td>
-			</tr>
-			<tbody>
-				<tr>
-					<td>1</td>
-					<td>2</td>
-					<td>3</td>
-					<td>4</td>
-					<td>5</td>
-					<td>6</td>
-					<td>7</td>
-				</tr>
-			</tbody>
-		</table>
+			<table class="table table-bordered" id="tab">
+				<thead style="background-color: gray">
+					<tr>
+						<th style="width: 80px;">번호</th>
+						<th>이름</th>
+						<th>수신번호</th>
+						<th>변수1</th>
+						<th>변수2</th>
+						<th>변수3</th>
+						<th>변수4</th>
+					</tr>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td>2</td>
+						<td>3</td>
+						<td>4</td>
+						<td>5</td>
+						<td>6</td>
+						<td>7</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
-	
+
 	<div class="pt-3"></div>
 </div>
 
 <div class="pt-3"></div>
-<div class="container-fluid" id="con">
-testestestetstestestestestestestestestestestestsetestestest
-</div>
+<div class="container-fluid" id="con">testestestetstestestestestestestestestestestestsetestestest</div>
 <div class="pt-3"></div>
 
 
