@@ -7,9 +7,26 @@
 .card {
 	text-align: center;
 }
-#tab {
-	overflow:auto;
-	white-space:nowrap;
+
+table {
+    width: 100%; /* 140px * 5 column + 16px scrollbar width */
+    border-spacing: 0;
+}
+
+tbody, thead tr { display: block; }
+
+tbody {
+    height: 220px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+tbody td, thead th {
+    width: 140px;
+}
+
+thead th:last-child {
+    width: 156px; /* 140px + 16px scrollbar width */
 }
 </style>
 <div class="pt-3"></div>
@@ -45,15 +62,15 @@
 			수신번호
 			<input type="text" class="form-control" value="">
 			<div class="pt-4"></div>
-			<button type="button" class="btn btn-primary btn-lg btn-block">추가</button>
+			<button type="button" class="btn btn-primary btn-lg btn-block" id="addBtn">추가</button>
 			<div class="pt-4"></div>
-			<button type="button" class="btn btn-danger btn-lg btn-block">삭제</button>
+			<button type="button" class="btn btn-danger btn-lg btn-block" id="delBtn">삭제</button>
 		</div>
 		<div class="col-sm-8 pt-4">
-			<table class="table table-bordered" id="tab">
+			<table class="table table-bordered">
 				<thead style="background-color: gray">
 					<tr>
-						<th style="width: 80px;">번호</th>
+						<th>번호</th>
 						<th>이름</th>
 						<th>수신번호</th>
 						<th>변수1</th>
@@ -64,84 +81,12 @@
 				<tbody>
 					<tr>
 						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>4</td>
-						<td>5</td>
-						<td>6</td>
-						<td>7</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>4</td>
-						<td>5</td>
-						<td>6</td>
-						<td>7</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>4</td>
-						<td>5</td>
-						<td>6</td>
-						<td>7</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>4</td>
-						<td>5</td>
-						<td>6</td>
-						<td>7</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>4</td>
-						<td>5</td>
-						<td>6</td>
-						<td>7</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>4</td>
-						<td>5</td>
-						<td>6</td>
-						<td>7</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>4</td>
-						<td>5</td>
-						<td>6</td>
-						<td>7</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>4</td>
-						<td>5</td>
-						<td>6</td>
-						<td>7</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>2</td>
-						<td>3</td>
-						<td>4</td>
-						<td>5</td>
-						<td>6</td>
-						<td>7</td>
+						<td>윤제현이</td>
+						<td>010-2078-7856</td>
+						<td>2020-10-10</td>
+						<td>안녕하세요</td>
+						<td>어서오세요</td>
+						<td>null</td>
 					</tr>
 				</tbody>
 			</table>
