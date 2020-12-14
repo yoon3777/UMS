@@ -2,20 +2,20 @@
 <script>
 	$(document).ready(function() {
 		// Store variables
-		var accordion_head = $('.accordion > li > a'), accordion_body = $('.accordion li > .sub-menu');
+		var menu_head = $('.menu > li > a'), menu_body = $('.menu li > .sub-menu');
 		// Click function
-		accordion_head.on('click', function(event) {
+		menu_head.on('click', function(event) {
 			// Disable header links
 			event.preventDefault();
 			// Show and hide the tabs on click
 			if ($(this).attr('class') != 'active') {
-				accordion_body.slideUp('normal');
+				menu_body.slideUp('normal');
 				$(this).next().stop(true, true).slideToggle('normal');
-				accordion_head.removeClass('active');
+				menu_head.removeClass('active');
 				$(this).addClass('active');
 			} else {
 				$(this).removeClass('active');
-				accordion_body.slideUp('normal');
+				menu_body.slideUp('normal');
 			}
 
 		});
@@ -23,11 +23,11 @@
 	});
 </script>
 <style type="text/css">
-.accordion li>.sub-menu {
+.menu li>.sub-menu {
 	display: none;
 }
 
-.accordion li:target>.sub-menu {
+.menu li:target>.sub-menu {
 	display: block;
 }
 
@@ -39,7 +39,7 @@ ul {
 <body>
 	<h3 class="my-4 text-center">UMS</h3>
 	<div>
-		<ul class="accordion">
+		<ul class="menu">
 			<li>
 				<a href="#">메시지 전송</a>
 				<ul class="sub-menu">
