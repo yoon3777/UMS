@@ -68,6 +68,21 @@
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
+
+#divradio {
+	text-align: center;
+}
+
+input[name=radio] {
+	margin-left: 10px;
+}
+
+#textarea {
+	height: 150px;
+}
+#sendBtn {
+width: 300px;
+}
 </style>
 <script>
 	$(document).ready(function() {
@@ -91,7 +106,49 @@
 
 		$('#delBtn').on("click", function() {
 			$('#tblBody tr').last().remove();
+			index--;
 		});
+		
+		var hypenPhone = function(str){
+			str = str.replace(/[^0-9]/g,'');
+			var tmp='';
+			if(str.length < 4){
+				return str;
+			}else if(str.length < 7){
+				tmp += str.substr(0,3);
+				tmp += '-';
+				tmp += str.substr(3);
+				return tmp;
+			}else if(str.length < 11){
+				tmp += str.substr(0,3);
+				tmp += '-';
+				tmp += str.substr(3,3);
+				tmp += '-';
+				tmp += str.substr(6);
+				return tmp;
+			}else {
+				tmp += str.substr(0,3);
+				tmp += '-';
+				tmp += str.substr(3,4);
+				tmp += '-';
+				tmp += str.substr(7);
+				return tmp;
+			}
+			return str;
+		}
+		
+		var destNum = document.getElementById('dest_num');
+		var departNum = document.getElementById('depart_num');
+		
+		destNum.onkeyup = function(){
+			this.value = hypenPhone(this.value);
+		}
+		departNum.onkeyup = function(){
+			this.value = hypenPhone(this.value);
+		}
+
+	
+
 	})
 </script>
 <div class="pt-3"></div>
@@ -99,7 +156,7 @@
 	<div class="row pt-4">
 		<div class="col-sm-3">
 			발신번호
-			<input type="text" class="form-control" id="depart_num">
+			<input type="text" class="form-control" id="depart_num" maxlength="13">
 		</div>
 		<div class="col-sm-2">
 			변수1
@@ -125,7 +182,7 @@
 			<input type="text" class="form-control" id="dest_name">
 			<div class="pt-4"></div>
 			수신번호
-			<input type="text" class="form-control" id="dest_num">
+			<input type="text" class="form-control" id="dest_num" maxlength="13">
 			<div class="pt-4"></div>
 			<button type="button" class="btn btn-primary btn-lg btn-block" id="addBtn">추가</button>
 			<div class="pt-4"></div>
@@ -184,5 +241,38 @@
 </div>
 
 <div class="pt-3"></div>
-<div class="container-fluid" id="con">testestestetstestestestestestestestestestestestsetestestest</div>
+
+<div class="container-fluid" id="con">
+	<div class="row pt-4">
+		<div class="col-sm-3">
+			제목
+			<input type="text" class="form-control" id="depart_num">
+			<div class="pt-3"></div>
+			<div class="pt-2" style="border: 1px solid black; height: 150px;">
+				<div id="divradio">
+					<label>
+						<input type="radio" name="radio" id="radio1">
+						즉시 전송
+					</label>
+					<label>
+						<input type="radio" name="radio" id="radio2">
+						예약 전송
+					</label>
+				</div>
+				<div class="pt-3"></div>
+				<div style="height: 100px;">
+					<input type='date' id='Date' style="margin-left: 40px;" />
+					<input type='time' id='Time' style="margin-left: 30px;" />
+				</div>
+			</div>
+
+		</div>
+		<div class="col-sm-8 pt-4">
+			<textarea class="form-control" id="textarea" placeholder="문자 내용을 입력해주세요. (90Bytes 초과시 LMS로 전환)"></textarea>
+			<div class="pt-1"></div>
+			<button type="button" class="btn btn-primary btn-lg float-right" id="sendBtn">메시지 전송</button>
+		</div>
+	</div>
+	<div class="pt-3"></div>
+</div>
 <div class="pt-3"></div>

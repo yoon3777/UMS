@@ -17,9 +17,7 @@
 				$(this).removeClass('active');
 				menu_body.slideUp('normal');
 			}
-
 		});
-
 	});
 </script>
 <style type="text/css">
