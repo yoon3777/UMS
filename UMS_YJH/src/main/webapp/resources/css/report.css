@@ -1,0 +1,51 @@
+#tBack {
+	width: 100%;
+	table-layout: fixed;
+}
+
+#dheadscroll {
+	width: 100%;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	border-top: 2px solid #d0d0d0;
+}
+
+#tHead {
+	table-layout: fixed;
+	background-color: #efefef;
+	text-align: center;
+	padding-top: 4px;
+	width: 100%;
+	height: 30px;
+}
+
+#dbodyscroll {
+	width: 100%;
+	height: 500px;
+	overflow-x: scroll;
+	overflow-y: scroll;
+	border-top: 1px solid #d0d0d0;
+}
+
+#tBody {
+	width: 100%;
+	table-layout: fixed;
+	height: 30px;
+}
+ 
+.title {
+	text-align: center;
+	font-weight: bold;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	padding: 10px 10px 10px 10px;
+}
+
+.cont {
+	border-bottom: 1px solid #efefef;
+	padding: 10px 10px 10px 10px;
+	text-align: center;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
