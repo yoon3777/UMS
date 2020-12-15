@@ -2,11 +2,18 @@ package com.mono.ums.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.mono.ums.dto.DestDTO;
+import com.mono.ums.service.SendService;
+
 @Controller
 public class SendController {
+	
+	@Autowired
+	SendService sendService;
 	
 	
 	@RequestMapping("/")
@@ -31,6 +38,11 @@ public class SendController {
 	public String send_fms(HttpSession httpSession){
 		httpSession.setAttribute("page", "FMS");
 		return "send/send_fms.page";
+	}
+	@RequestMapping("/insertDest")
+	public String insertDest(DestDTO destDTO){
+		sendService.dest_insert(destDTO);
+		return "/";
 	}
 
 }

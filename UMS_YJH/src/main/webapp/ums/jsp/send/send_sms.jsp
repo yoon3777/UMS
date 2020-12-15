@@ -124,3 +124,28 @@
 	<div class="pt-4"></div>
 </div>
 <div class="pt-3"></div>
+
+<script>
+$(document).ready(function(){
+	
+	$('#addBtn').on("click", function(){
+		var data = {
+			DEST_NAME : $('#dest_name').val(),
+			DEST_NUM : $('#dest_num').val(),
+			VAR1 : $('#var1').val(),
+			VAR2 : $('#var2').val(),
+			VAR3 : $('#var3').val(),
+			VAR4 : $('#var4').val()
+		};
+		$.ajax({
+			data : data,
+			url : '/insertDest',
+			type : 'POST',
+		}).done(function (){
+			alert("성공");
+		}).fail(function(error){
+			JSON.stringify(alert(error));
+		});
+	});
+})
+</script>

@@ -6,6 +6,6 @@
 	<typeAliases>
 		<typeAlias alias="testDTO" type="com.mono.ums.dto.TestDTO" />
 	</typeAliases>
-	
-	
+
+
 </configuration>
