@@ -2,4 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mono.ums.mapper.SendMapper">
 
+	<select id="viewAll" resultType="testDTO">
+	<![CDATA[
+		select * from board
+	]]>
+	</select>
+
+	<insert id="dest_insert">
+		insert into UMS_DEST_TEMP values(
+		DEST_SEQ.nextval, #{DEST_NAME}, #{DEST_NUM}, null, null,
+		null, null, null, #{VAR1}, #{VAR2}, #{VAR3}, #{VAR4}
+		)
+	</insert>
+
 </mapper>

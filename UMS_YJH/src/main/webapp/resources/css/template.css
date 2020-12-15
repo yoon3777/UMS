@@ -1,17 +1,18 @@
 #top {
 	height: 70px;
-	text-align: left;
+	text-align: center;
 	background-color: #EAEAEA;
+	padding-top:10px;
 }
 
 #side {
-	float: left;
-	width: 7%;
+	/* float: left;
+	width: 7%; */
 	background-color: gray;
 }
 
 #content {
-	float: left;
+	/* float: left; */
 	width:99%;
 }
 
@@ -19,4 +20,5 @@
 	text-align: center;
 	color: white;
 	background-color: black;
+	height:50px;
 }
