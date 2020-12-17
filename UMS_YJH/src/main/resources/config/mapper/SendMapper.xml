@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mono.ums.mapper.SendMapper">
+	<!-- select dest_seq, dest_name, dest_num, var1, var2, var3, var4 from UMS_DEST_TEMP -->
 
-	<select id="viewAll" resultType="testDTO">
+	<!-- 추가된 수신자 목록 -->
+	<select id="select_dest" resultType="destDTO">
 	<![CDATA[
-		select * from board
+		select * from UMS_DEST_TEMP
 	]]>
 	</select>
 
+	<!-- 수신자 추가 -->
 	<insert id="dest_insert">
+	<![CDATA[
 		insert into UMS_DEST_TEMP values(
-		DEST_SEQ.nextval, #{DEST_NAME}, #{DEST_NUM}, null, null,
-		null, null, null, #{VAR1}, #{VAR2}, #{VAR3}, #{VAR4}
+		DEST_SEQ.nextval, #{dest_name}, #{dest_num}, null, null,
+		null, null, null, #{var1}, #{var2}, #{var3}, #{var4}
 		)
+	]]>
 	</insert>
+
+	<!-- 전송 테이블 insert -->
+	<!-- <insert id="send_insert"> <![CDATA[ insert into UMS_MSG_SEND values( SEND_SEQ.nextval, #{sch_type}, #{subject}, #{depart_num}, #{now_date}, #{send_date}, 
+		#{total_count}, #{msg_content}, #{attach_file}, null, null, null, null ) ]]> </insert> -->
+
 
 </mapper>
