@@ -1,74 +1,51 @@
 package com.mono.ums.dto;
 
 public class DestDTO {
-
-	int dest_seq;
-	String dest_name;
-	String dest_num;
-	String var1;
-	String var2;
-	String var3;
-	String var4;
-
-	@Override
-	public String toString() {
-		return "DestDTO [dest_seq=" + dest_seq + ", dest_name=" + dest_name + ", dest_num=" + dest_num + ", var1=" + var1 + ", var2=" + var2
-				+ ", var3=" + var3 + ", var4=" + var4 + "]";
+	
+	String DEST_NAME;
+	String DEST_NUM;
+	String VAR1;
+	String VAR2;
+	String VAR3;
+	String VAR4;
+	
+	public String getDEST_NAME() {
+		return DEST_NAME;
 	}
-
-	public int getDest_seq() {
-		return dest_seq;
+	public void setDEST_NAME(String dEST_NAME) {
+		DEST_NAME = dEST_NAME;
 	}
-
-	public void setDest_seq(int dest_seq) {
-		this.dest_seq = dest_seq;
+	public String getDEST_NUM() {
+		return DEST_NUM;
 	}
-
-	public String getDest_name() {
-		return dest_name;
+	public void setDEST_NUM(String dEST_NUM) {
+		DEST_NUM = dEST_NUM;
 	}
-
-	public void setDest_name(String dest_name) {
-		this.dest_name = dest_name;
+	public String getVAR1() {
+		return VAR1;
 	}
-
-	public String getDest_num() {
-		return dest_num;
+	public void setVAR1(String vAR1) {
+		VAR1 = vAR1;
 	}
-
-	public void setDest_num(String dest_num) {
-		this.dest_num = dest_num;
+	public String getVAR2() {
+		return VAR2;
 	}
-
-	public String getVar1() {
-		return var1;
+	public void setVAR2(String vAR2) {
+		VAR2 = vAR2;
 	}
-
-	public void setVar1(String var1) {
-		this.var1 = var1;
+	public String getVAR3() {
+		return VAR3;
 	}
-
-	public String getVar2() {
-		return var2;
+	public void setVAR3(String vAR3) {
+		VAR3 = vAR3;
 	}
-
-	public void setVar2(String var2) {
-		this.var2 = var2;
+	public String getVAR4() {
+		return VAR4;
 	}
-
-	public String getVar3() {
-		return var3;
+	public void setVAR4(String vAR4) {
+		VAR4 = vAR4;
 	}
+	
+	
 
-	public void setVar3(String var3) {
-		this.var3 = var3;
-	}
-
-	public String getVar4() {
-		return var4;
-	}
-
-	public void setVar4(String var4) {
-		this.var4 = var4;
-	}
 }
