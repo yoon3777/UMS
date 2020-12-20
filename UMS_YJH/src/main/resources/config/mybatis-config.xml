@@ -4,7 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="testDTO" type="com.mono.ums.dto.TestDTO" />
 		<typeAlias alias="destDTO" type="com.mono.ums.dto.DestDTO" />
 	</typeAliases>
 

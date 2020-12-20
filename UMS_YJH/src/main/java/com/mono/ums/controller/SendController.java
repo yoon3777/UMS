@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mono.ums.dto.DestDTO;
 import com.mono.ums.service.SendService;
@@ -40,10 +41,14 @@ public class SendController {
 		httpSession.setAttribute("page", "FMS");
 		return "send/send_fms.page";
 	}
+	
+	@ResponseBody
 	@RequestMapping("/insertDest")
 	public String insertDest(DestDTO destDTO, Model model){
 		sendService.dest_insert(destDTO);
-		model.addAttribute("dest_list", sendService.select_dest());
+		for (DestDTO dest_list : sendService.select_dest()) {
+			model.addAttribute("dest_list", dest_list);
+		}
 		return "/";
 	}
 

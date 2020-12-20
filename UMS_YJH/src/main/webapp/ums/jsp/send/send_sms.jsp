@@ -67,7 +67,7 @@
 						</div>
 						<div id="divBodyScroll">
 							<table id="tblBody">
-								<c:forEach items="${dest_list}" var="list" varStatus="i">
+								<%-- <c:forEach items="${dest_list}" var="list" varStatus="i">
 									<tr>
 										<td class="content">
 											<c:out value="${list.dest_seq}"></c:out>
@@ -91,7 +91,7 @@
 											<c:out value="${list.var4}"></c:out>
 										</td>
 									</tr>
-								</c:forEach>
+								</c:forEach> --%>
 							</table>
 						</div>
 					</td>
@@ -160,6 +160,14 @@
 				dataType : 'text',
 				url : 'insertDest',
 				success : function(data) {
+					/* var results = data.dest_list;
+					var str='<tr>';
+					$.each(results, function(i){
+						str += '<td>' + results[i].dest_seq + '</td><td>' + result[i].dest_num + '</td><td>' + result[i].dest_name + '</td><td>'
+						+ result[i].var1 + '</td><td>' + result[i].var2 + '</td><td>' + result[i].var3 + '</td><td>' + result[i].var4;
+						str += '</tr>';
+					});
+					$("tblBody").append(str); */
 					alert('추가');
 				},
 				error : function(request, status, error) {
