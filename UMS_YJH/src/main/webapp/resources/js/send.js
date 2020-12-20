@@ -1,7 +1,7 @@
 	$(document).ready(function() {
 		var index = 1;
 
-		$('#addBtn').on("click", function() {
+		/*$('#addBtn').on("click", function() {
 
 			var rowItem = "<tr>"
 			rowItem += "<td class='content'>" + index + "</td>"
@@ -16,11 +16,11 @@
 
 			index++;
 
-		})
+		})*/
 
 		$('#delBtn').on("click", function() {
 			$('#tblBody tr').last().remove();
-			index--;
+			/*index--;*/
 		});
 
 		var hypenPhone = function(str) {

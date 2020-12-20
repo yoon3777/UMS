@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="pt-3"></div>
 <div class="container-fluid" id="con">
 	<div class="row pt-4">
@@ -66,17 +67,31 @@
 						</div>
 						<div id="divBodyScroll">
 							<table id="tblBody">
-
-								<tr>
-									<!-- <td class="content">1</td>
-									<td class="content">윤제현</td>
-									<td class="content">010-2078-7856</td>
-									<td class="content">헬로월드</td>
-									<td class="content">헬로월드</td>
-									<td class="content">헬로월드</td>
-									<td class="content">헬로월드</td> -->
-								</tr>
-
+								<c:forEach items="${dest_list}" var="list" varStatus="i">
+									<tr>
+										<td class="content">
+											<c:out value="${list.dest_seq}"></c:out>
+										</td>
+										<td class="content">
+											<c:out value="${list.dest_name}"></c:out>
+										</td>
+										<td class="content">
+											<c:out value="${list.dest_num}"></c:out>
+										</td>
+										<td class="content">
+											<c:out value="${list.var1}"></c:out>
+										</td>
+										<td class="content">
+											<c:out value="${list.var2}"></c:out>
+										</td>
+										<td class="content">
+											<c:out value="${list.var3}"></c:out>
+										</td>
+										<td class="content">
+											<c:out value="${list.var4}"></c:out>
+										</td>
+									</tr>
+								</c:forEach>
 							</table>
 						</div>
 					</td>
@@ -125,28 +140,37 @@
 	<div class="pt-4"></div>
 </div>
 <div class="pt-3"></div>
-
 <script>
 	$(document).ready(function() {
-
 		$('#addBtn').on("click", function() {
 			var data = {
-				DEST_NAME : $('#dest_name').val(),
-				DEST_NUM : $('#dest_num').val(),
-				VAR1 : $('#var1').val(),
-				VAR2 : $('#var2').val(),
-				VAR3 : $('#var3').val(),
-				VAR4 : $('#var4').val()
+				dest_name : $('#dest_name').val(),
+				dest_num : $('#dest_num').val(),
+				var1 : $('#var1').val(),
+				var2 : $('#var2').val(),
+				var3 : $('#var3').val(),
+				var4 : $('#var4').val()
 			};
+			
+			console.log(data);
+			
 			$.ajax({
 				data : data,
-				url : '/insertDest',
-				type : 'POST',
-			}).done(function() {
-				alert("성공");
-			}).fail(function(error) {
-				JSON.stringify(alert(error));
+				type : 'post',
+				dataType : 'text',
+				url : 'insertDest',
+				success : function(data) {
+					alert('추가');
+				},
+				error : function(request, status, error) {
+					/* alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error); */
+					alert("실패");
+				}
 			});
 		});
+		/* $('#sendBtn').on("click", function(){
+			$("input[name=radio]:checked").val()
+			
+		}); */
 	})
 </script>
