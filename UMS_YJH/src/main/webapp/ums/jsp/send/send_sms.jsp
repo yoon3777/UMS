@@ -110,7 +110,7 @@
 	<div class="row pt-4">
 		<div class="col-sm-3">
 			제목
-			<input type="text" class="form-control" id="depart_num">
+			<input type="text" class="form-control" id="subject">
 			<div class="pt-3"></div>
 			<div class="pt-4" style="height: 150px;">
 				<div id="divradio">
@@ -152,33 +152,49 @@
 				var4 : $('#var4').val()
 			};
 			
-			console.log(data);
+			console.log("수신자 insert 정보 : " + JSON.stringify(data));
 			
 			$.ajax({
 				data : data,
 				type : 'post',
-				dataType : 'text',
 				url : 'insertDest',
-				success : function(data) {
-					/* var results = data.dest_list;
-					var str='<tr>';
-					$.each(results, function(i){
-						str += '<td>' + results[i].dest_seq + '</td><td>' + result[i].dest_num + '</td><td>' + result[i].dest_name + '</td><td>'
-						+ result[i].var1 + '</td><td>' + result[i].var2 + '</td><td>' + result[i].var3 + '</td><td>' + result[i].var4;
+				success : function() {
+					/* var str='';
+					for ( var i=0 in data) {
+						str += '<tr><td class="content">' + data[i].dest_seq + '</td><td class="content">' + data[i].dest_num + '</td><td> class="content"'
+						+ data[i].dest_name + '</td><td class="content">' + data[i].var1 + '</td><td class="content">' + data[i].var2 +
+						'</td><td class="content">' + data[i].var3 + '</td><td class="content">' + data[i].var4 + '</td>'; 
 						str += '</tr>';
-					});
+						console.log(data[i].dest_num);
+					}
 					$("tblBody").append(str); */
-					alert('추가');
 				},
 				error : function(request, status, error) {
-					/* alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error); */
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
 					alert("실패");
 				}
 			});
 		});
-		/* $('#sendBtn').on("click", function(){
-			$("input[name=radio]:checked").val()
+		$('#sendBtn').on("click", function(){
+			var data = {
+				depart_num : $('#depart_num').val(),
+				subject : $('#subject').val(),
+				sch_type : $("input[name=radio]:checked").val(),
+				send_date : $('#Date').val()+'-'+$('#Time').val(),
+				total_count : $('#tblBody>tr').length,
+				msg_content : $('#textarea').val() 
+			}
 			
-		}); */
+			$.ajax({
+				data : data,
+				type : 'post',
+				url : 'sendMsg',
+				success : function(){
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				}
+			});
+		}); 
 	})
 </script>

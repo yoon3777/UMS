@@ -1,7 +1,7 @@
 	$(document).ready(function() {
 		var index = 1;
 
-		/*$('#addBtn').on("click", function() {
+		$('#addBtn').on("click", function() {
 
 			var rowItem = "<tr>"
 			rowItem += "<td class='content'>" + index + "</td>"
@@ -16,11 +16,29 @@
 
 			index++;
 
-		})*/
+		})
 
 		$('#delBtn').on("click", function() {
+			var num = $('#tblBody tr').last().find("td").eq(2).text();
 			$('#tblBody tr').last().remove();
-			/*index--;*/
+			index--;
+			
+			var data = {
+					dest_num : num
+			}
+			console.log("delete 할 수신자 번호 :" + JSON.stringify(data));
+			$.ajax({
+				url:'deleteDest',
+				type : 'post',
+				dataType : 'json',
+				data : data,
+				success : function() {
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+					alert("실패");
+				}
+			});
 		});
 
 		var hypenPhone = function(str) {

@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mono.ums.dto.DestDTO;
+import com.mono.ums.dto.SendDTO;
 import com.mono.ums.service.SendService;
 
 @Controller
@@ -46,10 +48,20 @@ public class SendController {
 	@RequestMapping("/insertDest")
 	public String insertDest(DestDTO destDTO, Model model){
 		sendService.dest_insert(destDTO);
-		for (DestDTO dest_list : sendService.select_dest()) {
-			model.addAttribute("dest_list", dest_list);
-		}
-		return "/";
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/deleteDest")
+	public String deleteDest(@RequestParam(value="dest_num", required=false) String dest_num){
+		sendService.dest_delete(dest_num);
+		return "redirect:/";
+	}
+	
+	@RequestMapping("/sendMsg")
+	public String sendMsg(SendDTO sendDTO){
+		sendService.send_insert(sendDTO);
+		System.out.println(sendDTO.toString());
+		return "redirect:/";
 	}
 
 }

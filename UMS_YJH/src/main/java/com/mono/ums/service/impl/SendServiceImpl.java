@@ -1,11 +1,12 @@
 package com.mono.ums.service.impl;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mono.ums.dto.DestDTO;
+import com.mono.ums.dto.SendDTO;
 import com.mono.ums.mapper.SendMapper;
 import com.mono.ums.service.SendService;
 
@@ -20,10 +21,15 @@ public class SendServiceImpl implements SendService {
 	}
 
 	// 추가한 수신자 목록
-	public List<DestDTO> select_dest() {
-		for (DestDTO a : sendmapper.select_dest()) {
-			System.out.println("수신자이름 : " + a.toString());
-		}
+	public ArrayList<DestDTO> select_dest() {
 		return sendmapper.select_dest();
+	}
+	
+	public void dest_delete(String dest_num){
+		sendmapper.dest_delete(dest_num);
+	}
+	
+	public void send_insert(SendDTO sendDTO){
+		sendmapper.send_insert(sendDTO);
 	}
 }

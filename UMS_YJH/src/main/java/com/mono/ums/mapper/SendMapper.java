@@ -1,8 +1,9 @@
 package com.mono.ums.mapper;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import com.mono.ums.dto.DestDTO;
+import com.mono.ums.dto.SendDTO;
 
 public interface SendMapper {
 
@@ -10,8 +11,11 @@ public interface SendMapper {
 	void dest_insert(DestDTO destDTO);
 
 	// 추가한 수신자 목록
-	List<DestDTO> select_dest();
+	ArrayList<DestDTO> select_dest();
+
+	// 추가한 수신자 삭제
+	void dest_delete(String dest_num);
 
 	// 메시지 전송
-
+	void send_insert(SendDTO sendDTO);
 }

@@ -2,19 +2,27 @@ package com.mono.ums.dto;
 
 public class SendDTO {
 	
-	String depart_num;	
-	String subject;	
+	String depart_num;
+	String subject;
 	String sch_type;	
-	String now_date;	
-	String send_date;	
-	int total_count;	
-	String msg_content;	
-	String attach_file;	
-	//int succ_count;	
-	//int fail_count;	
-	String reserved1;	
-	String reserved2;	
+	String now_date;//요청 일시
+	String send_date;//전송 일시
+	int total_count;
+	String msg_content;
+	String attach_file;
+	//int succ_count;
+	//int fail_count;
+	String reserved1;
+	String reserved2;
+	
+	
 
+	@Override
+	public String toString() {
+		return "SendDTO [depart_num=" + depart_num + ", subject=" + subject + ", sch_type=" + sch_type + ", now_date=" + now_date + ", send_date="
+				+ send_date + ", total_count=" + total_count + ", msg_content=" + msg_content + ", attach_file=" + attach_file + ", reserved1="
+				+ reserved1 + ", reserved2=" + reserved2 + "]";
+	}
 	public String getDepart_num() {	
 		return depart_num;	
 	}	
