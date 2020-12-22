@@ -30,6 +30,8 @@ public class SendServiceImpl implements SendService {
 	}
 	
 	public void send_insert(SendDTO sendDTO){
+		System.out.println(sendDTO.getSch_type());			
+		
 		sendmapper.send_insert(sendDTO);
 	}
 }

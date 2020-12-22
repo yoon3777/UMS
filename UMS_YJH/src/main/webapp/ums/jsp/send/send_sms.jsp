@@ -1,5 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<script>
+	$(document).ready(function() {
+		$('#addBtn').on("click", function() {
+			var data = {
+				dest_name : $('#dest_name').val(),
+				dest_num : $('#dest_num').val(),
+				var1 : $('#var1').val(),
+				var2 : $('#var2').val(),
+				var3 : $('#var3').val(),
+				var4 : $('#var4').val()
+			};
+			
+			console.log("수신자 insert 정보 : " + JSON.stringify(data));
+			
+			$.ajax({
+				data : data,
+				type : 'post',
+				url : 'insertDest',
+				success : function() {
+					
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+					alert("실패");
+				}
+			});
+		});
+		$('#sendBtn').on("click", function(){
+			var data = {
+				depart_num : $('#depart_num').val(),
+				subject : $('#subject').val(),
+				sch_type : $("input[name=radio]:checked").val(),
+				send_date : $('#Date').val()+'-'+$('#Time').val(),
+				total_count : $('#tblBody>tr').length,
+				msg_content : $('#textarea').val() 
+			}
+			
+			$.ajax({
+				data : data,
+				type : 'post',
+				url : 'sendMsg',
+				success : function(){
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+				}
+			});
+		}); 
+	})
+</script>
 <div class="pt-3"></div>
 <div class="container-fluid" id="con">
 	<div class="row pt-4">
@@ -67,31 +117,7 @@
 						</div>
 						<div id="divBodyScroll">
 							<table id="tblBody">
-								<%-- <c:forEach items="${dest_list}" var="list" varStatus="i">
-									<tr>
-										<td class="content">
-											<c:out value="${list.dest_seq}"></c:out>
-										</td>
-										<td class="content">
-											<c:out value="${list.dest_name}"></c:out>
-										</td>
-										<td class="content">
-											<c:out value="${list.dest_num}"></c:out>
-										</td>
-										<td class="content">
-											<c:out value="${list.var1}"></c:out>
-										</td>
-										<td class="content">
-											<c:out value="${list.var2}"></c:out>
-										</td>
-										<td class="content">
-											<c:out value="${list.var3}"></c:out>
-										</td>
-										<td class="content">
-											<c:out value="${list.var4}"></c:out>
-										</td>
-									</tr>
-								</c:forEach> --%>
+								
 							</table>
 						</div>
 					</td>
@@ -140,61 +166,3 @@
 	<div class="pt-4"></div>
 </div>
 <div class="pt-3"></div>
-<script>
-	$(document).ready(function() {
-		$('#addBtn').on("click", function() {
-			var data = {
-				dest_name : $('#dest_name').val(),
-				dest_num : $('#dest_num').val(),
-				var1 : $('#var1').val(),
-				var2 : $('#var2').val(),
-				var3 : $('#var3').val(),
-				var4 : $('#var4').val()
-			};
-			
-			console.log("수신자 insert 정보 : " + JSON.stringify(data));
-			
-			$.ajax({
-				data : data,
-				type : 'post',
-				url : 'insertDest',
-				success : function() {
-					/* var str='';
-					for ( var i=0 in data) {
-						str += '<tr><td class="content">' + data[i].dest_seq + '</td><td class="content">' + data[i].dest_num + '</td><td> class="content"'
-						+ data[i].dest_name + '</td><td class="content">' + data[i].var1 + '</td><td class="content">' + data[i].var2 +
-						'</td><td class="content">' + data[i].var3 + '</td><td class="content">' + data[i].var4 + '</td>'; 
-						str += '</tr>';
-						console.log(data[i].dest_num);
-					}
-					$("tblBody").append(str); */
-				},
-				error : function(request, status, error) {
-					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-					alert("실패");
-				}
-			});
-		});
-		$('#sendBtn').on("click", function(){
-			var data = {
-				depart_num : $('#depart_num').val(),
-				subject : $('#subject').val(),
-				sch_type : $("input[name=radio]:checked").val(),
-				send_date : $('#Date').val()+'-'+$('#Time').val(),
-				total_count : $('#tblBody>tr').length,
-				msg_content : $('#textarea').val() 
-			}
-			
-			$.ajax({
-				data : data,
-				type : 'post',
-				url : 'sendMsg',
-				success : function(){
-				},
-				error : function(request, status, error) {
-					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-				}
-			});
-		}); 
-	})
-</script>

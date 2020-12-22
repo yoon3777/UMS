@@ -11,12 +11,12 @@
 	<insert id="dest_insert">
 	<![CDATA[	
 		insert into UMS_DEST_TEMP values(			
-		DEST_SEQ.nextval, #{dest_name}, #{dest_num}, null, null,			
+		DEST_SEQ.nextval, #{dest_num}, #{dest_name}, null, null,			
 		null, null, null, #{var1}, #{var2}, #{var3}, #{var4}			
 		)			
 	]]>
 	</insert>
-	
+
 	<delete id="dest_delete">
 	<![CDATA[
 		delete from UMS_DEST_TEMP where dest_num = #{dest_name, jdbcType=NVARCHAR}
@@ -29,9 +29,10 @@
 		insert into UMS_MSG_SEND values(SEND_SEQ.nextval, #{sch_type, jdbcType=NVARCHAR}, #{subject, jdbcType=NVARCHAR}, 
 		#{depart_num, jdbcType=NVARCHAR}, sysdate, #{send_date, jdbcType=NVARCHAR}, 
 		#{total_count, jdbcType=NVARCHAR}, #{msg_content, jdbcType=NVARCHAR},
-		#{attach_file, jdbcType=NVARCHAR}, null, null, null, null ) 
-	]]> 
-	</insert> 
+		#{attach_file, jdbcType=NVARCHAR}, null, null, #{reserved1, jdbcType=NVARCHAR}, #{reserved2, jdbcType=NVARCHAR} 
+		) 
+	]]>
+	</insert>
 
 
 </mapper>
