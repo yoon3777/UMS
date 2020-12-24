@@ -18,4 +18,13 @@ public interface SendService {
 
 	// 메시지 전송
 	void send_insert(SendDTO sendDTO);
+
+	// 메시지 전송
+	void send_insert2(SendDTO sendDTO);
+
+	// 임시테이블 데이터 옮기기
+	void copy_dest(SendDTO sendDTO);
+
+	// 임시테이블 비우기
+	void trunc_temp();
 }

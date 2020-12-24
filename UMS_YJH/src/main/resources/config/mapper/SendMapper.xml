@@ -4,19 +4,21 @@
 
 	<select id="select_dest" resultType="destDTO">	
 	<![CDATA[		
-		select * from UMS_DEST_TEMP	
+		select dest_num, dest_name, var1, var2, var3, var4 from UMS_DEST_TEMP	
 	]]>
 	</select>
 
+	<!-- 수신자 추가 -->
 	<insert id="dest_insert">
 	<![CDATA[	
 		insert into UMS_DEST_TEMP values(			
-		DEST_SEQ.nextval, #{dest_num}, #{dest_name}, null, null,			
+		null, #{dest_num}, #{dest_name}, null, null,			
 		null, null, null, #{var1}, #{var2}, #{var3}, #{var4}			
 		)			
 	]]>
 	</insert>
 
+	<!-- 수신자 삭제 -->
 	<delete id="dest_delete">
 	<![CDATA[
 		delete from UMS_DEST_TEMP where dest_num = #{dest_name, jdbcType=NVARCHAR}
@@ -24,15 +26,55 @@
 	</delete>
 
 	<!-- 전송 테이블 insert -->
-	<insert id="send_insert"> 
+	<insert id="send_insert">
+		<selectKey keyProperty="msg_id" resultType="int" order="AFTER">
+			SELECT SEND_SEQ.currval FROM DUAL
+		</selectKey>
 	<![CDATA[ 
-		insert into UMS_MSG_SEND values(SEND_SEQ.nextval, #{sch_type, jdbcType=NVARCHAR}, #{subject, jdbcType=NVARCHAR}, 
-		#{depart_num, jdbcType=NVARCHAR}, sysdate, #{send_date, jdbcType=NVARCHAR}, 
+		insert into UMS_MSG_SEND values(
+		SEND_SEQ.nextval, #{sch_type, jdbcType=NVARCHAR}, #{subject, jdbcType=NVARCHAR}, 
+		#{depart_num, jdbcType=NVARCHAR}, to_char(sysdate,'YYYYMMDDHH24MISS'), #{send_date, jdbcType=NVARCHAR}, 
 		#{total_count, jdbcType=NVARCHAR}, #{msg_content, jdbcType=NVARCHAR},
 		#{attach_file, jdbcType=NVARCHAR}, null, null, #{reserved1, jdbcType=NVARCHAR}, #{reserved2, jdbcType=NVARCHAR} 
 		) 
+		
 	]]>
 	</insert>
+	
+	<insert id="send_insert2">
+		<selectKey keyProperty="msg_id" resultType="int" order="AFTER">
+			SELECT SEND_SEQ.currval FROM DUAL
+		</selectKey>
+	<![CDATA[ 
+		insert into UMS_MSG_SEND values(
+		SEND_SEQ.nextval, #{sch_type, jdbcType=NVARCHAR}, #{subject, jdbcType=NVARCHAR}, 
+		#{depart_num, jdbcType=NVARCHAR}, to_char(sysdate,'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS'), 
+		#{total_count, jdbcType=NVARCHAR}, #{msg_content, jdbcType=NVARCHAR},
+		#{attach_file, jdbcType=NVARCHAR}, null, null, #{reserved1, jdbcType=NVARCHAR}, #{reserved2, jdbcType=NVARCHAR} 
+		) 
+		
+	]]>
+	</insert>
+
+
+	<!-- dest_temp -> dest -->
+	<insert id="copy_dest">
+	<![CDATA[	
+		INSERT INTO UMS_DEST(
+		msg_id, dest_num, dest_name, now_date, send_date, send_status,
+		tcs_result, find_month,var1, var2, var3, var4
+		)
+		SELECT 
+		#{msg_id}, dest_num, dest_name, now_date, send_date, send_status,
+		tcs_result, find_month, var1, var2, var3, var4
+		FROM UMS_DEST_TEMP
+	]]>
+	</insert>
+
+	<!-- temp T 비우기 -->
+	<delete id="trunc_temp">
+		truncate table UMS_DEST_TEMP
+	</delete>
 
 
 </mapper>

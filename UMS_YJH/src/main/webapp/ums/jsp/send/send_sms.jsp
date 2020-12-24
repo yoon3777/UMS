@@ -2,7 +2,25 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
 	$(document).ready(function() {
+
+		//key 값에 필요한 현재날짜 구하는 코드
+		var date = new Date();
+		var year = date.getFullYear();
+		var month = new String(date.getMonth() + 1);
+		var day = new String(date.getDate());
+
+		// 한자리수일 경우 0을 채워준다. 
+		if (month.length == 1) {
+			month = "0" + month;
+		}
+		if (day.length == 1) {
+			day = "0" + day;
+		}
+		var key_date = year + month + day;
+
+		// 수신자 추가 버튼
 		$('#addBtn').on("click", function() {
+
 			var data = {
 				dest_name : $('#dest_name').val(),
 				dest_num : $('#dest_num').val(),
@@ -11,15 +29,16 @@
 				var3 : $('#var3').val(),
 				var4 : $('#var4').val()
 			};
-			
+
+			console.log("실시간 수신자 수 :" + $('#tblBody > tr').length);
+
 			console.log("수신자 insert 정보 : " + JSON.stringify(data));
-			
+
 			$.ajax({
 				data : data,
 				type : 'post',
 				url : 'insertDest',
 				success : function() {
-					
 				},
 				error : function(request, status, error) {
 					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
@@ -27,29 +46,69 @@
 				}
 			});
 		});
-		$('#sendBtn').on("click", function(){
+
+		// 메시지 전송 버튼
+		$('#sendBtn').on("click", function() {
+			var date = $('#Date').val();
+			var time = $('#Time').val() + '00';
+
+			var s_date = date.replace(/\-/g, '');
+			var s_time = time.replace(':', '');
+
 			var data = {
 				depart_num : $('#depart_num').val(),
 				subject : $('#subject').val(),
 				sch_type : $("input[name=radio]:checked").val(),
-				send_date : $('#Date').val()+'-'+$('#Time').val(),
-				total_count : $('#tblBody>tr').length,
-				msg_content : $('#textarea').val() 
+				send_date : s_date + s_time,
+				total_count : $('#index').val() - 1,
+				msg_content : $('#textarea').val()
 			}
+			console.log("총 수신자 수 :" + index);
+			console.log("날짜값 확인 :" + s_date + s_time);
 			
-			$.ajax({
-				data : data,
-				type : 'post',
-				url : 'sendMsg',
-				success : function(){
-				},
-				error : function(request, status, error) {
-					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+			swal({
+				  text : "메시지를 전송하시겠습니까?",
+				  icon: "info",
+				  buttons: true,
+				  closeOnClickOutside:false,
+				  buttons : {
+					  cancle : {
+						  text : '아니요',
+						  value : false
+					  },
+					  confirm : {
+						  text : '예',
+						  value : true
+					  }
+				  }
+			}).then((result)=>{
+				if(result){
+				$.ajax({
+					data : data,
+					type : 'post',
+					url : 'sendMsg',
+					success : function() {
+						swal("메시지 발송이 완료 되었습니다.", {
+							icon : "success",
+						});
+					},
+					error : function(request, status, error) {
+						alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+					}
+				});
+				} else{
 				}
 			});
-		}); 
+			
+
+			
+			
+			
+			});
+
 	})
 </script>
+<input type="hidden" id="index">
 <div class="pt-3"></div>
 <div class="container-fluid" id="con">
 	<div class="row pt-4">
@@ -117,7 +176,7 @@
 						</div>
 						<div id="divBodyScroll">
 							<table id="tblBody">
-								
+
 							</table>
 						</div>
 					</td>
