@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.mono.ums.dto.DestDTO;
 import com.mono.ums.dto.SendDTO;
+import com.mono.ums.dto.Send_SelectDTO;
 
 public interface SendService {
 
@@ -27,4 +28,9 @@ public interface SendService {
 
 	// 임시테이블 비우기
 	void trunc_temp();
+	
+	ArrayList<Send_SelectDTO> select_send(int msg_id);
+	
+	void insert_sdk_sms(Send_SelectDTO send_SelectDTO);
+	void insert_sdk_sms2(Send_SelectDTO send_SelectDTO);
 }

@@ -6,42 +6,20 @@
 <tiles-definitions>
 
 	<!-- 메뉴 표시 -->
-	<definition name="base" template="/ums/jsp/tiles/template.jsp">
-		<put-attribute name="css" value="/ums/jsp/tiles/css.jsp" />
-		<put-attribute name="js" value="/ums/jsp/tiles/js.jsp" />
-		<put-attribute name="left" value="/ums/jsp/tiles/left.jsp" />
-		<put-attribute name="header" value="/ums/jsp/tiles/header.jsp" />
-		<put-attribute name="body" value="" />
-		<put-attribute name="footer" value="/ums/jsp/tiles/footer.jsp" />
+	<definition name="viewDefinition" template="/assets/tiles/templates/ums/viewTemplate.jsp">
+		<put-attribute name="header" value="/assets/tiles/templates/ums/header.jsp" />
+		<put-attribute name="sider" value="/assets/tiles/templates/ums/sider.jsp" />
+		<put-attribute name="footer" value="/assets/tiles/templates/ums/footer.jsp" />
 	</definition>
 
-	<definition name="*.page" extends="base">
-		<put-attribute name="body" value="/ums/jsp/{1}.jsp" />
+	<definition name="formDefinition" template="/assets/tiles/templates/ums/formTemplate.jsp">
 	</definition>
 
-	<definition name="*/*.page" extends="base">
+	<definition name="layout:view:*/*" extends="viewDefinition">
 		<put-attribute name="body" value="/ums/jsp/{1}/{2}.jsp" />
 	</definition>
 
-	<definition name="*/*/*.page" extends="base">
-		<put-attribute name="body" value="/ums/jsp/{1}/{2}/{3}.jsp" />
-	</definition>
-
-
-	<!-- 메뉴 미표시 -->
-	<!-- <definition name="baseEmpty" template="/ums/jsp/tiles/templateEmpty.jsp">
-	</definition>
-
-	<definition name="*.part" extends="baseEmpty">
-		<put-attribute name="body" value="/ums/jsp/{1}.jsp" />
-	</definition>
-
-	<definition name="*/*.part" extends="baseEmpty">
+	<definition name="layout:form:*/*" extends="formDefinition">
 		<put-attribute name="body" value="/ums/jsp/{1}/{2}.jsp" />
 	</definition>
-
-	<definition name="*/*/*.part" extends="baseEmpty">
-		<put-attribute name="body" value="/ums/jsp/1}/{2}/{3}.jsp" />
-	</definition> -->
-
 </tiles-definitions>

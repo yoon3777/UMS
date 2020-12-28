@@ -16,14 +16,6 @@ public class SendDTO {
 	String reserved1;
 	String reserved2;
 
-
-	@Override
-	public String toString() {
-		return "SendDTO [msg_id=" + msg_id + ", depart_num=" + depart_num + ", subject=" + subject + ", sch_type=" + sch_type + ", now_date="
-				+ now_date + ", send_date=" + send_date + ", total_count=" + total_count + ", msg_content=" + msg_content + ", attach_file="
-				+ attach_file + ", reserved1=" + reserved1 + ", reserved2=" + reserved2 + "]";
-	}
-
 	public int getMsg_id() {
 		return msg_id;
 	}
@@ -112,4 +104,5 @@ public class SendDTO {
 		this.reserved2 = reserved2;
 	}
 
+	
 }

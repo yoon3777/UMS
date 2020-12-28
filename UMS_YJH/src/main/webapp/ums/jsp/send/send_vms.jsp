@@ -1,4 +1,89 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<script>
+	$(document).ready(function() {
+
+		// 수신자 추가 버튼
+		$('#addBtn').on("click", function() {
+
+			var data = {
+				dest_name : $('#dest_name').val(),
+				dest_num : $('#dest_num').val(),
+				var1 : $('#var1').val(),
+				var2 : $('#var2').val(),
+				var3 : $('#var3').val(),
+				var4 : $('#var4').val()
+			};
+
+			$.ajax({
+				data : data,
+				type : 'post',
+				url : 'insertDest',
+				success : function() {
+				},
+				error : function(request, status, error) {
+					alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+					alert("실패");
+				}
+			});
+		});
+
+		// 메시지 전송 버튼
+		$('#sendBtn').on("click", function() {
+			var date = $('#Date').val();
+			var time = $('#Time').val() + '00';
+
+			var s_date = date.replace(/\-/g, '');
+			var s_time = time.replace(':', '');
+
+			var data = {
+				depart_num : $('#depart_num').val(),
+				subject : $('#subject').val(),
+				sch_type : $("input[name=radio]:checked").val(),
+				send_date : s_date + s_time,
+				total_count : $('#index').val() - 1,
+				msg_content : $('#textarea').val()
+			}
+			
+			swal({
+				  text : "메시지를 전송하시겠습니까?",
+				  icon: "info",
+				  buttons: true,
+				  closeOnClickOutside:false,
+				  buttons : {
+					  cancle : {
+						  text : '아니요',
+						  value : false
+					  },
+					  confirm : {
+						  text : '예',
+						  value : true
+					  }
+				  }
+			}).then((result)=>{
+				if(result){
+				$.ajax({
+					data : data,
+					type : 'post',
+					url : 'sendMsg',
+					success : function() {
+						swal("메시지 발송이 완료 되었습니다.", {
+							icon : "success",
+						});
+					},
+					error : function(request, status, error) {
+						alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+					}
+				});
+				} else{
+				}
+			});
+			
+			
+			
+			});
+
+	})
+</script>
 <div class="pt-3"></div>
 <div class="container-fluid" id="con">
 	<div class="row pt-4">
@@ -66,16 +151,6 @@
 						</div>
 						<div id="divBodyScroll">
 							<table id="tblBody">
-
-								<tr>
-									<!-- <td class="content">1</td>
-									<td class="content">윤제현</td>
-									<td class="content">010-2078-7856</td>
-									<td class="content">헬로월드</td>
-									<td class="content">헬로월드</td>
-									<td class="content">헬로월드</td>
-									<td class="content">헬로월드</td> -->
-								</tr>
 
 							</table>
 						</div>

@@ -3,21 +3,6 @@
 <script>
 	$(document).ready(function() {
 
-		//key 값에 필요한 현재날짜 구하는 코드
-		var date = new Date();
-		var year = date.getFullYear();
-		var month = new String(date.getMonth() + 1);
-		var day = new String(date.getDate());
-
-		// 한자리수일 경우 0을 채워준다. 
-		if (month.length == 1) {
-			month = "0" + month;
-		}
-		if (day.length == 1) {
-			day = "0" + day;
-		}
-		var key_date = year + month + day;
-
 		// 수신자 추가 버튼
 		$('#addBtn').on("click", function() {
 
@@ -29,10 +14,6 @@
 				var3 : $('#var3').val(),
 				var4 : $('#var4').val()
 			};
-
-			console.log("실시간 수신자 수 :" + $('#tblBody > tr').length);
-
-			console.log("수신자 insert 정보 : " + JSON.stringify(data));
 
 			$.ajax({
 				data : data,
@@ -63,8 +44,6 @@
 				total_count : $('#index').val() - 1,
 				msg_content : $('#textarea').val()
 			}
-			console.log("총 수신자 수 :" + index);
-			console.log("날짜값 확인 :" + s_date + s_time);
 			
 			swal({
 				  text : "메시지를 전송하시겠습니까?",
@@ -100,13 +79,10 @@
 				}
 			});
 			
-
-			
-			
 			
 			});
 
-	})
+})
 </script>
 <input type="hidden" id="index">
 <div class="pt-3"></div>
@@ -176,7 +152,7 @@
 						</div>
 						<div id="divBodyScroll">
 							<table id="tblBody">
-
+								
 							</table>
 						</div>
 					</td>

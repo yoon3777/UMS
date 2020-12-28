@@ -85,11 +85,7 @@
 			<version>${org.springframework-version}</version>
 		</dependency>
 
-
-
 		<!-- ************************************************************ -->
-
-
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -194,6 +190,15 @@
 		</dependency>
 	</dependencies>
 	<build>
+		<sourceDirectory>D:\UMS_git\UMS_YJH\src\main\java</sourceDirectory>
+		<testSourceDirectory>D:\UMS_git\UMS_YJH\src\test\java</testSourceDirectory>
+		<outputDirectory>D:\UMS_git\UMS_YJH\src\main\webapp\WEB-INF\classes</outputDirectory>
+		<testOutputDirectory>D:\UMS_git\UMS_YJH\target\test-classes</testOutputDirectory>
+		<resources>
+			<resource>
+				<directory>D:\UMS_git\UMS_YJH\src\main\resources</directory>
+			</resource>
+		</resources>
 		<plugins>
 			<plugin>
 				<artifactId>maven-eclipse-plugin</artifactId>
@@ -228,6 +233,22 @@
 				<configuration>
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>default-resources</id>
+						<phase>process-resources</phase>
+						<goals>
+							<goal>resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>D:\UMS_git\UMS_YJH\src\main\webapp\WEB-INF\classes</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -40,7 +40,7 @@
 		
 	]]>
 	</insert>
-	
+
 	<insert id="send_insert2">
 		<selectKey keyProperty="msg_id" resultType="int" order="AFTER">
 			SELECT SEND_SEQ.currval FROM DUAL
@@ -75,6 +75,43 @@
 	<delete id="trunc_temp">
 		truncate table UMS_DEST_TEMP
 	</delete>
+
+
+	<!-- SDK INSERT할 정보 조인 -->
+	<select id="select_send" resultType="Send_SelectDTO">
+	<![CDATA[
+		SELECT
+		s.msg_id, s.sch_type, s.subject, s.depart_num, s.now_date, s.send_date, s.total_count, s.msg_content,
+		d.dest_name, d.dest_num, d.var1, d.var2, d.var3, d.var4
+		FROM UMS_MSG_SEND s, UMS_DEST d
+		WHERE s.msg_id = d.msg_id
+		AND s.msg_id=#{msg_id}
+	]]>
+	</select>
+
+	<insert id="insert_sdk_sms">
+	<![CDATA[
+		INSERT INTO SDK_SMS_SEND (MSG_ID, USER_ID, SCHEDULE_TYPE, SUBJECT, NOW_DATE, SEND_DATE,
+		CALLBACK, DEST_COUNT, DEST_INFO, SMS_MSG)
+		VALUES 
+		(SDK_SMS_SEQ.nextval, 'agentTest', #{sch_type}, #{subject},
+		to_char(sysdate,'YYYYMMDDHH24MISS'), #{send_date}, #{depart_num}, 1, #{dest_info}, #{msg_content}
+		)
+	]]>
+	</insert>
+	
+	<insert id="insert_sdk_sms2">
+	<![CDATA[
+		INSERT INTO SDK_SMS_SEND (
+		MSG_ID, USER_ID, SCHEDULE_TYPE, SUBJECT, NOW_DATE, SEND_DATE,
+		CALLBACK, DEST_COUNT, DEST_INFO, SMS_MSG
+		)
+		VALUES 
+		(SDK_SMS_SEQ.nextval, 'agentTest', #{sch_type}, #{subject},
+		to_char(sysdate,'YYYYMMDDHH24MISS'), to_char(sysdate,'YYYYMMDDHH24MISS'), #{depart_num}, 1, #{dest_info}, #{msg_content}
+		)
+	]]>
+	</insert>
 
 
 </mapper>
