@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mono.ums2.mapper.MsgSendMapper">
+
+	<!-- 수신자 추가 -->
+	<insert id="addSendItem" parameterType="com.mono.ums2.dto.DestTempDTO">
+	<![CDATA[
+		INSERT INTO UMS_DEST_TEMP (
+			ID
+			,DEST_NAME
+			,DEST_NUM
+			,NOW_DATE
+			,VAR1
+			,VAR2
+			,VAR3
+			,VAR4
+		) VALUES (
+			DEST_TEMP_SEQ.NEXTVAL
+			,#{destNm}
+			,#{destNum}
+			,TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS')
+			,#{var1}
+			,#{var2}
+			,#{var3}
+			,#{var4}
+		)			
+	]]>
+	</insert>
+
+	<select id="getSendItemTotalCnt" parameterType="java.util.HashMap" resultType="java.lang.Long">
+	<![CDATA[
+		SELECT COUNT(1)
+		FROM UMS_DEST_TEMP
+		WHERE 1=1
+	]]>
+		<if test="DEST_NM !=null  and !DEST_NM.equalsIgnoreCase('')">
+			<![CDATA[AND DEST_NAME LIKE '% || ${DEST_NM} || %']]>
+		</if>
+		<if test="DEST_NUM !=null  and !DEST_NUM.equalsIgnoreCase('')">
+			<![CDATA[AND DEST_NAME = #{DEST_NUM}]]>
+		</if>
+	<![CDATA[ORDER BY NOW_DATE DESC]]>
+	</select>
+
+	<select id="findSendItems" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+	<![CDATA[
+		SELECT 
+			DEST_NAME
+			,DEST_NUM
+			,NOW_DATE
+			,VAR1
+			,VAR2
+			,VAR3
+			,VAR4
+		FROM UMS_DEST_TEMP
+		WHERE 1=1
+	]]>
+		<if test="DEST_NM !=null  and !DEST_NM.equalsIgnoreCase('')">
+			<![CDATA[AND DEST_NAME LIKE '% || ${DEST_NM} || %']]>
+		</if>
+		<if test="DEST_NUM !=null  and !DEST_NUM.equalsIgnoreCase('')">
+			<![CDATA[AND DEST_NAME = #{DEST_NUM}]]>
+		</if>
+	<![CDATA[ORDER BY NOW_DATE DESC]]>
+	</select>
+</mapper>

@@ -1,0 +1,55 @@
+#top {
+	height: 70px;
+	text-align: center;
+	background-color: #EAEAEA;
+	padding-top: 10px;
+}
+
+#side {
+	/* float: left;
+	width: 7%; */
+	background-color: gray;
+}
+
+#content {
+	width: 99%;
+	margin-top: 15px;
+}
+
+#bottom {
+	text-align: center;
+	color: white;
+	background-color: black;
+	height: 50px;
+}
+
+/***************** header 영역 **********************/
+.header {
+	width: 100%;
+	height: 70px;
+	background: blue;
+	text-align: center;
+}
+/***************** header 영역 **********************/
+
+/***************** sider 영역 **********************/
+.menu li>#sub-menu {
+	display: none;
+}
+
+.menu li:target>#sub-menu {
+	display: block;
+}
+
+ul {
+	list-style: none;
+}
+
+li {
+	padding: 5px;
+}
+/***************** sider 영역 **********************/
+.title-font {
+	color: #1c8be6;
+	font-weight: bold;
+}
