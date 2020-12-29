@@ -1,28 +1,3 @@
-#top {
-	height: 70px;
-	text-align: center;
-	background-color: #EAEAEA;
-	padding-top: 10px;
-}
-
-#side {
-	/* float: left;
-	width: 7%; */
-	background-color: gray;
-}
-
-#content {
-	width: 99%;
-	margin-top: 15px;
-}
-
-#bottom {
-	text-align: center;
-	color: white;
-	background-color: black;
-	height: 50px;
-}
-
 /***************** header 영역 **********************/
 .header {
 	width: 100%;
@@ -30,7 +5,6 @@
 	background: blue;
 	text-align: center;
 }
-/***************** header 영역 **********************/
 
 /***************** sider 영역 **********************/
 .menu li>#sub-menu {
@@ -48,7 +22,12 @@ ul {
 li {
 	padding: 5px;
 }
-/***************** sider 영역 **********************/
+/***************** content 영역 **********************/
+#content {
+	width: 99%;
+	margin-top: 15px;
+}
+
 .title-font {
 	color: #1c8be6;
 	font-weight: bold;

@@ -65,7 +65,7 @@
 				data : $("#sendItemFrm").serialize(),
 				success : function(data) {
 					if (data.RESULT_CODE == "1") {
-						swal("수신대상이 추가되었습니다.", "총건:1건\n중복건:1건", "success");
+						swal("수신대상이 추가되었습니다.", "success");
 
 						$("#sendItemFrm").find("input").each(function() {
 							$(this).val("");
@@ -86,29 +86,32 @@
 		}
 	}
 </script>
+<div class="pt-4"></div>
 <div class="row">
 	<div class="col-lg-4">
 		<div class="row">
 			<div class="col-12">
 				<h5 class="title-font">◎ 메시지작성</h5>
 				<label>메시지제목</label>
-				<input type="text" class="form-control" name="subject" />
+				<input type="text" name="subject" class="form-control"  />
+				<div class="pt-4"></div>
 				<label>전송메시지</label>
 				<textarea class="form-control" rows="10" placeholder="문자 내용을 입력해주세요. (90Bytes 초과시 LMS로 전환)"></textarea>
+				<div class="pt-4"></div>
 				<label>발신번호</label>
-				<input type="text" class="form-control" id="depart_num" maxlength="13" />
-				<div id="divradio" class="pt-1">
+				<input type="text" id="depart_num" class="form-control" maxlength="13" />
+				<div id="divradio" class="pt-4">
 					<label>
-						<input type="radio" name="radio" id="radio1" value="0">
+						<input type="radio" id="radio1" name="radio" value="0">
 						즉시 전송
 					</label>
 					<label>
-						<input type="radio" name="radio" id="radio2" value="1">
+						<input type="radio" id="radio2" name="radio" value="1">
 						예약 전송
 					</label>
 				</div>
-				<div class="pt-1">
-					<input type='date' id='Date' style="margin-left: 40px;" />
+				<div class="pt-4">
+					<input type='date' id='Date' style="margin-left: 100px;" />
 					<input type='time' id='Time' style="margin-left: 30px;" />
 				</div>
 				<div class="pt-4">
@@ -129,7 +132,7 @@
 						</div>
 						<div class="col-lg-6">
 							<label>수신번호</label>
-							<input type="text" name="destNum" class="form-control" />
+							<input type="text" id="destNum" name="destNum" class="form-control" />
 						</div>
 					</div>
 					<div class="row">
@@ -166,6 +169,7 @@
 			<div class="col-12">
 				<h5 class="mt-5 title-font">◎ 수신자 목록</h5>
 				<span id="totalCnt" style="font-size: 14px; font-weight: bold">총0건</span>
+				<div id="divBodyScroll">
 				<table class="table table-boredered">
 					<colgroup>
 						<col style="width: 50px;" />
@@ -194,6 +198,7 @@
 						</tr>
 					</tbody>
 				</table>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	var index = 1;
+	/*var index = 1;
 
 	$('#addBtn').on("click", function() {
 
@@ -18,12 +18,12 @@ $(document).ready(function() {
 		
 		$('#index').val(index);
 
-	})
+	})*/
 
 	$('#delBtn').on("click", function() {
 		var num = $('#tblBody tr').last().find("td").eq(2).text();
 		$('#tblBody tr').last().remove();
-		index--;
+		/*index--;*/
 
 		$('#index').val(index);
 		
@@ -73,7 +73,7 @@ $(document).ready(function() {
 		return str;
 	}
 
-	var destNum = document.getElementById('dest_num');
+	var destNum = document.getElementById('destNum');
 	var departNum = document.getElementById('depart_num');
 
 	if (destNum) {
