@@ -3,11 +3,13 @@ package com.mono.ums.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,37 +23,36 @@ import com.mono.ums.service.SendService;
 public class SendController {
 
 	@Autowired
-	SendService sendService;
-
-	@RequestMapping("/")
-	public String send_sms(HttpSession httpSession, HttpServletRequest httpServletRequest, Model model) {
+	private SendService sendService;
+	
+	@ModelAttribute
+	public void common(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		model.addAttribute("contextPath", request.getContextPath());
+		model.addAttribute("request", request);
 		sendService.trunc_temp();
-		httpSession.setAttribute("page", "SMS");
+	}
+
+	@RequestMapping("/sms")
+	public String send_sms() {
 		/*
 		 * String session_id = httpServletRequest.getRequestedSessionId(); System.out.println(session_id);
 		 */
-		return "send/send_sms.page";
+		return "layout:view:send/send_sms";
 	}
 
 	@RequestMapping("/mms")
-	public String send_mms(HttpSession httpSession) {
-		sendService.trunc_temp();
-		httpSession.setAttribute("page", "MMS");
-		return "send/send_mms.page";
+	public String send_mms() {
+		return "layout:view:send/send_mms";
 	}
 
 	@RequestMapping("/vms")
-	public String send_vms(HttpSession httpSession) {
-		sendService.trunc_temp();
-		httpSession.setAttribute("page", "VMS");
-		return "send/send_vms.page";
+	public String send_vms() {
+		return "layout:view:send/send_vms";
 	}
 
 	@RequestMapping("/fms")
-	public String send_fms(HttpSession httpSession) {
-		sendService.trunc_temp();
-		httpSession.setAttribute("page", "FMS");
-		return "send/send_fms.page";
+	public String send_fms() {
+		return "layout:view:send/send_fms";
 	}
 
 	@ResponseBody
@@ -73,8 +74,6 @@ public class SendController {
 			int msg_id = sendDTO.getMsg_id();
 			sendService.copy_dest(sendDTO);
 
-			sendService.trunc_temp();
-
 			ArrayList<Send_SelectDTO> ss = sendService.select_send(msg_id);
 			for (Send_SelectDTO aa : ss) {
 				aa.setDest_info(aa.getDest_name() + '^' + aa.getDest_num());
@@ -85,8 +84,6 @@ public class SendController {
 			sendService.send_insert2(sendDTO);
 			int msg_id = sendDTO.getMsg_id();
 			sendService.copy_dest(sendDTO);
-
-			sendService.trunc_temp();
 
 			ArrayList<Send_SelectDTO> ss = sendService.select_send(msg_id);
 			for (Send_SelectDTO aa : ss) {
