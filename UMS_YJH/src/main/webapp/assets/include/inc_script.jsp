@@ -17,3 +17,5 @@
 <link rel="stylesheet" href="${contextPath}/assets/css/report.css" />
 <!-- bootstrap.. -->
 <link rel="stylesheet" href="${contextPath}/assets/css/bootstrap-4.3.1.min.css" />
+<!-- bootstrap  -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">

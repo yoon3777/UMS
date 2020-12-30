@@ -1,49 +1,4 @@
 $(document).ready(function() {
-	/*var index = 1;
-
-	$('#addBtn').on("click", function() {
-
-		var rowItem = "<tr>"
-		rowItem += "<td class='content'>" + index + "</td>"
-		rowItem += "<td class='content'>" + $('#dest_name').val() + "</td>"
-		rowItem += "<td class='content'>" + $('#dest_num').val() + "</td>"
-		rowItem += "<td class='content'>" + $('#var1').val() + "</td>"
-		rowItem += "<td class='content'>" + $('#var2').val() + "</td>"
-		rowItem += "<td class='content'>" + $('#var3').val() + "</td>"
-		rowItem += "<td class='content'>" + $('#var4').val() + "</td>"
-		rowItem += "</tr>"
-		$('#tblBody').append(rowItem);
-
-		index++;
-		
-		$('#index').val(index);
-
-	})*/
-
-	$('#delBtn').on("click", function() {
-		var num = $('#tblBody tr').last().find("td").eq(2).text();
-		$('#tblBody tr').last().remove();
-		/*index--;*/
-
-		$('#index').val(index);
-		
-		var data = {
-			dest_num : num
-		}
-		console.log("delete 할 수신자 번호 :" + JSON.stringify(data));
-		$.ajax({
-			url : 'deleteDest',
-			type : 'post',
-			dataType : 'json',
-			data : data,
-			success : function() {
-			},
-			error : function(request, status, error) {
-				alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-				alert("실패");
-			}
-		});
-	});
 
 	var hypenPhone = function(str) {
 		str = str.replace(/[^0-9]/g, '');
@@ -74,7 +29,7 @@ $(document).ready(function() {
 	}
 
 	var destNum = document.getElementById('destNum');
-	var departNum = document.getElementById('depart_num');
+	var departNum = document.getElementById('departNum');
 
 	if (destNum) {
 		destNum.onkeyup = function() {
@@ -87,14 +42,13 @@ $(document).ready(function() {
 		}
 	}
 
-	$("input:radio[name=radio]").on("click", function() {
-		if ($("input[name=radio]:checked").val() == "1") {
-			$("#Date").attr("disabled", false);
-			$("#Time").attr("disabled", false);
-		} else if ($("input[name=radio]:checked").val() == "0") {
-			$("#Date").attr("disabled", true);
-			$("#Time").attr("disabled", true);
-		}
-	});
-
 })
+	function ReservationRadioCheck(){
+		var Reservation = $('#ReservationRadio');
+		Reservation.html("<input type=\'date\' id=\'Date\' name=\'Date\' style=\"margin-left: 100px;\" /><input type=\'time\' id=\'Time\' name=\'Time\' style=\"margin-left: 30px;\" />");
+				
+	}
+	function ImmediatelyRadioCheck(){
+		var Reservation = $('#ReservationRadio');
+		Reservation.html("");
+	}

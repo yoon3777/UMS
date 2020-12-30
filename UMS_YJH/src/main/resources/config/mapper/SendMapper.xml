@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mono.ums.mapper.SendMapper">
 
-	<select id="select_dest" resultType="destDTO">	
+	<select id="select_dest" resultType="com.mono.ums.dto.DestDTO">	
 	<![CDATA[		
 		select dest_num, dest_name, var1, var2, var3, var4 from UMS_DEST_TEMP	
 	]]>
@@ -78,7 +78,7 @@
 
 
 	<!-- SDK INSERT할 정보 조인 -->
-	<select id="select_send" resultType="Send_SelectDTO">
+	<select id="select_send" resultType="com.mono.ums.dto.Send_SelectDTO">
 	<![CDATA[
 		SELECT
 		s.msg_id, s.sch_type, s.subject, s.depart_num, s.now_date, s.send_date, s.total_count, s.msg_content,

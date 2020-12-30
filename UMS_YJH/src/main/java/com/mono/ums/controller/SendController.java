@@ -32,7 +32,7 @@ public class SendController {
 		sendService.trunc_temp();
 	}
 
-	@RequestMapping("/sms")
+	@RequestMapping("/smss")
 	public String send_sms() {
 		/*
 		 * String session_id = httpServletRequest.getRequestedSessionId(); System.out.println(session_id);
@@ -40,17 +40,17 @@ public class SendController {
 		return "layout:view:send/send_sms";
 	}
 
-	@RequestMapping("/mms")
+	@RequestMapping("/mmss")
 	public String send_mms() {
 		return "layout:view:send/send_mms";
 	}
 
-	@RequestMapping("/vms")
+	@RequestMapping("/vmss")
 	public String send_vms() {
 		return "layout:view:send/send_vms";
 	}
 
-	@RequestMapping("/fms")
+	@RequestMapping("/fmss")
 	public String send_fms() {
 		return "layout:view:send/send_fms";
 	}

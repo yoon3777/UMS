@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mono.ums2.dto.DestTempDTO;
+import com.mono.ums2.dto.MsgSendDTO;
 import com.mono.ums2.service.MsgSendService;
 
 @Controller
@@ -29,15 +30,47 @@ public class MsgSendController {
 	}
 
 	@RequestMapping("/sms")
-	public String view(Model model) {
+	public String smsView(Model model) {
 		try {
-			msgSendService.setViewPage(model);
 		} catch (Exception e) {
 			e.printStackTrace();
 			// 어떠한 예외처리가 필요.
 		}
 
 		return "layout:view:msgsend/sms";
+	}
+
+	@RequestMapping("/mms")
+	public String mmsView(Model model) {
+		try {
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 어떠한 예외처리가 필요.
+		}
+
+		return "layout:view:msgsend/mms";
+	}
+
+	@RequestMapping("/vms")
+	public String vmsView(Model model) {
+		try {
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 어떠한 예외처리가 필요.
+		}
+
+		return "layout:view:msgsend/vms";
+	}
+
+	@RequestMapping("/fms")
+	public String fmsView(Model model) {
+		try {
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 어떠한 예외처리가 필요.
+		}
+
+		return "layout:view:msgsend/fms";
 	}
 
 	@RequestMapping("/list")
@@ -88,10 +121,10 @@ public class MsgSendController {
 		return "/ums/msgsend/form";
 	}
 
-	@RequestMapping("/send")
-	public void send(Model model, HttpServletResponse response) {
+	@RequestMapping("/sendMsg")
+	public void sendMsg(Model model, MsgSendDTO msgSendDTO, HttpServletResponse response) {
 		try {
-			msgSendService.send(model);
+			msgSendService.sendMsg(model, msgSendDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			// 어떠한 예외처리가 필요.

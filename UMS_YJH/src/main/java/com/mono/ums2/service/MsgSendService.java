@@ -5,14 +5,13 @@ import java.util.Map;
 import org.springframework.ui.Model;
 
 import com.mono.ums2.dto.DestTempDTO;
+import com.mono.ums2.dto.MsgSendDTO;
 
 public interface MsgSendService {
 
-	void setViewPage(Model model) throws Exception;
-
 	void setFormPage(Model model) throws Exception;
 
-	void send(Model model) throws Exception;
+	void sendMsg(Model model, MsgSendDTO msgSendDTO) throws Exception;
 
 	Map<String, String> save(Model model) throws Exception;
 

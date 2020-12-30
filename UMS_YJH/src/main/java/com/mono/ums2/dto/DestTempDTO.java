@@ -6,7 +6,6 @@ public class DestTempDTO implements Serializable {
 
 	private static final long serialVersionUID = -1114617366403463653L;
 
-	private int msgId;
 	private String destNm;
 	private String destNum;
 	private String var1;
@@ -14,13 +13,6 @@ public class DestTempDTO implements Serializable {
 	private String var3;
 	private String var4;
 
-	public int getMsgId() {
-		return msgId;
-	}
-
-	public void setMsgId(int msgId) {
-		this.msgId = msgId;
-	}
 
 	public String getDestNm() {
 		return destNm;

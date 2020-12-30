@@ -4,8 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="destDTO" type="com.mono.ums.dto.DestDTO" />
-		<typeAlias alias="sendDTO" type="com.mono.ums.dto.SendDTO" />
-		<typeAlias alias="send_selectDTO" type="com.mono.ums.dto.Send_SelectDTO" />
+		<typeAlias alias="DestTempDTO" type="com.mono.ums2.dto.DestTempDTO" />
+		<typeAlias alias="MsgSendDTO" type="com.mono.ums2.dto.MsgSendDTO" />
 	</typeAliases>
 </configuration>

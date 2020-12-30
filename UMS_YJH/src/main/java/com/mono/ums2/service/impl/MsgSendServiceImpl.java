@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 
 import com.mono.ums2.dto.DestTempDTO;
+import com.mono.ums2.dto.MsgSendDTO;
 import com.mono.ums2.mapper.MsgSendMapper;
 import com.mono.ums2.service.MsgSendService;
 
@@ -22,14 +23,6 @@ public class MsgSendServiceImpl implements MsgSendService {
 
 	@Autowired
 	private MsgSendMapper msgSendMapper;
-
-	@Override
-	public void setViewPage(Model model) throws Exception {
-		DestTempDTO destTempDTO = new DestTempDTO();
-		destTempDTO.setDestNm("123");
-
-		model.addAttribute("deptTempInfo", destTempDTO);
-	}
 
 	@Override
 	public Map<String, Object> findSendItems(Model model) throws Exception {
@@ -57,32 +50,27 @@ public class MsgSendServiceImpl implements MsgSendService {
 
 		resultMap.put("TOTAL_CNT", totalCnt);
 		resultMap.put("LIST", lists);
-		
 
 		return resultMap;
 	}
 
 	@Override
 	public void setFormPage(Model model) throws Exception {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void send(Model model) throws Exception {
-		// TODO Auto-generated method stub
-
+	public void sendMsg(Model model, MsgSendDTO msgSendDTO) throws Exception {
+		msgSendMapper.sendMsg(model, msgSendDTO);
 	}
 
 	@Override
 	public Map<String, String> save(Model model) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public Map<String, String> delete(Model model) throws Exception {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

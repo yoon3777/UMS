@@ -7,7 +7,7 @@
 	function schSendItems() {
 		$.ajax({
 			type : "POST",
-			url : '${contextPath}/ums/msgsend/list.json',
+			url : '${contextPath}/msgsend/list.json',
 			data : $("#sendItemFrm").serialize(),
 			success : function(data) {
 				var $tbody = $("#receiveList");
@@ -50,22 +50,37 @@
 			complete : function(data) {
 
 			},
-			error : function(request, status, error) {
-				alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
-				alert("실패");
+			error : function() {
+				alert('실패');
 			}
 		});
 	}
 
 	function addSendItem() {
-		if (confirm("대상자를 추가하시겠습니까?")) {
+		swal({
+			  text : "수신자를 추가하시겠습니까?",
+			  icon: "info",
+			  buttons: true,
+			  closeOnClickOutside:false,
+			  buttons : {
+				  cancle : {
+					  text : '아니요',
+					  value : false
+				  },
+				  confirm : {
+					  text : '예',
+					  value : true
+				  }
+			  }
+		}).then((result)=>{
+			if(result){
 			$.ajax({
 				type : "POST",
-				url : '${contextPath}/ums/msgsend/addSendItem.json',
+				url : '${contextPath}/msgsend/addSendItem.json',
 				data : $("#sendItemFrm").serialize(),
 				success : function(data) {
 					if (data.RESULT_CODE == "1") {
-						swal("수신대상이 추가되었습니다.", "success");
+						swal("수신대상이 추가되었습니다.", "총건:1건\n중복건:1건", "success");
 
 						$("#sendItemFrm").find("input").each(function() {
 							$(this).val("");
@@ -84,38 +99,88 @@
 				}
 			});
 		}
-	}
+	})
+}
+
+	function sendMsg() {
+		swal({
+			  text : "메시지를 전송하시겠습니까?",
+			  icon: "info",
+			  buttons: true,
+			  closeOnClickOutside:false,
+			  buttons : {
+				  cancle : {
+					  text : '아니요',
+					  value : false
+				  },
+				  confirm : {
+					  text : '예',
+					  value : true
+				  }
+			  }
+		}).then((result)=>{
+			if(result){
+			$.ajax({
+				type : "POST",
+				url : '${contextPath}/msgsend/sendMsg.json',
+				data : $("#sendMsgFrm").serialize(),
+				success : function(data) {
+					swal("메시지 발송이 완료 되었습니다.", {
+						icon : "success",
+					});
+
+					$("#sendMsgFrm").find("input").each(function() {
+						$(this).val("");
+					});
+					$("#sendMsgFrm").find("textarea").each(function() {
+						$(this).val("");
+					});
+				},
+				complete : function(data) {
+
+				},
+				error : function() {
+					swal("실패", "..", "wraning");
+				}
+			});
+		}
+	})
+}
 </script>
 <div class="pt-4"></div>
 <div class="row">
 	<div class="col-lg-4">
 		<div class="row">
-			<div class="col-12">
-				<h5 class="title-font">◎ 메시지작성</h5>
-				<label>메시지제목</label>
-				<input type="text" name="subject" class="form-control"  />
-				<div class="pt-4"></div>
-				<label>전송메시지</label>
-				<textarea class="form-control" rows="10" placeholder="문자 내용을 입력해주세요. (90Bytes 초과시 LMS로 전환)"></textarea>
-				<div class="pt-4"></div>
-				<label>발신번호</label>
-				<input type="text" id="depart_num" class="form-control" maxlength="13" />
-				<div id="divradio" class="pt-4">
-					<label>
-						<input type="radio" id="radio1" name="radio" value="0">
-						즉시 전송
-					</label>
-					<label>
-						<input type="radio" id="radio2" name="radio" value="1">
-						예약 전송
-					</label>
-				</div>
-				<div class="pt-4">
-					<input type='date' id='Date' style="margin-left: 100px;" />
-					<input type='time' id='Time' style="margin-left: 30px;" />
-				</div>
-				<div class="pt-4">
-					<button type="button" class="btn btn-primary btn-block btn-lg">메시지 전송</button>
+			<div class="container-fluid">
+				<div class="col-12">
+					<h5 class="title-font">
+						<i class="fa fa-envelope"></i>&nbsp;메시지작성
+					</h5>
+					<form id="sendMsgFrm" name="sendMsgFrm" method="post">
+						<label>메시지제목</label>
+						<input type="text" name="subject" class="form-control" />
+						<div class="pt-4"></div>
+						<label>전송메시지</label>
+						<textarea name="msgContent" class="form-control" rows="10" placeholder="문자 내용을 입력해주세요. (90Bytes 초과시 LMS로 전환)"></textarea>
+						<div class="pt-4"></div>
+						<label>발신번호</label>
+						<input type="text" id="departNum" name="departNum" class="form-control" maxlength="13" />
+						<div id="divradio" class="pt-4">
+							<label>
+								<input type="radio" id="radio1" name="radio" value="0" checked onclick="ImmediatelyRadioCheck()" />
+								즉시 전송
+							</label>
+							<label>
+								<input type="radio" id="radio2" name="radio" value="1" onclick="ReservationRadioCheck()" />
+								예약 전송
+							</label>
+						</div>
+						<div class="pt-4" id="ReservationRadio"></div>
+					</form>
+					<div class="pt-4">
+						<button type="button" id="sendMsg" class="btn btn-primary btn-block btn-lg" onclick="sendMsg()">메시지 전송</button>
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -123,7 +188,9 @@
 	<div class="col-lg-8">
 		<div class="row">
 			<div class="col-12">
-				<h5 class="title-font">◎ 수신자 추가</h5>
+				<h5 class="title-font">
+					<i class="fa fa-user-plus"></i>&nbsp;수신자 추가
+				</h5>
 				<form id="sendItemFrm" name="sendItemFrm" method="post">
 					<div class="row">
 						<div class="col-lg-6">
@@ -132,7 +199,7 @@
 						</div>
 						<div class="col-lg-6">
 							<label>수신번호</label>
-							<input type="text" id="destNum" name="destNum" class="form-control" />
+							<input type="text" id="destNum" name="destNum" class="form-control" maxlength="13" />
 						</div>
 					</div>
 					<div class="row">
@@ -159,7 +226,7 @@
 				<div class="row pt-3">
 					<div class="col-12 text-right">
 						<div class="btn-group">
-							<button id="addBtn" type="button" class="btn btn-primary btn-lg mr-1" onclick="addSendItem()">대상자 추가</button>
+							<button type="button" id="addBtn" class="btn btn-primary btn-lg mr-1" onclick="addSendItem()">대상자 추가</button>
 						</div>
 					</div>
 				</div>
@@ -167,37 +234,39 @@
 		</div>
 		<div class="row">
 			<div class="col-12">
-				<h5 class="mt-5 title-font">◎ 수신자 목록</h5>
+				<h5 class="mt-5 title-font">
+					<i class="fa fa-user"></i>&nbsp;수신자 목록
+				</h5>
 				<span id="totalCnt" style="font-size: 14px; font-weight: bold">총0건</span>
 				<div id="divBodyScroll">
-				<table class="table table-boredered">
-					<colgroup>
-						<col style="width: 50px;" />
-						<col style="width: 100px;" />
-						<col style="width: 100px;" />
-						<col style="width: 100px;" />
-						<col style="width: 100px;" />
-						<col style="width: 100px;" />
-						<col style="width: 100px;" />
-						<col style="width: 17px;" />
-					</colgroup>
-					<thead>
-						<tr>
-							<th class="title">No.</th>
-							<th class="title">이름</th>
-							<th class="title">수신번호</th>
-							<th class="title">변수1</th>
-							<th class="title">변수2</th>
-							<th class="title">변수3</th>
-							<th class="title">변수4</th>
-						</tr>
-					</thead>
-					<tbody id="receiveList">
-						<tr>
-							<td colspan="7" class="text-center">추가 된 수신자가 없습니다.</td>
-						</tr>
-					</tbody>
-				</table>
+					<table class="table table-boredered">
+						<colgroup>
+							<col style="width: 50px;" />
+							<col style="width: 100px;" />
+							<col style="width: 100px;" />
+							<col style="width: 100px;" />
+							<col style="width: 100px;" />
+							<col style="width: 100px;" />
+							<col style="width: 100px;" />
+							<col style="width: 17px;" />
+						</colgroup>
+						<thead>
+							<tr>
+								<th class="title">No.</th>
+								<th class="title">이름</th>
+								<th class="title">수신번호</th>
+								<th class="title">변수1</th>
+								<th class="title">변수2</th>
+								<th class="title">변수3</th>
+								<th class="title">변수4</th>
+							</tr>
+						</thead>
+						<tbody id="receiveList">
+							<tr>
+								<td colspan="7" class="text-center">추가 된 수신자가 없습니다.</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>

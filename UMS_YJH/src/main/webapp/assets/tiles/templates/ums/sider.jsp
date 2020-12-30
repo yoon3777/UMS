@@ -5,16 +5,16 @@
 		<a href="#">메시지 전송</a>
 		<ul class="navbar-nav" id="sub-menu">
 			<li class="nav-item">
-				<a href="/ums/">SMS/LMS</a>
+				<a href="/msgsend/sms">SMS/LMS</a>
 			</li>
 			<li class="nav-item">
-				<a href="/ums/mms">MMS</a>
+				<a href="/msgsend/mms">MMS</a>
 			</li>
 			<li class="nav-item">
-				<a href="/ums/fms">FMS</a>
+				<a href="/msgsend/fms">FMS</a>
 			</li>
 			<li class="nav-item">
-				<a href="/ums/vms">VMS</a>
+				<a href="/msgsend/vms">VMS</a>
 			</li>
 		</ul>
 	</li>
