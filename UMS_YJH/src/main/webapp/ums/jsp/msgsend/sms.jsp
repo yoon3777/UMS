@@ -103,6 +103,15 @@
 }
 
 	function sendMsg() {
+		var date =$('#Date').val();
+		var time = $('#Time').val() + '00';
+		var s_date = date.replace(/\-/g, '');
+		var s_time = time.replace(':', '');
+		var data = {
+				slist : $("#sendMsgFrm").serialize(),
+				sendDate : s_date + s_time,
+				schdType : $("input[name=radio]:checked").val(),
+		}
 		swal({
 			  text : "메시지를 전송하시겠습니까?",
 			  icon: "info",
@@ -122,8 +131,8 @@
 			if(result){
 			$.ajax({
 				type : "POST",
-				url : '${contextPath}/msgsend/sendMsg.json',
-				data : $("#sendMsgFrm").serialize(),
+				url : '${contextPath}/msgsend/sendMsg',
+				data : data,
 				success : function(data) {
 					swal("메시지 발송이 완료 되었습니다.", {
 						icon : "success",
@@ -140,7 +149,7 @@
 
 				},
 				error : function() {
-					swal("실패", "..", "wraning");
+					swal("실패", "..", "warning");
 				}
 			});
 		}
@@ -167,11 +176,11 @@
 						<input type="text" id="departNum" name="departNum" class="form-control" maxlength="13" />
 						<div id="divradio" class="pt-4">
 							<label>
-								<input type="radio" id="radio1" name="radio" value="0" checked onclick="ImmediatelyRadioCheck()" />
+								<input type="radio" name="radio" value="0" checked onclick="ImmediatelyRadioCheck()" />
 								즉시 전송
 							</label>
 							<label>
-								<input type="radio" id="radio2" name="radio" value="1" onclick="ReservationRadioCheck()" />
+								<input type="radio" name="radio" value="1" onclick="ReservationRadioCheck()" />
 								예약 전송
 							</label>
 						</div>
@@ -261,7 +270,7 @@
 								<th class="title">변수4</th>
 							</tr>
 						</thead>
-						<tbody id="receiveList">
+						<tbody id="receiveList" style="text-align: center">
 							<tr>
 								<td colspan="7" class="text-center">추가 된 수신자가 없습니다.</td>
 							</tr>

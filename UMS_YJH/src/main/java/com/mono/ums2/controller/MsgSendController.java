@@ -109,6 +109,17 @@ public class MsgSendController {
 		return resultMap;
 	}
 
+	@RequestMapping("/sendMsg")
+	public void sendMsg(Model model, MsgSendDTO msgSendDTO, HttpServletResponse response) {
+		try {
+			System.out.println(msgSendDTO.toString());
+			msgSendService.sendMsg(model, msgSendDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 어떠한 예외처리가 필요.
+		}
+	}
+
 	@RequestMapping("/form")
 	public String form(Model model) {
 		try {
@@ -119,16 +130,6 @@ public class MsgSendController {
 		}
 
 		return "/ums/msgsend/form";
-	}
-
-	@RequestMapping("/sendMsg")
-	public void sendMsg(Model model, MsgSendDTO msgSendDTO, HttpServletResponse response) {
-		try {
-			msgSendService.sendMsg(model, msgSendDTO);
-		} catch (Exception e) {
-			e.printStackTrace();
-			// 어떠한 예외처리가 필요.
-		}
 	}
 
 	@RequestMapping("/save")

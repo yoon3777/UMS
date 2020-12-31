@@ -19,6 +19,12 @@ public class MsgSendDTO implements Serializable{
 	String reserved1;
 	String reserved2;
 	
+	@Override
+	public String toString() {
+		return "MsgSendDTO [msgId=" + msgId + ", sendType=" + sendType + ", schdType=" + schdType + ", subject=" + subject + ", departNum="
+				+ departNum + ", nowDate=" + nowDate + ", sendDate=" + sendDate + ", MsgCnt=" + MsgCnt + ", msgContent=" + msgContent
+				+ ", attachFile=" + attachFile + ", reserved1=" + reserved1 + ", reserved2=" + reserved2 + "]";
+	}
 	public int getMsgId() {
 		return msgId;
 	}
