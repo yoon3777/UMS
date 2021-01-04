@@ -3,7 +3,8 @@
 	$(document).ready(function() {
 		schSendItems();
 	});
-
+	var totalCnt;
+	
 	function schSendItems() {
 		$.ajax({
 			type : "POST",
@@ -11,7 +12,7 @@
 			data : $("#sendItemFrm").serialize(),
 			success : function(data) {
 				var $tbody = $("#receiveList");
-
+				totalCnt = data.TOTAL_CNT;
 				$("#totalCnt").text("총" + data.TOTAL_CNT + "건");
 				if (data.TOTAL_CNT > 0) {
 					$tbody.html("");
@@ -86,7 +87,7 @@
 							$(this).val("");
 						});
 					} else {
-						swal("수신대상등록에 실패하였습니다.", "", "danger");
+						swal("수신대상등록에 실패하였습니다.", "미입력", "danger");
 					}
 					schSendItems();
 				},
@@ -103,15 +104,20 @@
 }
 
 	function sendMsg() {
-		var date =$('#Date').val();
-		var time = $('#Time').val() + '00';
-		var s_date = date.replace(/\-/g, '');
-		var s_time = time.replace(':', '');
-		var data = {
-				slist : $("#sendMsgFrm").serialize(),
-				sendDate : s_date + s_time,
-				schdType : $("input[name=radio]:checked").val(),
-		}
+		if($('input[name=radio]:checked').val()==1){
+			var date =$('#Date').val();
+			var time = $('#Time').val() + '00';
+			var s_date = date.replace(/\-/g, '');
+			var s_time = time.replace(':', '');
+			}
+			data = {
+					subject : $("#subject").val(),
+					msgContent : $("#msgContent").val(),
+					departNum : $("#departNum").val(),
+					schdType : $('input[name=radio]:checked').val(),
+					sendDate : s_date + s_time,
+					msgCnt : totalCnt
+			};
 		swal({
 			  text : "메시지를 전송하시겠습니까?",
 			  icon: "info",
@@ -134,16 +140,18 @@
 				url : '${contextPath}/msgsend/sendMsg',
 				data : data,
 				success : function(data) {
-					swal("메시지 발송이 완료 되었습니다.", {
-						icon : "success",
-					});
+					if (data.RESULT_CODE == "1") {
+						swal("메시지 발송이 완료 되었습니다.", "성공", "success");
 
-					$("#sendMsgFrm").find("input").each(function() {
-						$(this).val("");
-					});
-					$("#sendMsgFrm").find("textarea").each(function() {
-						$(this).val("");
-					});
+						$("#sendMsgFrm").find("input").each(function() {
+							$(this).val("");
+						});
+						$("#sendMsgFrm").find("textarea").each(function() {
+							$(this).val("");
+						});
+					} else {
+						swal("메시지 전송 실패.", "??", "warning");
+					}
 				},
 				complete : function(data) {
 
@@ -167,10 +175,10 @@
 					</h5>
 					<form id="sendMsgFrm" name="sendMsgFrm" method="post">
 						<label>메시지제목</label>
-						<input type="text" name="subject" class="form-control" />
+						<input type="text" id="subject" name="subject" class="form-control" />
 						<div class="pt-4"></div>
 						<label>전송메시지</label>
-						<textarea name="msgContent" class="form-control" rows="10" placeholder="문자 내용을 입력해주세요. (90Bytes 초과시 LMS로 전환)"></textarea>
+						<textarea id="msgContent" name="msgContent" class="form-control" rows="10" placeholder="문자 내용을 입력해주세요. (90Bytes 초과시 LMS로 전환)"></textarea>
 						<div class="pt-4"></div>
 						<label>발신번호</label>
 						<input type="text" id="departNum" name="departNum" class="form-control" maxlength="13" />
@@ -187,7 +195,7 @@
 						<div class="pt-4" id="ReservationRadio"></div>
 					</form>
 					<div class="pt-4">
-						<button type="button" id="sendMsg" class="btn btn-primary btn-block btn-lg" onclick="sendMsg()">메시지 전송</button>
+						<button type="button" class="btn btn-primary btn-block btn-lg" onclick="sendMsg()">메시지 전송</button>
 					</div>
 
 				</div>

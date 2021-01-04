@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mono.ums2.dto.DestTempDTO;
 import com.mono.ums2.dto.MsgSendDTO;
+import com.mono.ums2.dto.SdkSendDTO;
 import com.mono.ums2.service.MsgSendService;
 
 @Controller
@@ -97,58 +98,13 @@ public class MsgSendController {
 		return resultMap;
 	}
 
-	@RequestMapping("/removeSendItem")
-	public @ResponseBody Map<String, String> removeSendItem(Model model, HttpServletResponse response) {
-		Map<String, String> resultMap = null;
-		try {
-			resultMap = msgSendService.save(model);
-		} catch (Exception e) {
-			e.printStackTrace();
-			// 어떠한 예외처리가 필요.
-		}
-		return resultMap;
-	}
 
 	@RequestMapping("/sendMsg")
-	public void sendMsg(Model model, MsgSendDTO msgSendDTO, HttpServletResponse response) {
+	public @ResponseBody Map<String, String> sendMsg(Model model, MsgSendDTO msgSendDTO, SdkSendDTO sdkSendDTO, HttpServletResponse response) {
+		Map<String, String> resultMap = null;
 		try {
 			System.out.println(msgSendDTO.toString());
-			msgSendService.sendMsg(model, msgSendDTO);
-		} catch (Exception e) {
-			e.printStackTrace();
-			// 어떠한 예외처리가 필요.
-		}
-	}
-
-	@RequestMapping("/form")
-	public String form(Model model) {
-		try {
-			msgSendService.setFormPage(model);
-		} catch (Exception e) {
-			e.printStackTrace();
-			// 어떠한 예외처리가 필요.
-		}
-
-		return "/ums/msgsend/form";
-	}
-
-	@RequestMapping("/save")
-	public @ResponseBody Map<String, String> save(Model model, HttpServletResponse response) {
-		Map<String, String> resultMap = null;
-		try {
-			resultMap = msgSendService.save(model);
-		} catch (Exception e) {
-			e.printStackTrace();
-			// 어떠한 예외처리가 필요.
-		}
-		return resultMap;
-	}
-
-	@RequestMapping("/delete")
-	public @ResponseBody Map<String, String> delete(Model model, HttpServletResponse response) {
-		Map<String, String> resultMap = null;
-		try {
-			resultMap = msgSendService.delete(model);
+			resultMap = msgSendService.sendMsg(model, msgSendDTO, sdkSendDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			// 어떠한 예외처리가 필요.

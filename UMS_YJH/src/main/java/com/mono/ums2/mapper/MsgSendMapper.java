@@ -1,12 +1,12 @@
 package com.mono.ums2.mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.ui.Model;
-
 import com.mono.ums2.dto.DestTempDTO;
 import com.mono.ums2.dto.MsgSendDTO;
+import com.mono.ums2.dto.SdkSendDTO;
 
 public interface MsgSendMapper {
 
@@ -16,5 +16,14 @@ public interface MsgSendMapper {
 
 	void addSendItem(DestTempDTO destTempDTO);
 	
-	void sendMsg(Model model, MsgSendDTO msgSendDTO); 
+	void sendMsg(MsgSendDTO msgSendDTO); 
+	
+	void overWriteDest(MsgSendDTO msgSendDTO);
+
+	void truncTempItems();
+	
+	ArrayList<SdkSendDTO> sendMsgSelect(int msgId);
+	
+	void sendMsgSDK(SdkSendDTO sdkSendDTO);
+
 }

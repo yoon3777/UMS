@@ -6,16 +6,11 @@ import org.springframework.ui.Model;
 
 import com.mono.ums2.dto.DestTempDTO;
 import com.mono.ums2.dto.MsgSendDTO;
+import com.mono.ums2.dto.SdkSendDTO;
 
 public interface MsgSendService {
 
-	void setFormPage(Model model) throws Exception;
-
-	void sendMsg(Model model, MsgSendDTO msgSendDTO) throws Exception;
-
-	Map<String, String> save(Model model) throws Exception;
-
-	Map<String, String> delete(Model model) throws Exception;
+	Map<String, String> sendMsg(Model model, MsgSendDTO msgSendDTO, SdkSendDTO sdkSendDTO) throws Exception;
 
 	Map<String, String> addSendItem(Model model, DestTempDTO destTempDTO) throws Exception;
 

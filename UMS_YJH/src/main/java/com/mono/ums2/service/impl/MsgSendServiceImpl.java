@@ -1,5 +1,6 @@
 package com.mono.ums2.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import org.springframework.util.StringUtils;
 
 import com.mono.ums2.dto.DestTempDTO;
 import com.mono.ums2.dto.MsgSendDTO;
+import com.mono.ums2.dto.SdkSendDTO;
 import com.mono.ums2.mapper.MsgSendMapper;
 import com.mono.ums2.service.MsgSendService;
 
@@ -55,23 +57,24 @@ public class MsgSendServiceImpl implements MsgSendService {
 	}
 
 	@Override
-	public void setFormPage(Model model) throws Exception {
+	public Map<String, String> sendMsg(Model model, MsgSendDTO msgSendDTO, SdkSendDTO sdkSendDTO) throws Exception {
+		Map<String, String> resultMap = new HashMap<String, String>();
+		resultMap.put("RESULT_CODE", "1");
+		if (msgSendDTO.getDepartNum()==null) {
+			resultMap.put("RESULT_CODE", "0");
+		} else {
+			msgSendMapper.sendMsg(msgSendDTO);
+			msgSendMapper.overWriteDest(msgSendDTO);
+			int msgId = msgSendDTO.getMsgId();
+			msgSendMapper.truncTempItems();
+			ArrayList<SdkSendDTO> list = msgSendMapper.sendMsgSelect(msgId);
+			for (SdkSendDTO sdk : list) {
+				sdk.setDestInfo(sdk.getDestNm()+'^'+sdk.getDestNum());
+				msgSendMapper.sendMsgSDK(sdk);
+			}
+		}
+		return resultMap;
 
-	}
-
-	@Override
-	public void sendMsg(Model model, MsgSendDTO msgSendDTO) throws Exception {
-		msgSendMapper.sendMsg(model, msgSendDTO);
-	}
-
-	@Override
-	public Map<String, String> save(Model model) throws Exception {
-		return null;
-	}
-
-	@Override
-	public Map<String, String> delete(Model model) throws Exception {
-		return null;
 	}
 
 	@Override
