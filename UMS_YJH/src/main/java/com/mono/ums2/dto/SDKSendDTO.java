@@ -2,7 +2,7 @@ package com.mono.ums2.dto;
 
 import java.io.Serializable;
 
-public class SdkSendDTO implements Serializable{
+public class SDKSendDTO implements Serializable{
 	
 	private static final long serialVersionUID = -2161128004115726228L;
 	

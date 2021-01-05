@@ -6,7 +6,7 @@ import java.util.Map;
 
 import com.mono.ums2.dto.DestTempDTO;
 import com.mono.ums2.dto.MsgSendDTO;
-import com.mono.ums2.dto.SdkSendDTO;
+import com.mono.ums2.dto.SDKSendDTO;
 
 public interface MsgSendMapper {
 
@@ -22,8 +22,8 @@ public interface MsgSendMapper {
 
 	void truncTempItems();
 	
-	ArrayList<SdkSendDTO> sendMsgSelect(int msgId);
+	ArrayList<SDKSendDTO> sendMsgSelect(int msgId);
 	
-	void sendMsgSDK(SdkSendDTO sdkSendDTO);
+	void sendMsgSDK(SDKSendDTO sdkSendDTO);
 
 }

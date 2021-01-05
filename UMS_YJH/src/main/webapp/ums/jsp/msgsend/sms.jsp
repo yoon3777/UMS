@@ -278,7 +278,7 @@
 								<th class="title">변수4</th>
 							</tr>
 						</thead>
-						<tbody id="receiveList" style="text-align: center">
+						<tbody id="receiveList">
 							<tr>
 								<td colspan="7" class="text-center">추가 된 수신자가 없습니다.</td>
 							</tr>

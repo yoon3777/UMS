@@ -15,7 +15,7 @@ import org.springframework.util.StringUtils;
 
 import com.mono.ums2.dto.DestTempDTO;
 import com.mono.ums2.dto.MsgSendDTO;
-import com.mono.ums2.dto.SdkSendDTO;
+import com.mono.ums2.dto.SDKSendDTO;
 import com.mono.ums2.mapper.MsgSendMapper;
 import com.mono.ums2.service.MsgSendService;
 
@@ -57,7 +57,7 @@ public class MsgSendServiceImpl implements MsgSendService {
 	}
 
 	@Override
-	public Map<String, String> sendMsg(Model model, MsgSendDTO msgSendDTO, SdkSendDTO sdkSendDTO) throws Exception {
+	public Map<String, String> sendMsg(Model model, MsgSendDTO msgSendDTO, SDKSendDTO sdkSendDTO) throws Exception {
 		Map<String, String> resultMap = new HashMap<String, String>();
 		resultMap.put("RESULT_CODE", "1");
 		if (msgSendDTO.getDepartNum()==null) {
@@ -70,8 +70,8 @@ public class MsgSendServiceImpl implements MsgSendService {
 			
 			msgSendMapper.truncTempItems();
 			
-			ArrayList<SdkSendDTO> list = msgSendMapper.sendMsgSelect(msgId);
-			for (SdkSendDTO sdk : list) {
+			ArrayList<SDKSendDTO> list = msgSendMapper.sendMsgSelect(msgId);
+			for (SDKSendDTO sdk : list) {
 				sdk.setDestInfo(sdk.getDestNm()+'^'+sdk.getDestNum());
 				System.out.println(sdk.getDestNm()+'^'+sdk.getDestNum());
 				msgSendMapper.sendMsgSDK(sdk);

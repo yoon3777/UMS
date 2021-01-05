@@ -127,7 +127,7 @@
 			,#{attachFile, jdbcType=NVARCHAR}
 			,NULL
 			,NULL
-			,#{reserved1, jdbcType=NVARCHAR}
+			,#{msgId}
 			,#{reserved2, jdbcType=NVARCHAR}
 		)
 		]]>
@@ -160,7 +160,7 @@
 		UMS_DEST_TEMP
 	</insert>
 	
-	<select id="sendMsgSelect" resultType="SdkSendDTO">
+	<select id="sendMsgSelect" resultType="SDKSendDTO">
 	<![CDATA[
 		SELECT
 		S.MSGID
@@ -198,6 +198,7 @@
 		,DEST_COUNT
 		,DEST_INFO
 		,SMS_MSG
+		,RESERVED1
 		)VALUES(
 		SDK_SMS_SEQ.nextval
 		,'agentTest'
@@ -209,6 +210,7 @@
 		,1
 		,#{destInfo}
 		,#{msgContent}
+		,#{reserved1}
 		)
 	</insert>
 

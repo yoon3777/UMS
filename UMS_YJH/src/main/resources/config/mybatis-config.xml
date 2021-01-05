@@ -6,6 +6,6 @@
 	<typeAliases>
 		<typeAlias alias="DestTempDTO" type="com.mono.ums2.dto.DestTempDTO" />
 		<typeAlias alias="MsgSendDTO" type="com.mono.ums2.dto.MsgSendDTO" />
-		<typeAlias alias="SdkSendDTO" type="com.mono.ums2.dto.SdkSendDTO"/>
+		<typeAlias alias="SDKSendDTO" type="com.mono.ums2.dto.SDKSendDTO"/>
 	</typeAliases>
 </configuration>
