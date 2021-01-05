@@ -27,8 +27,8 @@
 						var $tdCol7 = $("<td />");
 
 						$tdCol1.text(i + 1);
-						$tdCol2.text(data.LIST[i].DEST_NAME);
-						$tdCol3.text(data.LIST[i].DEST_NUM);
+						$tdCol2.text(data.LIST[i].DESTNM);
+						$tdCol3.text(data.LIST[i].DESTNUM);
 						$tdCol4.text(data.LIST[i].VAR1);
 						$tdCol5.text(data.LIST[i].VAR2);
 						$tdCol6.text(data.LIST[i].VAR3);

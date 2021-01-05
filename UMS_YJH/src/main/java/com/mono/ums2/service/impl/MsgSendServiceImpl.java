@@ -65,11 +65,15 @@ public class MsgSendServiceImpl implements MsgSendService {
 		} else {
 			msgSendMapper.sendMsg(msgSendDTO);
 			msgSendMapper.overWriteDest(msgSendDTO);
+			
 			int msgId = msgSendDTO.getMsgId();
+			
 			msgSendMapper.truncTempItems();
+			
 			ArrayList<SdkSendDTO> list = msgSendMapper.sendMsgSelect(msgId);
 			for (SdkSendDTO sdk : list) {
 				sdk.setDestInfo(sdk.getDestNm()+'^'+sdk.getDestNum());
+				System.out.println(sdk.getDestNm()+'^'+sdk.getDestNum());
 				msgSendMapper.sendMsgSDK(sdk);
 			}
 		}

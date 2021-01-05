@@ -6,9 +6,9 @@
 	<insert id="addSendItem" parameterType="DestTempDTO">
 	<![CDATA[
 		INSERT INTO UMS_DEST_TEMP (
-			DEST_ID
-			,DEST_NAME
-			,DEST_NUM
+			DESTID
+			,DESTNM
+			,DESTNUM
 			,VAR1
 			,VAR2
 			,VAR3
@@ -31,18 +31,18 @@
 		FROM UMS_DEST_TEMP
 	]]>
 		<if test="destNm !=null  and !destNm.equalsIgnoreCase('')">
-			<![CDATA[AND DEST_NAME LIKE '% || ${destNm} || %']]>
+			<![CDATA[AND DESTNM LIKE '% || ${destNm} || %']]>
 		</if>
 		<if test="destNum !=null  and !destNum.equalsIgnoreCase('')">
-			<![CDATA[AND DEST_NAME = #{destNum}]]>
+			<![CDATA[AND DESTNM = #{destNum}]]>
 		</if>
 	</select>
 
 	<select id="findSendItems" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 	<![CDATA[
 		SELECT 
-			DEST_NAME
-			,DEST_NUM
+			DESTNM
+			,DESTNUM
 			,VAR1
 			,VAR2
 			,VAR3
@@ -50,10 +50,10 @@
 		FROM UMS_DEST_TEMP
 	]]>
 		<if test="destNm !=null  and !destNm.equalsIgnoreCase('')">
-			<![CDATA[AND DEST_NAME LIKE '% || ${destNm} || %']]>
+			<![CDATA[AND DESTNM LIKE '% || ${destNm} || %']]>
 		</if>
 		<if test="destNum !=null  and !destNum.equalsIgnoreCase('')">
-			<![CDATA[AND DEST_NAME = #{destNum}]]>
+			<![CDATA[AND DESTNM = #{destNum}]]>
 		</if>
 	</select>
 
@@ -142,16 +142,16 @@
 	<insert id="overWriteDest">
 		INSERT INTO UMS_DEST (
 		MSGID
-		,DEST_NUM
-		,DEST_NAME
+		,DESTNUM
+		,DESTNM
 		,VAR1
 		,VAR2
 		,VAR3
 		,VAR4
 		) SELECT
 		#{msgId}
-		,DEST_NUM
-		,DEST_NAME
+		,DESTNUM
+		,DESTNM
 		,VAR1
 		,VAR2
 		,VAR3
@@ -159,6 +159,32 @@
 		FROM
 		UMS_DEST_TEMP
 	</insert>
+	
+	<select id="sendMsgSelect" resultType="SdkSendDTO">
+	<![CDATA[
+		SELECT
+		S.MSGID
+		,S.SCHDTYPE
+		,S.SUBJECT
+		,S.DEPARTNUM
+		,S.NOWDATE
+		,S.SENDDATE
+		,S.MSGCNT
+		,S.MSGCONTENT
+		,S.ATTACHFILE
+		,S.RESERVED1
+		,S.RESERVED2
+		,D.DESTNUM
+		,D.DESTNM
+		,D.VAR1
+		,D.VAR2
+		,D.VAR3
+		,D.VAR4
+		FROM UMS_MSG_SEND S, UMS_DEST D
+		WHERE S.MSGID = D.MSGID
+		AND S.MSGID=#{MSGID}
+	]]>
+	</select>
 
 	<insert id="sendMsgSDK">
 		INSERT INTO SDK_SMS_SEND (
@@ -175,14 +201,14 @@
 		)VALUES(
 		SDK_SMS_SEQ.nextval
 		,'agentTest'
-		,#{sch_type}
+		,#{schdType}
 		,#{subject}
-		,#{nowdate}
-		,#{senddate}
-		,#{depart_num}
+		,#{nowDate}
+		,#{sendDate}
+		,#{departNum}
 		,1
-		,#{dest_info}
-		,#{msg_content}
+		,#{destInfo}
+		,#{msgContent}
 		)
 	</insert>
 
