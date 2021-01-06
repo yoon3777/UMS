@@ -1,6 +1,44 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <script type="text/javascript">
+	$(document).ready(function() {
+		schDetailItems();
+	});
 
+	function schDetailItems() {
+		$.ajax({
+			type : "POST",
+			url : '${contextPath}/msgreport/dlist.json',
+			success : function(data) {
+				var $tbody = $("#detailList");
+				if (data.LIST.length > 0) {
+					for (var i = 0; i < data.LIST.length; i++) {
+						var $tr = $("<tr />");
+						var $tdCol1 = $("<td />");
+						var $tdCol2 = $("<td />");
+						var $tdCol3 = $("<td />");
+						var $tdCol4 = $("<td />");
+						var $tdCol5 = $("<td />");
+						var $tdCol6 = $("<td />");
+						var $tdCol7 = $("<td />");
+
+						$tdCol1.text(i + 1);
+
+						$tr.append($tdCol1);
+
+						$tbody.append($tr);
+					}
+				} else {
+					$tbody.html("<tr><td colspan=\"10\" class=\"text-center\">결과가 없습니다.</td></tr>");
+				}
+			},
+			complete : function(data) {
+
+			},
+			error : function() {
+				alert('실패');
+			}
+		});
+	}
 </script>
 <div class="pt-3"></div>
 <div class="container-fluid">
@@ -10,7 +48,7 @@
 			제목
 			<input type="text" class="form-control">
 			<div class="pt-3"></div>
-			<textarea class="form-control" placeholder="fdsa" style="height: 170px;"></textarea>
+			<textarea class="form-control" style="height: 170px;"></textarea>
 		</div>
 		<div class="col-sm-3">
 			전송 타입
@@ -54,16 +92,8 @@
 						<th>실패 사유</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr>
-						<td class="cont">1</td>
-						<td class="cont">윤제현</td>
-						<td class="cont">010-2078-7856</td>
-						<td class="cont">2020-12-12</td>
-						<td class="cont">헬로월드</td>
-						<td class="cont">전송 완료</td>
-						<td class="cont">네트워크 연결 X</td>
-					</tr>
+				<tbody id="detailList">
+
 				</tbody>
 			</table>
 		</div>

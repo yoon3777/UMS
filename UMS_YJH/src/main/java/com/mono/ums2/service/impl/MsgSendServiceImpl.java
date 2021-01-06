@@ -16,6 +16,8 @@ import org.springframework.util.StringUtils;
 import com.mono.ums2.dto.DestTempDTO;
 import com.mono.ums2.dto.MsgSendDTO;
 import com.mono.ums2.dto.SDKSendDTO;
+import com.mono.ums2.dto.SchDestDTO;
+import com.mono.ums2.dto.SchMsgDTO;
 import com.mono.ums2.mapper.MsgSendMapper;
 import com.mono.ums2.service.MsgSendService;
 
@@ -57,25 +59,30 @@ public class MsgSendServiceImpl implements MsgSendService {
 	}
 
 	@Override
-	public Map<String, String> sendMsg(Model model, MsgSendDTO msgSendDTO, SDKSendDTO sdkSendDTO) throws Exception {
+	public Map<String, String> sendMsg(Model model, MsgSendDTO msgSendDTO) throws Exception {
 		Map<String, String> resultMap = new HashMap<String, String>();
 		resultMap.put("RESULT_CODE", "1");
-		if (msgSendDTO.getDepartNum()==null) {
+		if (msgSendDTO.getDepartNum() == null) {
 			resultMap.put("RESULT_CODE", "0");
 		} else {
 			msgSendMapper.sendMsg(msgSendDTO);
 			msgSendMapper.overWriteDest(msgSendDTO);
-			
+
 			int msgId = msgSendDTO.getMsgId();
-			
+
 			msgSendMapper.truncTempItems();
-			
-			ArrayList<SDKSendDTO> list = msgSendMapper.sendMsgSelect(msgId);
-			for (SDKSendDTO sdk : list) {
-				sdk.setDestInfo(sdk.getDestNm()+'^'+sdk.getDestNum());
-				System.out.println(sdk.getDestNm()+'^'+sdk.getDestNum());
-				msgSendMapper.sendMsgSDK(sdk);
+
+			SDKSendDTO sdkSendDTO = msgSendMapper.schMsg(msgId);
+
+			ArrayList<SchDestDTO> dlist = msgSendMapper.schDest(msgId);
+			String info = "";
+			for (SchDestDTO a : dlist) {
+				info += a.getDestNm() + '^' + a.getDestNum() + '|';
 			}
+
+			sdkSendDTO.setDestInfo(info);
+			msgSendMapper.sendMsgSDK(sdkSendDTO);
+
 		}
 		return resultMap;
 

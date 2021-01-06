@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.mono.ums2.dto.DestTempDTO;
 import com.mono.ums2.dto.MsgSendDTO;
-import com.mono.ums2.dto.SDKSendDTO;
 import com.mono.ums2.service.MsgSendService;
 
 @Controller
@@ -100,11 +99,11 @@ public class MsgSendController {
 
 
 	@RequestMapping("/sendMsg")
-	public @ResponseBody Map<String, String> sendMsg(Model model, MsgSendDTO msgSendDTO, SDKSendDTO sdkSendDTO, HttpServletResponse response) {
+	public @ResponseBody Map<String, String> sendMsg(Model model, MsgSendDTO msgSendDTO, HttpServletResponse response) {
 		Map<String, String> resultMap = null;
 		try {
 			System.out.println(msgSendDTO.toString());
-			resultMap = msgSendService.sendMsg(model, msgSendDTO, sdkSendDTO);
+			resultMap = msgSendService.sendMsg(model, msgSendDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 			// 어떠한 예외처리가 필요.

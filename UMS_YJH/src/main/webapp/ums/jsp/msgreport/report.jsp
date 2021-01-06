@@ -26,14 +26,15 @@
 
 						$tdCol1.text(i + 1);
 						$tdCol2.text(data.LIST[i].SUBJECT);
-						$tdCol3.text(data.LIST[i].NOWDATE);
-						$tdCol4.text(data.LIST[i].SENDDATE);
-						$tdCol5.text(data.LIST[i].DEPARTNUM);
+						$tdCol3.text(data.LIST[i].NOW_DATE);
+						$tdCol4.text(data.LIST[i].SEND_DATE);
+						$tdCol5.text(data.LIST[i].CALLBACK);
 						$tdCol6.text(data.LIST[i].SENDTYPE);
-						$tdCol7.text(data.LIST[i].SENDSTATUS);
-						$tdCol8.text(data.LIST[i].MSGCNT);
-						$tdCol9.text(data.LIST[i].SUCCCNT);
-						$tdCol10.text(data.LIST[i].FAILCNT);
+						/* $tdCol7.text(data.LIST[i].SENDSTATUS); */
+						$tdCol7.text(i);
+						$tdCol8.text(data.LIST[i].DEST_COUNT);
+						$tdCol9.text(data.LIST[i].SUCC_COUNT);
+						$tdCol10.text(data.LIST[i].FAIL_COUNT);
 
 						$tr.append($tdCol1);
 						$tr.append($tdCol2);
@@ -60,7 +61,6 @@
 			}
 		});
 	}
-};
 </script>
 <div class="pt-3"></div>
 <div class="container-fluid">
@@ -106,18 +106,7 @@
 					</tr>
 				</thead>
 				<tbody id="reportList">
-					<tr>
-						<td class="cont">1</td>
-						<td class="cont">TEST</td>
-						<td class="cont">2020-12-12</td>
-						<td class="cont">2020-12-12</td>
-						<td class="cont">010-2078-7856</td>
-						<td class="cont">MMS</td>
-						<td class="cont">전송 실패</td>
-						<td class="cont">100</td>
-						<td class="cont">99</td>
-						<td class="cont">1</td>
-					</tr>
+					
 				</tbody>
 			</table>
 		</div>

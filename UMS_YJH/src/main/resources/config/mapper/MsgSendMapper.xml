@@ -29,6 +29,7 @@
 	<![CDATA[
 		SELECT COUNT(1)
 		FROM UMS_DEST_TEMP
+		WHERE 1=1
 	]]>
 		<if test="destNm !=null  and !destNm.equalsIgnoreCase('')">
 			<![CDATA[AND DESTNM LIKE '% || ${destNm} || %']]>
@@ -48,6 +49,7 @@
 			,VAR3
 			,VAR4
 		FROM UMS_DEST_TEMP
+		WHERE 1=1
 	]]>
 		<if test="destNm !=null  and !destNm.equalsIgnoreCase('')">
 			<![CDATA[AND DESTNM LIKE '% || ${destNm} || %']]>
@@ -58,8 +60,8 @@
 	</select>
 
 	<insert id="sendMsg" parameterType="MsgSendDTO">
-		<selectKey keyProperty="msgId" resultType="int" order="AFTER">
-			SELECT SEND_SEQ.currval FROM DUAL
+		<selectKey keyProperty="msgId" resultType="int" order="BEFORE">
+			SELECT SEND_SEQ.nextval FROM DUAL
 		</selectKey>
 		<choose>
 			<when test="!sendDate.equalsIgnoreCase('NaN')">
@@ -80,7 +82,7 @@
 			,RESERVED1
 			,RESERVED2
 		) VALUES (
-			SEND_SEQ.NEXTVAL
+			#{msgId}
 			,NULL
 			,#{schdType, jdbcType=NVARCHAR}
 			,#{subject}
@@ -92,7 +94,7 @@
 			,#{attachFile, jdbcType=NVARCHAR}
 			,NULL
 			,NULL
-			,#{reserved1, jdbcType=NVARCHAR}
+			,#{msgId}
 			,#{reserved2, jdbcType=NVARCHAR}
 		)
 		]]>
@@ -115,7 +117,7 @@
 			,RESERVED1
 			,RESERVED2
 		) VALUES (
-			SEND_SEQ.NEXTVAL
+			#{msgId}
 			,NULL
 			,#{schdType, jdbcType=NVARCHAR}
 			,#{subject}
@@ -141,21 +143,21 @@
 
 	<insert id="overWriteDest">
 		INSERT INTO UMS_DEST (
-		MSGID
-		,DESTNUM
-		,DESTNM
-		,VAR1
-		,VAR2
-		,VAR3
-		,VAR4
+			MSGID
+			,DESTNUM
+			,DESTNM
+			,VAR1
+			,VAR2
+			,VAR3
+			,VAR4
 		) SELECT
-		#{msgId}
-		,DESTNUM
-		,DESTNM
-		,VAR1
-		,VAR2
-		,VAR3
-		,VAR4
+			#{msgId}
+			,DESTNUM
+			,DESTNM
+			,VAR1
+			,VAR2
+			,VAR3
+			,VAR4
 		FROM
 		UMS_DEST_TEMP
 	</insert>
@@ -163,23 +165,23 @@
 	<select id="sendMsgSelect" resultType="SDKSendDTO">
 	<![CDATA[
 		SELECT
-		S.MSGID
-		,S.SCHDTYPE
-		,S.SUBJECT
-		,S.DEPARTNUM
-		,S.NOWDATE
-		,S.SENDDATE
-		,S.MSGCNT
-		,S.MSGCONTENT
-		,S.ATTACHFILE
-		,S.RESERVED1
-		,S.RESERVED2
-		,D.DESTNUM
-		,D.DESTNM
-		,D.VAR1
-		,D.VAR2
-		,D.VAR3
-		,D.VAR4
+			S.MSGID
+			,S.SCHDTYPE
+			,S.SUBJECT
+			,S.DEPARTNUM
+			,S.NOWDATE
+			,S.SENDDATE
+			,S.MSGCNT
+			,S.MSGCONTENT
+			,S.ATTACHFILE
+			,S.RESERVED1
+			,S.RESERVED2
+			,D.DESTNUM
+			,D.DESTNM
+			,D.VAR1
+			,D.VAR2
+			,D.VAR3
+			,D.VAR4
 		FROM UMS_MSG_SEND S, UMS_DEST D
 		WHERE S.MSGID = D.MSGID
 		AND S.MSGID=#{MSGID}
@@ -188,31 +190,62 @@
 
 	<insert id="sendMsgSDK">
 		INSERT INTO SDK_SMS_SEND (
-		MSG_ID
-		,USER_ID
-		,SCHEDULE_TYPE
-		,SUBJECT
-		,NOW_DATE
-		,SEND_DATE
-		,CALLBACK
-		,DEST_COUNT
-		,DEST_INFO
-		,SMS_MSG
-		,RESERVED1
+			MSG_ID
+			,USER_ID
+			,SCHEDULE_TYPE
+			,SUBJECT
+			,NOW_DATE
+			,SEND_DATE
+			,CALLBACK
+			,DEST_COUNT
+			,DEST_INFO
+			,SMS_MSG
+			,RESERVED1
 		)VALUES(
-		SDK_SMS_SEQ.nextval
-		,'agentTest'
-		,#{schdType}
-		,#{subject}
-		,#{nowDate}
-		,#{sendDate}
-		,#{departNum}
-		,1
-		,#{destInfo}
-		,#{msgContent}
-		,#{reserved1}
+			SDK_SMS_SEQ.nextval
+			,'agentTest'
+			,#{schdType}
+			,#{subject}
+			,#{nowDate}
+			,#{sendDate}
+			,#{departNum}
+			,1
+			,#{destInfo}
+			,#{msgContent}
+			,#{reserved1}
 		)
 	</insert>
+	
+	
+	<select id="schMsg" resultType="SDKSendDTO">
+		SELECT
+		MSGID
+		,SCHDTYPE
+		,SUBJECT
+		,DEPARTNUM
+		,NOWDATE
+		,SENDDATE
+		,MSGCNT
+		,MSGCONTENT
+		,ATTACHFILE
+		,RESERVED1
+		,RESERVED2
+		FROM UMS_MSG_SEND
+		WHERE MSGID=#{msgId}
+	</select>
+	
+	<select id="schDest" resultType="SchDestDTO">
+		SELECT
+		MSGID
+		,DESTNM
+		,DESTNUM
+		,VAR1
+		,VAR2
+		,VAR3
+		,VAR4
+		FROM UMS_DEST
+		WHERE MSGID=#{msgId}
+	</select>
 
 
 </mapper>

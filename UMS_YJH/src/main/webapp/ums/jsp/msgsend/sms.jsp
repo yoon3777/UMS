@@ -9,7 +9,6 @@
 		$.ajax({
 			type : "POST",
 			url : '${contextPath}/msgsend/list.json',
-			data : $("#sendItemFrm").serialize(),
 			success : function(data) {
 				var $tbody = $("#receiveList");
 				totalCnt = data.TOTAL_CNT;

@@ -2,6 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mono.ums2.mapper.MsgReportMapper">
 
-
+	<select id="schReportItems" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT
+			S.MSGID
+			,SR.SCHEDULE_TYPE
+			,SR.SUBJECT
+			,SR.SMS_MSG
+			,SR.NOW_DATE
+			,SR.SEND_DATE
+			,S.SENDTYPE
+			,SR.DEST_COUNT
+			,SR.CALLBACK
+			,SR.SUCC_COUNT
+			,SR.FAIL_COUNT
+		FROM UMS_MSG_SEND S, SDK_SMS_REPORT_2101 SR
+		WHERE S.RESERVED1 = SR.RESERVED1
+	</select>
 
 </mapper>

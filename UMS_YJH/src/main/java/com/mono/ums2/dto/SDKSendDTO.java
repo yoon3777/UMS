@@ -26,6 +26,15 @@ public class SDKSendDTO implements Serializable{
 	private String var4;
 	private String destInfo;
 	
+	
+	
+	@Override
+	public String toString() {
+		return "SDKSendDTO [msgId=" + msgId + ", sendType=" + sendType + ", schdType=" + schdType + ", subject=" + subject + ", departNum="
+				+ departNum + ", nowDate=" + nowDate + ", sendDate=" + sendDate + ", msgCnt=" + msgCnt + ", msgContent=" + msgContent
+				+ ", attachFile=" + attachFile + ", reserved1=" + reserved1 + ", reserved2=" + reserved2 + ", destNm=" + destNm + ", destNum="
+				+ destNum + ", var1=" + var1 + ", var2=" + var2 + ", var3=" + var3 + ", var4=" + var4 + ", destInfo=" + destInfo + "]";
+	}
 	public int getMsgId() {
 		return msgId;
 	}

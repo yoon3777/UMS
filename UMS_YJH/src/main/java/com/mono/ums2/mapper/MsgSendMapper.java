@@ -7,6 +7,8 @@ import java.util.Map;
 import com.mono.ums2.dto.DestTempDTO;
 import com.mono.ums2.dto.MsgSendDTO;
 import com.mono.ums2.dto.SDKSendDTO;
+import com.mono.ums2.dto.SchDestDTO;
+import com.mono.ums2.dto.SchMsgDTO;
 
 public interface MsgSendMapper {
 
@@ -25,5 +27,9 @@ public interface MsgSendMapper {
 	ArrayList<SDKSendDTO> sendMsgSelect(int msgId);
 	
 	void sendMsgSDK(SDKSendDTO sdkSendDTO);
+
+	SDKSendDTO schMsg(int msgId);
+
+	ArrayList<SchDestDTO> schDest(int msgId);
 
 }
