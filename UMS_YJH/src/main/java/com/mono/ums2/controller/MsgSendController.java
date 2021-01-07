@@ -102,7 +102,6 @@ public class MsgSendController {
 	public @ResponseBody Map<String, String> sendMsg(Model model, MsgSendDTO msgSendDTO, HttpServletResponse response) {
 		Map<String, String> resultMap = null;
 		try {
-			System.out.println(msgSendDTO.toString());
 			resultMap = msgSendService.sendMsg(model, msgSendDTO);
 		} catch (Exception e) {
 			e.printStackTrace();

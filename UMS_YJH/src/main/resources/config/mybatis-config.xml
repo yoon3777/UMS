@@ -9,6 +9,5 @@
 		<typeAlias alias="SDKSendDTO" type="com.mono.ums2.dto.SDKSendDTO"/>
 		<typeAlias alias="ReportDTO" type="com.mono.ums2.dto.ReportDTO"/>
 		<typeAlias alias="SchDestDTO" type="com.mono.ums2.dto.SchDestDTO"/>
-		<typeAlias alias="SchMsgDTO" type="com.mono.ums2.dto.SchMsgDTO"/>
 	</typeAliases>
 </configuration>

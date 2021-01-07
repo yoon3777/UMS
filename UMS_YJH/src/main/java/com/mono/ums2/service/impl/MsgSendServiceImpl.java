@@ -17,7 +17,6 @@ import com.mono.ums2.dto.DestTempDTO;
 import com.mono.ums2.dto.MsgSendDTO;
 import com.mono.ums2.dto.SDKSendDTO;
 import com.mono.ums2.dto.SchDestDTO;
-import com.mono.ums2.dto.SchMsgDTO;
 import com.mono.ums2.mapper.MsgSendMapper;
 import com.mono.ums2.service.MsgSendService;
 

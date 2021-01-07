@@ -1,7 +1,5 @@
 package com.mono.ums2.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,10 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mono.ums2.dto.ReportDTO;
 import com.mono.ums2.service.MsgReportService;
 
 @Controller
@@ -52,10 +50,10 @@ public class MsgReportController {
 		return resultMap;
 	}
 
-	@RequestMapping("/detail")
-	public String detail(Model model) {
+	@RequestMapping("/detail{id}")
+	public String detail(Model model, @PathVariable("id") int id) {
 		try {
-
+			System.out.println(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			// 어떠한 예외처리가 필요.

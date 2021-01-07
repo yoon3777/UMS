@@ -4,19 +4,39 @@
 
 	<select id="schReportItems" parameterType="java.util.HashMap" resultType="java.util.HashMap">
 		SELECT
-			S.MSGID
-			,SR.SCHEDULE_TYPE
-			,SR.SUBJECT
-			,SR.SMS_MSG
-			,SR.NOW_DATE
-			,SR.SEND_DATE
-			,S.SENDTYPE
-			,SR.DEST_COUNT
-			,SR.CALLBACK
-			,SR.SUCC_COUNT
-			,SR.FAIL_COUNT
+		S.MSGID
+		,SR.SCHEDULE_TYPE
+		,SR.SUBJECT
+		,SR.SMS_MSG
+		,SR.NOW_DATE
+		,SR.SEND_DATE
+		,S.SENDTYPE
+		,SR.DEST_COUNT
+		,SR.CALLBACK
+		,SR.SUCC_COUNT
+		,SR.FAIL_COUNT
 		FROM UMS_MSG_SEND S, SDK_SMS_REPORT_2101 SR
 		WHERE S.RESERVED1 = SR.RESERVED1
 	</select>
+
+	<update id="updateSend">
+		UPDATE UMS_MSG_SEND A
+		SET (
+		A.SENDDATE
+		,A.SUCCCNT
+		,A.FAILCNT
+		) 
+		=
+		(
+		SELECT
+		B.SEND_DATE
+		,B.SUCC_COUNT
+		,B.FAIL_COUNT
+		FROM SDK_SMS_REPORT_2101 B
+		WHERE RESERVED1=#{id}
+		)
+		WHERE A.MSGID=#{id}
+	</update>
+	
 
 </mapper>

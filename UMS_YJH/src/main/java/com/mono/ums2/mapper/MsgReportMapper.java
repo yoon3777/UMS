@@ -7,4 +7,8 @@ public interface MsgReportMapper {
 	
 	List<Map<String, Object>> schReportItems();
 
+	void updateSend(int id);
+
+	void updateDest();
+
 }

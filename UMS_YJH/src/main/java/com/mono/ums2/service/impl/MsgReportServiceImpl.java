@@ -24,9 +24,18 @@ public class MsgReportServiceImpl implements MsgReportService {
 		List<Map<String, Object>> lists = msgReportMapper.schReportItems();
 		resultMap.put("LIST", lists);
 		
+		System.out.println("dd");
+		for (Map<String, Object> map : lists) {
+			int id = Integer.parseInt(String.valueOf(map.get("MSGID")));
+			System.out.println(id);
+			msgReportMapper.updateSend(id);
+			System.out.println(map.get("SUBJECT"));
+		}
 		
 		
 		return resultMap;
 	}
+	
+
 	
 }
