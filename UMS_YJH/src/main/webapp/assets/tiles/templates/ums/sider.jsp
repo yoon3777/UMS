@@ -24,9 +24,6 @@
 			<li class="nav-item">
 				<a href="/msgreport/report">결과 조회</a>
 			</li>
-			<li class="nav-item">
-				<a href="/msgreport/detail">상세 조회</a>
-			</li>
 		</ul>
 	</li>
 </ul>

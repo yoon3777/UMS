@@ -25,7 +25,7 @@
 		A.SENDDATE
 		,A.SUCCCNT
 		,A.FAILCNT
-		) 
+		)
 		=
 		(
 		SELECT
@@ -37,6 +37,61 @@
 		)
 		WHERE A.MSGID=#{id}
 	</update>
-	
+
+	<select id="schDestReport" resultType="SchDestReportDTO">
+		SELECT
+		B.DEST_NAME
+		,B.PHONE_NUMBER
+		,B.DELIVER_DATE
+		,B.REPORT_RES_DATE
+		,B.TCS_RESULT
+		FROM
+		SDK_SMS_REPORT_DETAIL_2101 B, SDK_SMS_REPORT_2101 C
+		WHERE B.MSG_ID = C.MSG_ID
+		AND C.RESERVED1 = #{id}
+	</select>
+
+	<update id="updateDest">
+		UPDATE UMS_DEST
+		SET
+		(
+		NOW_DATE
+		,SEND_DATE
+		,TCS_RESULT
+		)
+		=
+		(
+		SELECT
+		#{deliver_date}
+		,#{report_res_date}
+		,#{tcs_result}
+		FROM DUAL
+		)
+		WHERE
+		MSGID=#{id}
+	</update>
+
+
+	<select id="schDetailItems" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT
+		A.MSGID
+		,A.SUBJECT
+		,A.SENDTYPE
+		,A.MSGCONTENT
+		,A.DEPARTNUM
+		,A.NOWDATE
+		,A.SENDDATE
+		,A.ATTACHFILE
+		,B.DESTNUM
+		,B.DESTNM
+		,B.NOW_DATE
+		,B.SEND_DATE
+		,B.SEND_STATUS
+		,B.TCS_RESULT
+		FROM UMS_MSG_SEND A, UMS_DEST B
+		WHERE A.MSGID=B.MSGID
+		AND A.MSGID=#{id}
+	</select>
+
 
 </mapper>

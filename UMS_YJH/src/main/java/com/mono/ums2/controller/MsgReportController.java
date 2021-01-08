@@ -19,6 +19,8 @@ import com.mono.ums2.service.MsgReportService;
 @RequestMapping("/msgreport")
 public class MsgReportController {
 	
+	int id;
+	
 	@Autowired
 	private MsgReportService msgReportService;
 
@@ -52,13 +54,26 @@ public class MsgReportController {
 
 	@RequestMapping("/detail{id}")
 	public String detail(Model model, @PathVariable("id") int id) {
+		this.id = id;
 		try {
-			System.out.println(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			// 어떠한 예외처리가 필요.
 		}
 		return "layout:view:msgreport/detail";
+	}
+	
+	@RequestMapping("/dlist")
+	public @ResponseBody Map<String, Object> d(Model model) {
+		System.out.println("id값:"+id);
+		Map<String, Object> resultMap = null;
+		try {
+			resultMap = msgReportService.schDetailItems(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// 어떠한 예외처리가 필요.
+		}
+		return resultMap;
 	}
 
 }

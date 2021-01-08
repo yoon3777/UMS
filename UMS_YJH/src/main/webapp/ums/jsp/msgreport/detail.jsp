@@ -10,6 +10,7 @@
 			url : '${contextPath}/msgreport/dlist.json',
 			success : function(data) {
 				var $tbody = $("#detailList");
+				
 				if (data.LIST.length > 0) {
 					for (var i = 0; i < data.LIST.length; i++) {
 						var $tr = $("<tr />");
@@ -22,10 +23,29 @@
 						var $tdCol7 = $("<td />");
 
 						$tdCol1.text(i + 1);
+						$tdCol2.text(data.LIST[i].DESTNM);
+						$tdCol3.text(data.LIST[i].DESTNUM);
+						$tdCol4.text(data.LIST[i].NOW_DATE);
+						$tdCol5.text(data.LIST[i].SEND_DATE);
+						$tdCol6.text(data.LIST[i].SEND_STATUS);
+						$tdCol7.text(data.LIST[i].TCS_RESULT);
 
 						$tr.append($tdCol1);
+						$tr.append($tdCol2);
+						$tr.append($tdCol3);
+						$tr.append($tdCol4);
+						$tr.append($tdCol5);
+						$tr.append($tdCol6);
+						$tr.append($tdCol7);
 
 						$tbody.append($tr);
+						
+						$('#subject').val(data.LIST[i].SUBJECT);
+						$('#msgcontent').text(data.LIST[i].MSGCONTENT);
+						$('#sendtype').val(data.LIST[i].SENDTYPE);
+						$('#departnum').val(data.LIST[i].MSGCONTENT);
+						$('#nowdate').val(data.LIST[i].NOWDATE);
+						$('#senddate').val(data.LIST[i].SENDDATE);
 					}
 				} else {
 					$tbody.html("<tr><td colspan=\"10\" class=\"text-center\">결과가 없습니다.</td></tr>");
@@ -46,23 +66,23 @@
 	<div class="row col-sm-12">
 		<div class="col-sm-4">
 			제목
-			<input type="text" class="form-control">
+			<input type="text" id="subject" class="form-control">
 			<div class="pt-3"></div>
-			<textarea class="form-control" style="height: 170px;"></textarea>
+			<textarea id="msgcontent" class="form-control" style="height: 170px;" readonly></textarea>
 		</div>
 		<div class="col-sm-3">
 			전송 타입
-			<input type="text" class="form-control">
+			<input type="text" id="sendtype" class="form-control">
 			발신 번호
-			<input type="text" class="form-control">
+			<input type="text" id="departnum" class="form-control">
 			요청 일시
-			<input type="text" class="form-control">
+			<input type="text" id="nowdate" class="form-control">
 			전송 일시
-			<input type="text" class="form-control">
+			<input type="text" id="senddate" class="form-control">
 		</div>
 		<div class="col-sm-5">
 			첨부파일
-			<input type="text" class="form-control" readonly>
+			<input type="text" id="attachfile" class="form-control" readonly>
 		</div>
 	</div>
 	<div class="row">
@@ -79,7 +99,6 @@
 					<col style="width: 80px;" />
 					<col style="width: 80px;" />
 					<col style="width: 150px;" />
-					<col style="width: 10px;" />
 				</colgroup>
 				<thead>
 					<tr>

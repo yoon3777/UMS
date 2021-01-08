@@ -2,6 +2,15 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		schSendItems();
+		
+		$("#fileInput").on('change', function(){
+			if(window.FileReader){
+				var filename = $(this)[0].files[0].name;
+			}else{
+				var filename = $(this).val().split('/').pop().split('\\').pop();
+			}
+			$("#userfile").val(filename);
+		})
 	});
 	var totalCnt;
 	
@@ -164,7 +173,7 @@
 	})
 }
 </script>
-<div class="pt-4"></div>
+<div class="jumbotron"></div>
 <div class="row">
 	<div class="col-lg-4">
 		<div class="row">
@@ -192,7 +201,21 @@
 								예약 전송
 							</label>
 						</div>
-						<div class="pt-4" id="ReservationRadio"></div>
+
+						<div class="pt-1" id="ReservationRadio"></div>
+						<div class="pt-3 form-group">
+							<label for="InputSubject1">파일첨부</label>
+							<input id="fileInput" filestyle="" type="file" class="form-control" style="width:50px;position: absolute";/>
+							<div class="bootstrap-filestyle input-group">
+								<input type="text" id="userfile" class="form-control" name="userfile" disabled=""/>
+								<label for="fileInput" class="btn btn-default" style="border:1px solid #ced4da">
+									<span class="glyphicon fa fa-upload"></span>
+								</label>
+							</div>
+						</div>
+						<div>
+						
+						</div>
 					</form>
 					<div class="pt-4">
 						<button type="button" class="btn btn-primary btn-block btn-lg" onclick="sendMsg()">메시지 전송</button>

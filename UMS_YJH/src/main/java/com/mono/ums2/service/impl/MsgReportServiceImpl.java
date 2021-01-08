@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mono.ums2.dto.SchDestReportDTO;
 import com.mono.ums2.mapper.MsgReportMapper;
 import com.mono.ums2.service.MsgReportService;
 
@@ -23,19 +24,26 @@ public class MsgReportServiceImpl implements MsgReportService {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<Map<String, Object>> lists = msgReportMapper.schReportItems();
 		resultMap.put("LIST", lists);
-		
-		System.out.println("dd");
+
 		for (Map<String, Object> map : lists) {
 			int id = Integer.parseInt(String.valueOf(map.get("MSGID")));
-			System.out.println(id);
 			msgReportMapper.updateSend(id);
-			System.out.println(map.get("SUBJECT"));
+			List<SchDestReportDTO> schlist = msgReportMapper.schDestReport(id);
+			for (SchDestReportDTO dr : schlist) {
+				dr.setId(id);
+				msgReportMapper.updateDest(dr);
+			}
 		}
-		
-		
 		return resultMap;
 	}
 	
+	@Override
+	public Map<String, Object> schDetailItems(int id) throws Exception {
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<Map<String, Object>> lists = msgReportMapper.schDetailItems(id);
+		resultMap.put("LIST", lists);
+		
+		return resultMap;
+	}
 
-	
 }
