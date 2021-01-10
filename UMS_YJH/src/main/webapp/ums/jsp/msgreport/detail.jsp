@@ -66,19 +66,19 @@
 	<div class="row col-sm-12">
 		<div class="col-sm-4">
 			제목
-			<input type="text" id="subject" class="form-control">
+			<input type="text" id="subject" class="form-control" readonly>
 			<div class="pt-3"></div>
 			<textarea id="msgcontent" class="form-control" style="height: 170px;" readonly></textarea>
 		</div>
 		<div class="col-sm-3">
 			전송 타입
-			<input type="text" id="sendtype" class="form-control">
+			<input type="text" id="sendtype" class="form-control" readonly>
 			발신 번호
-			<input type="text" id="departnum" class="form-control">
+			<input type="text" id="departnum" class="form-control" readonly>
 			요청 일시
-			<input type="text" id="nowdate" class="form-control">
+			<input type="text" id="nowdate" class="form-control" readonly>
 			전송 일시
-			<input type="text" id="senddate" class="form-control">
+			<input type="text" id="senddate" class="form-control" readonly>
 		</div>
 		<div class="col-sm-5">
 			첨부파일

@@ -4,4 +4,3 @@
 </div>
 
 <%-- <h2>메시지 전송 - ${sessionScope.page}</h2> --%>
-

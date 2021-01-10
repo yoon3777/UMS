@@ -7,6 +7,11 @@
 }
 
 /***************** sider 영역 **********************/
+#side {
+	background: black;
+	height: 100%;
+}
+
 .menu li>#sub-menu {
 	display: none;
 }
@@ -25,10 +30,96 @@ li {
 /***************** content 영역 **********************/
 #content {
 	width: 99%;
+	margin-right: 50px;
 	margin-top: 15px;
 }
 
 .title-font {
 	color: #1c8be6;
 	font-weight: bold;
+}
+
+.card {
+	border: 3px solid #48b0f7 !important;
+	padding: 5px;
+}
+
+.b-r {
+	border-right-width: 1px;
+	border-style: solid #c6c6c6;
+	border-left-width: 0px;
+	border-top-width: 0;
+	border-bottom-width: 0;
+}
+
+.b-b {
+	border-bottom-width: 1px;
+	border-style: solid #c6c6c6;
+	border-left-width: 0px;
+	border-top-width: 0;
+	border-right-width: 0;
+}
+
+.b-dashed {
+	border-style: dashed;
+}
+
+#divBodyScroll {
+	/*overflow-x, overflow-y는 scroll로 지정하고,
+	height는 테이블의 데이터가 나올 기본 크기를 잡아줍니다.
+	세로길이를 잡아주지 않으면 overflow-y가 걸리지 않습니다.*/
+	width: 100%;
+	height: 350px;
+	overflow-x: scroll;
+	overflow-y: scroll;
+	border-top: 1px solid #d0d0d0;
+}
+
+#divradio {
+	text-align: center;
+}
+
+input[name=radio] {
+	margin-left: 10px;
+}
+
+.msgBox {
+	background-color: #222;
+	margin-top:20px;
+	margin-left:50px;
+	margin-bottom: 30px;
+	max-width: 400px;
+	padding: 20px 15px 20px 15px;
+	border-radius: 25px;
+}
+
+.content-box {
+	background: #fff;
+	padding-top: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	border-radius: 10px;
+}
+
+.form-box {
+	padding-top: 20px;
+	padding-left: 12px;
+	padding-right: 12px;
+	padding-bottom: 4px;
+}
+
+.textbytes {
+	font-size: 12px !important;
+}
+
+.contentType {
+	background-color: #000000;
+	color: #fff;
+	font-size: 11px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-bottom: 4px;
+	padding-top: 4px;
+	border-radius: 10px;
 }

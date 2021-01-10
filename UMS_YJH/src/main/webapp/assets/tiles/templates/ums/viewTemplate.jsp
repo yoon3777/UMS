@@ -33,7 +33,7 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-1">
-				<div id="side">
+				<div class="container-fluid" id="side">
 					<tiles:insertAttribute name="sider" />
 				</div>
 			</div>
@@ -42,6 +42,7 @@
 				<div id="content">
 					<tiles:insertAttribute name="body" />
 				</div>
+				<tiles:insertAttribute name="footer"/>
 			</div>
 		</div>
 	</div>
