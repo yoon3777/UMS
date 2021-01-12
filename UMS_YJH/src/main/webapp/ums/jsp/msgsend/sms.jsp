@@ -80,13 +80,15 @@
 				data : $("#sendItemFrm").serialize(),
 				success : function(data) {
 					if (data.RESULT_CODE == "1") {
-						swal("수신대상이 추가되었습니다.", "총건:1건\n중복건:1건", "success");
+						swal("수신대상이 추가되었습니다.", "총건:1건\n중복건:0건", "success");
 
 						$("#sendItemFrm").find("input").each(function() {
 							$(this).val("");
 						});
-					} else {
+					} else if(data.RESULT_CODE == "0"){
 						swal("수신대상등록에 실패하였습니다.", "미입력", "danger");
+					} else if(data.RESULT_CODE == "2"){
+						swal("수신대상등록에 실패하였습니다.", "수신번호 중복", "danger");
 					}
 					schSendItems();
 				},
@@ -162,6 +164,31 @@
 		}
 	})
 }
+
+	function byteCheck() {
+		var str = $('#msgContent').val();
+		var size = 0;
+		for (var i = 0; i < str.length; i++) {
+
+			size++;
+			if (44032 < str.charCodeAt(i) && str.charCodeAt(i) <= 55203) { // hangul Syliables
+				size++;
+			}
+			if (12593 <= str.charCodeAt(i) && str.charCodeAt(i) <= 12686) {
+				size++;
+			}
+		}
+		$('#byteChk').text(size);
+
+		if (size > 90) {
+			$('.contentType').css('background', 'green');
+			$('.contentType').text("장문");
+		} else {
+			$('.contentType').css('background', 'black');
+			$('.contentType').text("단문");
+		}
+	}
+
 </script>
 <div class="pt-4"></div>
 <div class="card">
@@ -182,8 +209,11 @@
 									</div>
 									<div class="form-group form-box">
 										<label>전송메시지</label>
-										<textarea id="msgContent" name="msgContent" class="form-control no-margin" rows="10" placeholder="문자 내용을 입력해주세요. (90Bytes 초과시 LMS로 전환)"></textarea>
-										<span class="textbytes" style="margin: 5px 0 0 0">0/2000bytes</span>
+										<textarea id="msgContent" name="msgContent" onKeyUp="byteCheck()" class="form-control no-margin" rows="10" placeholder="문자 내용을 입력해주세요. (90Bytes 초과시 LMS로 전환)"></textarea>
+										<span class="textbytes" style="margin: 5px 0 0 0">
+											<span id="byteChk">0</span>
+											/2000bytes
+										</span>
 										<span class="contentType" style="magin: 5px 0 0 0">단문</span>
 									</div>
 								</div>

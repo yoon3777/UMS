@@ -5,14 +5,25 @@
 	background: white;
 	text-align: center;
 }
+
 .pl-5 {
-	margin-left:165px;	
+	margin-left: 165px;
 }
 /***************** sider 영역 **********************/
 #side {
 	position: fixed;
-	background: #ffffff;
 	height: 100%;
+	background: #4e73df;
+}
+
+/******************/
+
+/******************/
+#subMenu {
+	display:none;	
+}
+li a:target>#subMenu{
+	display:block;
 }
 
 .menu li>#sub-menu {
@@ -38,7 +49,6 @@ li {
 /***************** footer 영역 **********************/
 .footer {
 	border-top: 0.5px solid #c6c6c6;
-	margin-left: 10px;
 }
 /***************** content 영역 **********************/
 #content {

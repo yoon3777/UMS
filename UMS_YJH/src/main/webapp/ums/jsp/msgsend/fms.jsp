@@ -174,20 +174,6 @@
 							<i class="fa fa-envelope"></i> 메시지작성
 						</h5>
 						<form id="sendMsgFrm" name="sendMsgFrm" method="post">
-							<div class="msgBox">
-								<div class="content-box">
-									<div class="form-group form-box">
-										<label>메시지제목</label>
-										<input type="text" id="subject" name="subject" class="form-control" />
-									</div>
-									<div class="form-group form-box">
-										<label>전송메시지</label>
-										<textarea id="msgContent" name="msgContent" class="form-control no-margin" rows="10" placeholder="문자 내용을 입력해주세요. (90Bytes 초과시 LMS로 전환)"></textarea>
-										<span class="textbytes" style="margin: 5px 0 0 0">0/2000bytes</span>
-										<span class="contentType" style="magin: 5px 0 0 0">단문</span>
-									</div>
-								</div>
-							</div>
 							<label>
 								<i class="fa fa-phone" aria-hidden="true"></i> 발신번호
 							</label>
@@ -203,16 +189,6 @@
 								</label>
 							</div>
 							<div class="pt-4" id="ReservationRadio"></div>
-						<div class="pt-3 form-group">
-							<label for="InputSubject1">파일첨부</label>
-							<input id="fileInput" filestyle="" type="file" class="form-control" style="width:50px;position: absolute";/>
-							<div class="bootstrap-filestyle input-group">
-								<input type="text" id="userfile" class="form-control" name="userfile" disabled=""/>
-								<label for="fileInput" class="btn btn-default" style="border:1px solid #ced4da">
-									<span class="glyphicon fa fa-upload"></span>
-								</label>
-							</div>
-						</div>
 					</form>
 					<div class="pt-4">
 						<button type="button" class="btn btn-primary btn-block btn-lg" onclick="sendMsg()">메시지 전송</button>

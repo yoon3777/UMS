@@ -9,24 +9,21 @@
 <%@ include file="../../../include/inc_script.jsp"%>
 <style>
 body {
-	background: #e6e6e6;
+	background: #fafafa;
 }
 
-/* .col-1, .col-11 {
-	margin: 0px !important;
-} */
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
 		// Store variables
-		var menu_head = $('.menu > li > a'), menu_body = $('.menu li > #sub-menu');
+		var menu_head = $('li > a'), menu_body = $('#subMenu');
 		// Click function
 		menu_head.on('click', function(event) {
 			// Disable header links
 			event.preventDefault();
 			// Show and hide the tabs on click
 			if ($(this).attr('class') != 'active') {
-				menu_body.slideUp('normal');
+				
 				$(this).next().stop(true, true).slideToggle('normal');
 				menu_head.removeClass('active');
 				$(this).addClass('active');

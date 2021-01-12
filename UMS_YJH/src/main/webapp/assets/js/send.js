@@ -5,10 +5,10 @@ $(document).ready(function() {
 		var tmp = '';
 		if (str.length < 4) {
 			return str;
-		} else if (str.length < 7) {
-			tmp += str.substr(0, 3);
+		} else if (str.length < 9) {
+			tmp += str.substr(0, 4);
 			tmp += '-';
-			tmp += str.substr(3);
+			tmp += str.substr(4);
 			return tmp;
 		} else if (str.length < 11) {
 			tmp += str.substr(0, 3);
@@ -43,12 +43,13 @@ $(document).ready(function() {
 	}
 
 })
-	function ReservationRadioCheck(){
-		var Reservation = $('#ReservationRadio');
-		Reservation.html("<input type=\'date\' id=\'Date\' name=\'Date\' style=\"margin-left: 90px;\" /><input type=\'time\' id=\'Time\' name=\'Time\' style=\"margin-left: 10px;\" />");
-				
-	}
-	function ImmediatelyRadioCheck(){
-		var Reservation = $('#ReservationRadio');
-		Reservation.html("");
-	}
+function ReservationRadioCheck() {
+	var Reservation = $('#ReservationRadio');
+	Reservation
+			.html("<input type=\'date\' id=\'Date\' name=\'Date\' style=\"margin-left: 60px;\" /><input type=\'time\' id=\'Time\' name=\'Time\' style=\"margin-left: 10px;\" />");
+
+}
+function ImmediatelyRadioCheck() {
+	var Reservation = $('#ReservationRadio');
+	Reservation.html("");
+}

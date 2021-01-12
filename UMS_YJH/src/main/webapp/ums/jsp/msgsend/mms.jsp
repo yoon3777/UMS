@@ -80,13 +80,15 @@
 				data : $("#sendItemFrm").serialize(),
 				success : function(data) {
 					if (data.RESULT_CODE == "1") {
-						swal("수신대상이 추가되었습니다.", "총건:1건\n중복건:1건", "success");
+						swal("수신대상이 추가되었습니다.", "총건:1건\n중복건:0건", "success");
 
 						$("#sendItemFrm").find("input").each(function() {
 							$(this).val("");
 						});
-					} else {
+					} else if(data.RESULT_CODE == "0"){
 						swal("수신대상등록에 실패하였습니다.", "미입력", "danger");
+					} else if(data.RESULT_CODE == "2"){
+						swal("수신대상등록에 실패하였습니다.", "수신번호 중복", "danger");
 					}
 					schSendItems();
 				},
@@ -162,6 +164,30 @@
 		}
 	})
 }
+
+	function byteCheck() {
+		var str = $('#msgContent').val();
+		var size = 0;
+		for (var i = 0; i < str.length; i++) {
+
+			size++;
+			if (44032 < str.charCodeAt(i) && str.charCodeAt(i) <= 55203) { // hangul Syliables
+				size++;
+			}
+			if (12593 <= str.charCodeAt(i) && str.charCodeAt(i) <= 12686) {
+				size++;
+			}
+		}
+		$('#byteChk').text(size);
+
+		if (size > 90) {
+			$('.contentType').css('background', 'green');
+			$('.contentType').text("장문");
+		} else {
+			$('.contentType').css('background', 'black');
+			$('.contentType').text("단문");
+		}
+	}
 </script>
 <div class="pt-4"></div>
 <div class="card">
@@ -182,9 +208,11 @@
 									</div>
 									<div class="form-group form-box">
 										<label>전송메시지</label>
-										<textarea id="msgContent" name="msgContent" class="form-control no-margin" rows="10" placeholder="문자 내용을 입력해주세요. (90Bytes 초과시 LMS로 전환)"></textarea>
-										<span class="textbytes" style="margin: 5px 0 0 0">0/2000bytes</span>
-										<span class="contentType" style="magin: 5px 0 0 0">단문</span>
+										<textarea id="msgContent" name="msgContent" onKeyUp="byteCheck()" class="form-control no-margin" rows="10" placeholder="문자 내용을 입력해주세요. (90Bytes 초과시 LMS로 전환)"></textarea>
+										<span class="textbytes" style="margin: 5px 0 0 0">
+											<span id="byteChk">0</span>
+											/2000bytes
+										</span>
 									</div>
 								</div>
 							</div>
@@ -203,115 +231,113 @@
 								</label>
 							</div>
 							<div class="pt-4" id="ReservationRadio"></div>
-						<div class="pt-3 form-group">
-							<label for="InputSubject1">파일첨부</label>
-							<input id="fileInput" filestyle="" type="file" class="form-control" style="width:50px;position: absolute";/>
-							<div class="bootstrap-filestyle input-group">
-								<input type="text" id="userfile" class="form-control" name="userfile" disabled=""/>
-								<label for="fileInput" class="btn btn-default" style="border:1px solid #ced4da">
-									<span class="glyphicon fa fa-upload"></span>
-								</label>
+							<div class="pt-3 form-group">
+								<label for="InputSubject1">파일첨부</label>
+								<input id="fileInput" filestyle="" type="file" class="form-control" style="width: 50px; position: absolute" ;/>
+								<div class="bootstrap-filestyle input-group">
+									<input type="text" id="userfile" class="form-control" name="userfile" disabled="" />
+									<label for="fileInput" class="btn btn-default" style="border: 1px solid #ced4da">
+										<span class="glyphicon fa fa-upload"></span>
+									</label>
+								</div>
+							</div>
+						</form>
+						<div class="pt-4">
+							<button type="button" class="btn btn-primary btn-block btn-lg" onclick="sendMsg()">메시지 전송</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-8">
+			<div class="row">
+				<div class="container-fluid b-dashed b-b">
+					<div class="col-12">
+						<h5 class="title-font">
+							<i class="fa fa-user-plus"></i> 수신자 추가
+						</h5>
+						<form id="sendItemFrm" name="sendItemFrm" method="post">
+							<div class="row">
+								<div class="col-lg-6">
+									<label>이름</label>
+									<input type="text" name="destNm" class="form-control" />
+								</div>
+								<div class="col-lg-6">
+									<label>수신번호</label>
+									<input type="text" id="destNum" name="destNum" class="form-control" maxlength="13" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6">
+									<label>변수1</label>
+									<input type="text" name="var1" class="form-control" />
+								</div>
+								<div class="col-lg-6">
+									<label>변수2</label>
+									<input type="text" name="var2" class="form-control" />
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-lg-6">
+									<label>변수3</label>
+									<input type="text" name="var3" class="form-control" />
+								</div>
+								<div class="col-lg-6">
+									<label>변수4</label>
+									<input type="text" name="var4" class="form-control" />
+								</div>
+							</div>
+						</form>
+						<div class="row pt-3 pb-3">
+							<div class="col-12 text-right">
+								<div class="btn-group">
+									<button type="button" id="addBtn" class="btn btn-primary btn-lg mr-1" onclick="addSendItem()">대상자 추가</button>
+								</div>
 							</div>
 						</div>
-					</form>
-					<div class="pt-4">
-						<button type="button" class="btn btn-primary btn-block btn-lg" onclick="sendMsg()">메시지 전송</button>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="container-fluid">
+					<div class="col-12">
+						<h5 class="mt-5 title-font">
+							<i class="fa fa-user"></i> 수신자 목록
+						</h5>
+						<span id="totalCnt" style="font-size: 14px; font-weight: bold">총0건</span>
+						<div id="divBodyScroll">
+							<table class="table table-boredered">
+								<colgroup>
+									<col style="width: 50px;" />
+									<col style="width: 100px;" />
+									<col style="width: 100px;" />
+									<col style="width: 100px;" />
+									<col style="width: 100px;" />
+									<col style="width: 100px;" />
+									<col style="width: 100px;" />
+									<col style="width: 17px;" />
+								</colgroup>
+								<thead>
+									<tr>
+										<th class="title">No.</th>
+										<th class="title">이름</th>
+										<th class="title">수신번호</th>
+										<th class="title">변수1</th>
+										<th class="title">변수2</th>
+										<th class="title">변수3</th>
+										<th class="title">변수4</th>
+									</tr>
+								</thead>
+								<tbody id="receiveList">
+									<tr>
+										<td colspan="7" class="text-center">추가 된 수신자가 없습니다.</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-lg-8">
-		<div class="row">
-		<div class="container-fluid b-dashed b-b">
-			<div class="col-12">
-				<h5 class="title-font">
-					<i class="fa fa-user-plus"></i>
-					수신자 추가
-				</h5>
-				<form id="sendItemFrm" name="sendItemFrm" method="post">
-					<div class="row">
-						<div class="col-lg-6">
-							<label>이름</label>
-							<input type="text" name="destNm" class="form-control" />
-						</div>
-						<div class="col-lg-6">
-							<label>수신번호</label>
-							<input type="text" id="destNum" name="destNum" class="form-control" maxlength="13" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-6">
-							<label>변수1</label>
-							<input type="text" name="var1" class="form-control" />
-						</div>
-						<div class="col-lg-6">
-							<label>변수2</label>
-							<input type="text" name="var2" class="form-control" />
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-6">
-							<label>변수3</label>
-							<input type="text" name="var3" class="form-control" />
-						</div>
-						<div class="col-lg-6">
-							<label>변수4</label>
-							<input type="text" name="var4" class="form-control" />
-						</div>
-					</div>
-				</form>
-				<div class="row pt-3 pb-3">
-					<div class="col-12 text-right">
-						<div class="btn-group">
-							<button type="button" id="addBtn" class="btn btn-primary btn-lg mr-1" onclick="addSendItem()">대상자 추가</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
-		<div class="row">
-		<div class="container-fluid">
-			<div class="col-12">
-				<h5 class="mt-5 title-font">
-					<i class="fa fa-user"></i>
-					수신자 목록
-				</h5>
-				<span id="totalCnt" style="font-size: 14px; font-weight: bold">총0건</span>
-				<div id="divBodyScroll">
-					<table class="table table-boredered">
-						<colgroup>
-							<col style="width: 50px;" />
-							<col style="width: 100px;" />
-							<col style="width: 100px;" />
-							<col style="width: 100px;" />
-							<col style="width: 100px;" />
-							<col style="width: 100px;" />
-							<col style="width: 100px;" />
-							<col style="width: 17px;" />
-						</colgroup>
-						<thead>
-							<tr>
-								<th class="title">No.</th>
-								<th class="title">이름</th>
-								<th class="title">수신번호</th>
-								<th class="title">변수1</th>
-								<th class="title">변수2</th>
-								<th class="title">변수3</th>
-								<th class="title">변수4</th>
-							</tr>
-						</thead>
-						<tbody id="receiveList">
-							<tr>
-								<td colspan="7" class="text-center">추가 된 수신자가 없습니다.</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-			</div>
-		</div>
-		</div>
-	</div>
-</div>
 </div>

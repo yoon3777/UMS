@@ -31,4 +31,6 @@ public interface MsgSendMapper {
 
 	ArrayList<SchDestDTO> schDest(int msgId);
 
+	int checkDest(DestTempDTO destTempDTO);
+
 }

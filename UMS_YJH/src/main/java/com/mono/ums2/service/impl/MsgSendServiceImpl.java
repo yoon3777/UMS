@@ -58,6 +58,24 @@ public class MsgSendServiceImpl implements MsgSendService {
 	}
 
 	@Override
+	public Map<String, String> addSendItem(Model model, DestTempDTO destTempDTO) throws Exception {
+		Map<String, String> resultMap = new HashMap<String, String>();
+		resultMap.put("RESULT_CODE", "1"); // 성공
+
+		if (StringUtils.isEmpty(destTempDTO.getDestNum()) || StringUtils.isEmpty(destTempDTO.getDestNm())) {
+			resultMap.put("RESULT_CODE", "0"); // 미입력
+		} else {
+			if(msgSendMapper.checkDest(destTempDTO)==1){
+				resultMap.put("RESULT_CODE", "2"); // 중복
+			}
+			else{
+			msgSendMapper.addSendItem(destTempDTO);
+			}
+		}
+		return resultMap;
+	}
+
+	@Override
 	public Map<String, String> sendMsg(Model model, MsgSendDTO msgSendDTO) throws Exception {
 		Map<String, String> resultMap = new HashMap<String, String>();
 		resultMap.put("RESULT_CODE", "1");
@@ -83,21 +101,6 @@ public class MsgSendServiceImpl implements MsgSendService {
 			msgSendMapper.sendMsgSDK(sdkSendDTO);
 
 		}
-		return resultMap;
-
-	}
-
-	@Override
-	public Map<String, String> addSendItem(Model model, DestTempDTO destTempDTO) throws Exception {
-		Map<String, String> resultMap = new HashMap<String, String>();
-		resultMap.put("RESULT_CODE", "1");
-
-		if (StringUtils.isEmpty(destTempDTO.getDestNum())) {
-			resultMap.put("RESULT_CODE", "0");
-		} else {
-			msgSendMapper.addSendItem(destTempDTO);
-		}
-
 		return resultMap;
 	}
 
