@@ -6,7 +6,7 @@
 	});
 
 	var msgid = [];
-	
+
 	function schReportItems() {
 		$.ajax({
 			type : "POST",
@@ -16,7 +16,7 @@
 				if (data.LIST.length > 0) {
 					for (var i = 0; i < data.LIST.length; i++) {
 						msgid[i] = data.LIST[i].MSGID;
-						var $tr = $("<tr onclick='moveDetail("+i+")'>");
+						var $tr = $("<tr onclick='moveDetail(" + i + ")'>");
 						var $tdCol1 = $("<td />");
 						var $tdCol2 = $("<td />");
 						var $tdCol3 = $("<td />");
@@ -65,75 +65,75 @@
 			}
 		});
 	}
-	
-	function moveDetail(i){
+
+	function moveDetail(i) {
 		var id = msgid[i];
-		window.location.href = "${contextPath}/msgreport/detail"+id;
+		window.location.href = "${contextPath}/msgreport/detail" + id;
 		console.log(id);
 	}
 </script>
-<div class="pt-3"></div>
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-lg-4">
-			<div class="row">
-				<div class="col-6">
-					<input type="date" id="startDate" class="form-control">
-				</div>
-				<div class="col-6">
-					<input type="date" id="endDate" class="form-control">
+<div class="card">
+	<div class="pt-3"></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="row">
+					<div class="col-6">
+						<input type="date" id="startDate" class="form-control">
+					</div>
+					<div class="col-6">
+						<input type="date" id="endDate" class="form-control">
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-lg-7">
-			<div class="row">
-				<div class="col-8">
-					<input type="text" class="form-control" placeholder="검색 키워드를 입력하세요.">
-				</div>
-				<div class="col-4">
-					<div class="btn-group">
-						<button class="btn btn-primary" type="button">찾기</button>
+			<div class="col-lg-7">
+				<div class="row">
+					<div class="col-8">
+						<input type="text" class="form-control" placeholder="검색 키워드를 입력하세요.">
+					</div>
+					<div class="col-4">
+						<div class="btn-group">
+							<button class="btn btn-primary" type="button">찾기</button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-12 pt-5">
-			<table class="table table-boredered table-hover">
-				<colgroup>
-					<col style="width: 100px;" />
-					<col style="width: 100px;" />
-					<col style="width: 100px;" />
-					<col style="width: 100px;" />
-					<col style="width: 100px;" />
-					<col style="width: 100px;" />
-					<col style="width: 100px;" />
-					<col style="width: 100px;" />
-					<col style="width: 100px;" />
-					<col style="width: 100px;" />
-					<col style="width: 10px;" />
-				</colgroup>
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th>요청 일시</th>
-						<th>전송 일시</th>
-						<th>발신 번호</th>
-						<th>전송 타입</th>
-						<th>전송 상태</th>
-						<th>총 건수</th>
-						<th>성공 건수</th>
-						<th>실패 건수</th>
-					</tr>
-				</thead>
-				<tbody id="reportList">
+		<div class="row">
+			<div class="col-sm-12">
+				<table class="table table-boredered table-hover">
+					<colgroup>
+						<col style="width: 100px;" />
+						<col style="width: 100px;" />
+						<col style="width: 100px;" />
+						<col style="width: 100px;" />
+						<col style="width: 100px;" />
+						<col style="width: 100px;" />
+						<col style="width: 100px;" />
+						<col style="width: 100px;" />
+						<col style="width: 100px;" />
+						<col style="width: 100px;" />
+						<col style="width: 10px;" />
+					</colgroup>
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>요청 일시</th>
+							<th>전송 일시</th>
+							<th>발신 번호</th>
+							<th>전송 타입</th>
+							<th>전송 상태</th>
+							<th>총 건수</th>
+							<th>성공 건수</th>
+							<th>실패 건수</th>
+						</tr>
+					</thead>
+					<tbody id="reportList">
 
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
-	<div class="pt-5"></div>
 </div>
-<div class="pt-3"></div>

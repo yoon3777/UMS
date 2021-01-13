@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,8 @@ public class MsgReportController {
 	}
 
 	@RequestMapping("/report")
-	public String report(Model model) {
+	public String report(Model model, HttpSession session) {
+		session.setAttribute("page", "결과 조회");
 		try {
 
 		} catch (Exception e) {
@@ -53,7 +55,8 @@ public class MsgReportController {
 	}
 
 	@RequestMapping("/detail{id}")
-	public String detail(Model model, @PathVariable("id") int id) {
+	public String detail(Model model, @PathVariable("id") int id, HttpSession session) {
+		session.setAttribute("page", "상세 결과 조회");
 		this.id = id;
 		try {
 		} catch (Exception e) {
@@ -64,8 +67,7 @@ public class MsgReportController {
 	}
 	
 	@RequestMapping("/dlist")
-	public @ResponseBody Map<String, Object> d(Model model) {
-		System.out.println("id값:"+id);
+	public @ResponseBody Map<String, Object> dlist(Model model) {
 		Map<String, Object> resultMap = null;
 		try {
 			resultMap = msgReportService.schDetailItems(id);

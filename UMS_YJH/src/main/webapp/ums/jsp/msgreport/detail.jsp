@@ -10,7 +10,7 @@
 			url : '${contextPath}/msgreport/dlist.json',
 			success : function(data) {
 				var $tbody = $("#detailList");
-				
+
 				if (data.LIST.length > 0) {
 					for (var i = 0; i < data.LIST.length; i++) {
 						var $tr = $("<tr />");
@@ -39,7 +39,7 @@
 						$tr.append($tdCol7);
 
 						$tbody.append($tr);
-						
+
 						$('#subject').val(data.LIST[i].SUBJECT);
 						$('#msgcontent').text(data.LIST[i].MSGCONTENT);
 						$('#sendtype').val(data.LIST[i].SENDTYPE);
@@ -60,62 +60,60 @@
 		});
 	}
 </script>
-<div class="pt-3"></div>
-<div class="container-fluid">
+<div class="card">
 	<div class="pt-3"></div>
-	<div class="row col-sm-12">
-		<div class="col-sm-4">
-			제목
-			<input type="text" id="subject" class="form-control" readonly>
-			<div class="pt-3"></div>
-			<textarea id="msgcontent" class="form-control" style="height: 170px;" readonly></textarea>
+	<div class="container-fluid">
+		<div class="pt-3"></div>
+		<div class="row col-sm-12">
+			<div class="col-sm-4">
+				제목
+				<input type="text" id="subject" class="form-control" readonly>
+				<div class="pt-3"></div>
+				<textarea id="msgcontent" class="form-control" style="height: 170px;" readonly></textarea>
+			</div>
+			<div class="col-sm-3">
+				전송 타입
+				<input type="text" id="sendtype" class="form-control" readonly>
+				발신 번호
+				<input type="text" id="departnum" class="form-control" readonly>
+				요청 일시
+				<input type="text" id="nowdate" class="form-control" readonly>
+				전송 일시
+				<input type="text" id="senddate" class="form-control" readonly>
+			</div>
+			<div class="col-sm-5">
+				첨부파일
+				<input type="text" id="attachfile" class="form-control" readonly>
+			</div>
 		</div>
-		<div class="col-sm-3">
-			전송 타입
-			<input type="text" id="sendtype" class="form-control" readonly>
-			발신 번호
-			<input type="text" id="departnum" class="form-control" readonly>
-			요청 일시
-			<input type="text" id="nowdate" class="form-control" readonly>
-			전송 일시
-			<input type="text" id="senddate" class="form-control" readonly>
-		</div>
-		<div class="col-sm-5">
-			첨부파일
-			<input type="text" id="attachfile" class="form-control" readonly>
-		</div>
-	</div>
-	<div class="row">
+		<div class="row">
+			<div class="col-sm-12 pt-4 table-responsive">
+				<table class="table table-boredered">
+					<colgroup>
+						<col style="width: 50px;" />
+						<col style="width: 80px;" />
+						<col style="width: 80px;" />
+						<col style="width: 80px;" />
+						<col style="width: 80px;" />
+						<col style="width: 80px;" />
+						<col style="width: 150px;" />
+					</colgroup>
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>이름</th>
+							<th>수신 번호</th>
+							<th>요청 일시</th>
+							<th>전송 일시</th>
+							<th>전송 상태</th>
+							<th>실패 사유</th>
+						</tr>
+					</thead>
+					<tbody id="detailList">
 
-
-
-		<div class="col-sm-12 pt-4 table-responsive">
-			<table class="table table-boredered">
-				<colgroup>
-					<col style="width: 50px;" />
-					<col style="width: 80px;" />
-					<col style="width: 80px;" />
-					<col style="width: 80px;" />
-					<col style="width: 80px;" />
-					<col style="width: 80px;" />
-					<col style="width: 150px;" />
-				</colgroup>
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>이름</th>
-						<th>수신 번호</th>
-						<th>요청 일시</th>
-						<th>전송 일시</th>
-						<th>전송 상태</th>
-						<th>실패 사유</th>
-					</tr>
-				</thead>
-				<tbody id="detailList">
-
-				</tbody>
-			</table>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>
-<div class="pt-3"></div>

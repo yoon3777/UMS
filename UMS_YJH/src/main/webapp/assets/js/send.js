@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+
 	var hypenPhone = function(str) {
 		str = str.replace(/[^0-9]/g, '');
 		var tmp = '';

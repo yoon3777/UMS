@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,12 +26,14 @@ public class MsgSendController {
 
 	@ModelAttribute
 	public void common(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		model.addAttribute("contextPath", request.getContextPath());
 		model.addAttribute("request", request);
 	}
 
 	@RequestMapping("/sms")
-	public String smsView(Model model) {
+	public String smsView(Model model, HttpSession session) {
+		session.setAttribute("page", "SMS/LMS");
 		try {
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -41,7 +44,8 @@ public class MsgSendController {
 	}
 
 	@RequestMapping("/mms")
-	public String mmsView(Model model) {
+	public String mmsView(Model model, HttpSession session) {
+		session.setAttribute("page", "MMS");
 		try {
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,7 +56,8 @@ public class MsgSendController {
 	}
 
 	@RequestMapping("/vms")
-	public String vmsView(Model model) {
+	public String vmsView(Model model, HttpSession session) {
+		session.setAttribute("page", "VMS");
 		try {
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -63,7 +68,8 @@ public class MsgSendController {
 	}
 
 	@RequestMapping("/fms")
-	public String fmsView(Model model) {
+	public String fmsView(Model model, HttpSession session) {
+		session.setAttribute("page", "FMS");
 		try {
 		} catch (Exception e) {
 			e.printStackTrace();

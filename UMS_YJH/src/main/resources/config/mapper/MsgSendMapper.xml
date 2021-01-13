@@ -89,7 +89,7 @@
 			,RESERVED2
 		) VALUES (
 			#{msgId}
-			,NULL
+			,#{sendType, jdbcType=NVARCHAR}
 			,#{schdType, jdbcType=NVARCHAR}
 			,#{subject}
 			,#{departNum}
@@ -124,7 +124,7 @@
 			,RESERVED2
 		) VALUES (
 			#{msgId}
-			,NULL
+			,#{sendType, jdbcType=NVARCHAR}
 			,#{schdType, jdbcType=NVARCHAR}
 			,#{subject}
 			,#{departNum}
@@ -194,38 +194,178 @@
 	]]>
 	</select>
 
+	<!-- *******************SDK INSERT********************* -->
 	<insert id="sendMsgSDK">
-		INSERT INTO SDK_SMS_SEND (
-		MSG_ID
-		,USER_ID
-		,SCHEDULE_TYPE
-		,SUBJECT
-		,NOW_DATE
-		,SEND_DATE
-		,CALLBACK
-		,DEST_COUNT
-		,DEST_INFO
-		,SMS_MSG
-		,RESERVED1
-		)VALUES(
-		SDK_SMS_SEQ.nextval
-		,'agentTest'
-		,#{schdType}
-		,#{subject}
-		,#{nowDate}
-		,#{sendDate}
-		,#{departNum}
-		,1
-		,#{destInfo}
-		,#{msgContent}
-		,#{reserved1}
-		)
+		<choose>
+			<when test="sendType.equals('SMS')">
+				INSERT INTO SDK_SMS_SEND (
+				MSG_ID
+				,USER_ID
+				,SCHEDULE_TYPE
+				,SUBJECT
+				,NOW_DATE
+				,SEND_DATE
+				,CALLBACK
+				,DEST_COUNT
+				,DEST_INFO
+				,SMS_MSG
+				,RESERVED1
+				)VALUES(
+				SDK_SMS_SEQ.nextval
+				,'agentTest'
+				,#{schdType}
+				,#{subject}
+				,#{nowDate}
+				,#{sendDate}
+				,#{departNum}
+				,1
+				,#{destInfo}
+				,#{msgContent}
+				,#{reserved1}
+				)
+			</when>
+			<when test="sendType.equals('LMS')">
+				INSERT INTO SDK_MMS_SEND
+				(
+				MSG_ID
+				,USER_ID
+				,SCHEDULE_TYPE
+				,SUBJECT
+				,NOW_DATE
+				,SEND_DATE
+				,CALLBACK
+				,DEST_COUNT
+				,DEST_INFO
+				,MSG_TYPE
+				,MMS_MSG
+				,CONTENT_COUNT
+				,CONTENT_DATA)
+				values
+				(
+				SDK_MMS_SEQ.NEXTVAL
+				,'agentTest'
+				,#{schdType}
+				,#{subject}
+				,#{nowDate}
+				,#{sendDate}
+				,#{departNum}
+				,#{msgCnt}
+				,#{destInfo}
+				,0
+				,#{msgContent}
+				,1
+				,NULL
+				)
+			</when>
+			<when test="sendType.equals('MMS')">
+				INSERT INTO SDK_MMS_SEND
+				(
+				MSG_ID
+				,USER_ID
+				,SCHEDULE_TYPE
+				,SUBJECT
+				,NOW_DATE
+				,SEND_DATE
+				,CALLBACK
+				,DEST_COUNT
+				,DEST_INFO
+				,MSG_TYPE
+				,MMS_MSG
+				,CONTENT_COUNT
+				,CONTENT_DATA)
+				values
+				(
+				SDK_MMS_SEQ.NEXTVAL
+				,'agentTest'
+				,#{schdType}
+				,#{subject}
+				,#{nowDate}
+				,#{sendDate}
+				,#{departNum}
+				,#{msgCnt}
+				,#{destInfo}
+				,0
+				,#{msgContent}
+				,1
+				,#{attachFile}
+				)
+			</when>
+			<when test="sendType.equals('FMS')">
+				INSERT INTO SDK_FMS_SEND
+				(
+				MSG_ID
+				,USER_ID
+				,MSG_SUBTYPE
+				,SCHEDULE_TYPE
+				,DEST_TYPE
+				,SUBJECT
+				,NOW_DATE
+				,SEND_DATE
+				,CALLBACK
+				,DEST_COUNT
+				,DEST_INFO
+				,ATTACH_FILE
+				)
+				VALUES
+				(
+				SDK_VMS_SEQ.NEXTVAL
+				,'agentTest'
+				,20
+				,#{schdType}
+				,0
+				,#{subject}
+				,#{nowDate}
+				,#{sendDate}
+				,#{departNum}
+				,#{msgCnt}
+				,#{destInfo}
+				,#{attachFile}
+				)
+			</when>
+			<when test="sendType.equals('VMS')">
+				INSERT INTO SDK_VMS_SEND
+				(
+				MSG_ID
+				,USER_ID
+				,MSG_SUBTYPE
+				,VOICE_TYPE
+				,SCHEDULE_TYPE
+				,SUBJECT
+				,NOW_DATE
+				,SEND_DATE
+				,CALLBACK
+				,SMSPLUS_MSG
+				,TTS_MSG
+				,MENT_TYPE
+				,DEST_COUNT
+				,DEST_INFO
+				)
+				VALUES
+				(
+				SDK_VMS_SEQ.NEXTVAL
+				,'agentTest'
+				,30
+				,0
+				,#{schdType}
+				,#{subject}
+				,#{nowDate}
+				,#{sendDate}
+				,#{departNum}
+				,NULL
+				,#{msgContent}
+				,0
+				,#{msgCnt}
+				,#{destInfo}
+				)
+			</when>
+		</choose>
 	</insert>
 
 
 	<select id="schMsg" resultType="SDKSendDTO">
 		SELECT
 		MSGID
+		,SENDTYPE
 		,SCHDTYPE
 		,SUBJECT
 		,DEPARTNUM

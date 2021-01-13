@@ -2,6 +2,16 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 		schSendItems();
+		
+		$('#fileInput').on('change', function(){ 
+			if(window.FileReader){ 
+				var filename = $(this)[0].files[0].name;
+			} else {
+				var filename = $(this).val().split('/').pop().split('\\').pop();
+			} 
+				$('#userfile').val(filename);
+			});
+		
 	});
 	var totalCnt;
 	
@@ -117,7 +127,8 @@
 					departNum : $("#departNum").val(),
 					schdType : $('input[name=radio]:checked').val(),
 					sendDate : s_date + s_time,
-					msgCnt : totalCnt
+					msgCnt : totalCnt,
+					sendType : $("#sendType").val()
 			};
 		swal({
 			  text : "메시지를 전송하시겠습니까?",
@@ -188,8 +199,20 @@
 			$('.contentType').text("단문");
 		}
 	}
+	
+	function fileThumbnail(f){
+		
+		var file = f.files;
+		
+		var reader = new FileReader();
+			
+		reader.onload = function(e){
+			$("#thumbnail").append("<img src="+e.target.result+" style='hegith:30px; width:200px;'>");
+		}
+			reader.readAsDataURL(file[0]);
+	};
 </script>
-<div class="pt-4"></div>
+<input type="hidden" id="sendType" value="${sessionScope.page}" />
 <div class="card">
 	<div class="row" style="padding: 15px;">
 		<div class="col-lg-4">
@@ -231,15 +254,18 @@
 								</label>
 							</div>
 							<div class="pt-4" id="ReservationRadio"></div>
+
 							<div class="pt-3 form-group">
 								<label for="InputSubject1">파일첨부</label>
-								<input id="fileInput" filestyle="" type="file" class="form-control" style="width: 50px; position: absolute" ;/>
-								<div class="bootstrap-filestyle input-group">
+								<input id="fileInput" type="file" accept="image/*" class="form-control" onchange="fileThumbnail(this)" style="width: 300px; position: absolute" ;/>
+								<div class="input-group">
 									<input type="text" id="userfile" class="form-control" name="userfile" disabled="" />
 									<label for="fileInput" class="btn btn-default" style="border: 1px solid #ced4da">
 										<span class="glyphicon fa fa-upload"></span>
 									</label>
 								</div>
+							</div>
+							<div id="thumbnail" style="text-align:center">
 							</div>
 						</form>
 						<div class="pt-4">

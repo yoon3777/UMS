@@ -115,7 +115,8 @@
 					departNum : $("#departNum").val(),
 					schdType : $('input[name=radio]:checked').val(),
 					sendDate : s_date + s_time,
-					msgCnt : totalCnt
+					msgCnt : totalCnt,
+					sendType : $("#sendType").val()
 			};
 		swal({
 			  text : "메시지를 전송하시겠습니까?",
@@ -163,7 +164,7 @@
 	})
 }
 </script>
-<div class="pt-4"></div>
+<input type="hidden" id="sendType" value="${sessionScope.page}" />
 <div class="card">
 	<div class="row" style="padding: 15px;">
 		<div class="col-lg-4">

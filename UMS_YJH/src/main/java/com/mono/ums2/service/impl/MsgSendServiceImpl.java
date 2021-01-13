@@ -96,8 +96,8 @@ public class MsgSendServiceImpl implements MsgSendService {
 			for (SchDestDTO a : dlist) {
 				info += a.getDestNm() + '^' + a.getDestNum() + '|';
 			}
-
 			sdkSendDTO.setDestInfo(info);
+			
 			msgSendMapper.sendMsgSDK(sdkSendDTO);
 
 		}

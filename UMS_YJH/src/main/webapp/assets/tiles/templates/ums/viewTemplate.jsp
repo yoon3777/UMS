@@ -8,10 +8,11 @@
 <%@ include file="../../../include/inc_common.jsp"%>
 <%@ include file="../../../include/inc_script.jsp"%>
 <style>
-body {
+html, body {
+	width: 100%;
+	height: 100%;
 	background: #fafafa;
 }
-
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -23,7 +24,7 @@ body {
 			event.preventDefault();
 			// Show and hide the tabs on click
 			if ($(this).attr('class') != 'active') {
-				
+
 				$(this).next().stop(true, true).slideToggle('normal');
 				menu_head.removeClass('active');
 				$(this).addClass('active');
@@ -37,21 +38,23 @@ body {
 </head>
 <body>
 	<div>
-		<div class="row">
+		<div class="row wrap">
 			<div class="col-2">
-				<div id="side" style="z-index: 2;">
+				<div class="side" style="z-index: 2;">
 					<tiles:insertAttribute name="sider" />
 				</div>
 			</div>
 			<div class="col-10" style="margin-left: 280px !important; z-index: 1;">
-				<div class="header fixed-top pl-5">
+				<div class="header fixed-top">
 					<tiles:insertAttribute name="header" />
 				</div>
 				<div id="content">
 					<tiles:insertAttribute name="body" />
 				</div>
-				<tiles:insertAttribute name="footer" />
 			</div>
+			<%-- <div class="footer">
+				<tiles:insertAttribute name="footer" />
+			</div> --%>
 		</div>
 	</div>
 </body>
