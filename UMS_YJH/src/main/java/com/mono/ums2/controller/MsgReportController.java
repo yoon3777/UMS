@@ -80,7 +80,7 @@ public class MsgReportController {
 	public @ResponseBody Map<String, Object> schReport(SchReportDTO schReportDTO) {
 		Map<String, Object> resultMap = null;
 		try {
-			msgReportService.schReport(schReportDTO);
+			resultMap = msgReportService.schReport(schReportDTO);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

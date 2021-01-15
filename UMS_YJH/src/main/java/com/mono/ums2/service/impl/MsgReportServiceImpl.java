@@ -84,7 +84,9 @@ public class MsgReportServiceImpl implements MsgReportService {
 	public Map<String, Object> schReport(SchReportDTO schReportDTO) throws Exception {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		List<Map<String, Object>> lists = msgReportMapper.schReport(schReportDTO);
-		
+		for (Map<String, Object> map : lists) {
+			System.out.println(map.toString());
+		}
 		resultMap.put("LIST", lists);
 		
 		return resultMap;

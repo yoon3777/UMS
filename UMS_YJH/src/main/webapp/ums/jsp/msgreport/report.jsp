@@ -74,6 +74,7 @@
 			success : function(data) {
 				var $tbody = $("#reportList");
 				if (data.LIST.length > 0) {
+					$tbody.html("");
 					for (var i = 0; i < data.LIST.length; i++) {
 						msgid[i] = data.LIST[i].MSGID;
 						var $tr = $("<tr onclick='moveDetail(" + i + ")'>");
