@@ -103,5 +103,15 @@ public class MsgSendServiceImpl implements MsgSendService {
 		}
 		return resultMap;
 	}
+	
+	@Override
+	public void deleteDest(String destNum) throws Exception {
+		msgSendMapper.deleteDest(destNum);
+	}
+	
+	@Override
+	public void deleteADest() throws Exception {
+		msgSendMapper.deleteADest();
+	}
 
 }

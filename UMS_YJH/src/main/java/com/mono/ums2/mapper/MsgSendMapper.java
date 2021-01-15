@@ -33,4 +33,8 @@ public interface MsgSendMapper {
 
 	int checkDest(DestTempDTO destTempDTO);
 
+	void deleteDest(String destNum);
+
+	void deleteADest();
+
 }

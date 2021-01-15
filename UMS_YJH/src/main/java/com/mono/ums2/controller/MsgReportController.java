@@ -14,14 +14,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.mono.ums2.dto.SchReportDTO;
 import com.mono.ums2.service.MsgReportService;
 
 @Controller
 @RequestMapping("/msgreport")
 public class MsgReportController {
-	
+
 	int id;
-	
+
 	@Autowired
 	private MsgReportService msgReportService;
 
@@ -38,13 +39,12 @@ public class MsgReportController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			// 어떠한 예외처리가 필요.
 		}
 		return "layout:view:msgreport/report";
 	}
-	
+
 	@RequestMapping("/rlist")
-	public @ResponseBody Map<String, Object> getReportItems(HttpServletResponse response){
+	public @ResponseBody Map<String, Object> getReportItems(HttpServletResponse response) {
 		Map<String, Object> resultMap = null;
 		try {
 			resultMap = msgReportService.schReportItems();
@@ -61,11 +61,10 @@ public class MsgReportController {
 		try {
 		} catch (Exception e) {
 			e.printStackTrace();
-			// 어떠한 예외처리가 필요.
 		}
 		return "layout:view:msgreport/detail";
 	}
-	
+
 	@RequestMapping("/dlist")
 	public @ResponseBody Map<String, Object> dlist(Model model) {
 		Map<String, Object> resultMap = null;
@@ -73,7 +72,17 @@ public class MsgReportController {
 			resultMap = msgReportService.schDetailItems(id);
 		} catch (Exception e) {
 			e.printStackTrace();
-			// 어떠한 예외처리가 필요.
+		}
+		return resultMap;
+	}
+
+	@RequestMapping("/schReport")
+	public @ResponseBody Map<String, Object> schReport(SchReportDTO schReportDTO) {
+		Map<String, Object> resultMap = null;
+		try {
+			msgReportService.schReport(schReportDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return resultMap;
 	}

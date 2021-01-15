@@ -64,6 +64,15 @@
 			<![CDATA[AND DESTNM = #{destNum}]]>
 		</if>
 	</select>
+	
+	<delete id="deleteDest">
+		DELETE FROM UMS_DEST_TEMP
+		WHERE DESTNUM = #{destNum}
+	</delete>
+	
+	<delete id="deleteADest">
+		TRUNCATE TABLE UMS_DEST_TEMP
+	</delete>
 
 	<insert id="sendMsg" parameterType="MsgSendDTO">
 		<selectKey keyProperty="msgId" resultType="int" order="BEFORE">
@@ -239,7 +248,9 @@
 				,MSG_TYPE
 				,MMS_MSG
 				,CONTENT_COUNT
-				,CONTENT_DATA)
+				,CONTENT_DATA
+				,RESERVED1
+				)
 				values
 				(
 				SDK_MMS_SEQ.NEXTVAL
@@ -255,6 +266,7 @@
 				,#{msgContent}
 				,1
 				,NULL
+				,#{reserved1}
 				)
 			</when>
 			<when test="sendType.equals('MMS')">
@@ -272,7 +284,9 @@
 				,MSG_TYPE
 				,MMS_MSG
 				,CONTENT_COUNT
-				,CONTENT_DATA)
+				,CONTENT_DATA
+				,RESERVED1
+				)
 				values
 				(
 				SDK_MMS_SEQ.NEXTVAL
@@ -288,6 +302,7 @@
 				,#{msgContent}
 				,1
 				,#{attachFile}
+				,#{reserved1}
 				)
 			</when>
 			<when test="sendType.equals('FMS')">
@@ -305,6 +320,7 @@
 				,DEST_COUNT
 				,DEST_INFO
 				,ATTACH_FILE
+				,RESERVED1
 				)
 				VALUES
 				(
@@ -320,6 +336,7 @@
 				,#{msgCnt}
 				,#{destInfo}
 				,#{attachFile}
+				,#{reserved1}
 				)
 			</when>
 			<when test="sendType.equals('VMS')">
@@ -339,6 +356,7 @@
 				,MENT_TYPE
 				,DEST_COUNT
 				,DEST_INFO
+				,RESERVED1
 				)
 				VALUES
 				(
@@ -356,6 +374,7 @@
 				,0
 				,#{msgCnt}
 				,#{destInfo}
+				,#{reserved1}
 				)
 			</when>
 		</choose>
@@ -393,6 +412,5 @@
 		FROM UMS_DEST
 		WHERE MSGID=#{msgId}
 	</select>
-
-
+	
 </mapper>

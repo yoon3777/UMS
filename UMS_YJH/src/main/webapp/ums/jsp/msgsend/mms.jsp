@@ -11,9 +11,9 @@
 			} 
 				$('#userfile').val(filename);
 			});
-		
 	});
 	var totalCnt;
+	var tabRow;
 	
 	function schSendItems() {
 		$.ajax({
@@ -26,6 +26,7 @@
 				if (data.TOTAL_CNT > 0) {
 					$tbody.html("");
 					for (var i = 0; i < data.LIST.length; i++) {
+						/* var $tr = $("<tr onclick='deleteDest(" + tabRow + ")'>"); */
 						var $tr = $("<tr />");
 						var $tdCol1 = $("<td />");
 						var $tdCol2 = $("<td />");
@@ -52,6 +53,17 @@
 						$tr.append($tdCol7);
 
 						$tbody.append($tr);
+						
+						
+						$('#tab').find("tbody").find("td:nth-child(n)").bind('click',function(){
+							$(this).parent().siblings().css("background","white");
+							$(this).parent().css("background","#daeffd");
+							
+							/* alert($(this).parent().find('td').eq(2).text()); */
+							/* alert($(this).parent().eq(0).text()); */
+							
+							tabRow = $(this).parent().find('td').eq(2).text();
+						})
 					}
 				} else {
 					$tbody.html("<tr><td colspan=\"7\" class=\"text-center\">추가 된 수신자가 없습니다.</td></tr>");
@@ -161,9 +173,13 @@
 						$("#sendMsgFrm").find("textarea").each(function() {
 							$(this).val("");
 						});
+						$("#sendItemFrm").find("input").each(function() {
+							$(this).val("");
+						});
 					} else {
 						swal("메시지 전송 실패.", "??", "warning");
 					}
+					schSendItems();
 				},
 				complete : function(data) {
 
@@ -194,9 +210,11 @@
 		if (size > 90) {
 			$('.contentType').css('background', 'green');
 			$('.contentType').text("장문");
+			$('#sendType').val("LMS");
 		} else {
 			$('.contentType').css('background', 'black');
 			$('.contentType').text("단문");
+			$('#sendType').val("SMS");
 		}
 	}
 	
@@ -211,13 +229,47 @@
 		}
 			reader.readAsDataURL(file[0]);
 	};
+	
+	function deleteDest(){
+		$.ajax({
+			type:'POST',
+			url: '${contextPath}/msgsend/deleteDest'+tabRow,
+			success : function(data) {
+				swal("수신자 삭제 성공", "1건 삭제", "success");
+				schSendItems();
+			},
+			complete : function(data) {
+
+			},
+			error : function() {
+				swal("실패", "..", "warning");
+			}
+		})
+	}
+	function deleteADest(){
+		$.ajax({
+			type:'POST',
+			url: '${contextPath}/msgsend/deleteADest',
+			success : function(data) {
+				swal("전체  수신자 삭제 성공", totalCnt+"건 삭제", "success");
+				schSendItems();
+			},
+			complete : function(data) {
+
+			},
+			error : function() {
+				swal("실패", "..", "warning");
+			}
+		})
+	}
+
 </script>
 <input type="hidden" id="sendType" value="${sessionScope.page}" />
 <div class="card">
 	<div class="row" style="padding: 15px;">
 		<div class="col-lg-4">
 			<div class="row">
-				<div class="container-fluid b-r b-dashed">
+				<div class="container-fluid b-dashed  b-r">
 					<div class="col-12">
 						<h5 class="title-font">
 							<i class="fa fa-envelope"></i> 메시지작성
@@ -229,6 +281,7 @@
 										<label>메시지제목</label>
 										<input type="text" id="subject" name="subject" class="form-control" />
 									</div>
+									<div id="thumbnail" style="text-align: center"></div>
 									<div class="form-group form-box">
 										<label>전송메시지</label>
 										<textarea id="msgContent" name="msgContent" onKeyUp="byteCheck()" class="form-control no-margin" rows="10" placeholder="문자 내용을 입력해주세요. (90Bytes 초과시 LMS로 전환)"></textarea>
@@ -257,15 +310,13 @@
 
 							<div class="pt-3 form-group">
 								<label for="InputSubject1">파일첨부</label>
-								<input id="fileInput" type="file" accept="image/*" class="form-control" onchange="fileThumbnail(this)" style="width: 300px; position: absolute" ;/>
+								<input id="fileInput" type="file" accept="image/*" class="form-control" onchange="fileThumbnail(this)" style="width: 300px; position: absolute"; />
 								<div class="input-group">
 									<input type="text" id="userfile" class="form-control" name="userfile" disabled="" />
 									<label for="fileInput" class="btn btn-default" style="border: 1px solid #ced4da">
 										<span class="glyphicon fa fa-upload"></span>
 									</label>
 								</div>
-							</div>
-							<div id="thumbnail" style="text-align:center">
 							</div>
 						</form>
 						<div class="pt-4">
@@ -315,10 +366,8 @@
 							</div>
 						</form>
 						<div class="row pt-3 pb-3">
-							<div class="col-12 text-right">
-								<div class="btn-group">
-									<button type="button" id="addBtn" class="btn btn-primary btn-lg mr-1" onclick="addSendItem()">대상자 추가</button>
-								</div>
+							<div class="col-12">
+								<button type="button" id="addBtn" class="btn btn-primary btn-block" onclick="addSendItem()">수신자 추가</button>
 							</div>
 						</div>
 					</div>
@@ -330,6 +379,10 @@
 						<h5 class="mt-5 title-font">
 							<i class="fa fa-user"></i> 수신자 목록
 						</h5>
+						<div style="text-align: right !important;">
+							<button type="button" id="deleteDest" class="delete-btn" onclick="deleteDest()">수신자 삭제</button>
+							<button type="button" id="deleteADest" class="delete-btn" onclick="deleteADest()">전체 삭제</button>
+						</div>
 						<span id="totalCnt" style="font-size: 14px; font-weight: bold">총0건</span>
 						<div id="divBodyScroll">
 							<table class="table table-boredered">

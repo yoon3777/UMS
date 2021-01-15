@@ -43,7 +43,7 @@
 						$('#subject').val(data.LIST[i].SUBJECT);
 						$('#msgcontent').text(data.LIST[i].MSGCONTENT);
 						$('#sendtype').val(data.LIST[i].SENDTYPE);
-						$('#departnum').val(data.LIST[i].MSGCONTENT);
+						$('#departnum').val(data.LIST[i].DEPARTNUM);
 						$('#nowdate').val(data.LIST[i].NOWDATE);
 						$('#senddate').val(data.LIST[i].SENDDATE);
 					}
@@ -62,30 +62,64 @@
 </script>
 <div class="card">
 	<div class="pt-3"></div>
-	<div class="container-fluid">
-		<div class="pt-3"></div>
-		<div class="row col-sm-12">
-			<div class="col-sm-4">
-				제목
-				<input type="text" id="subject" class="form-control" readonly>
-				<div class="pt-3"></div>
-				<textarea id="msgcontent" class="form-control" style="height: 170px;" readonly></textarea>
-			</div>
-			<div class="col-sm-3">
-				전송 타입
-				<input type="text" id="sendtype" class="form-control" readonly>
-				발신 번호
-				<input type="text" id="departnum" class="form-control" readonly>
-				요청 일시
-				<input type="text" id="nowdate" class="form-control" readonly>
-				전송 일시
-				<input type="text" id="senddate" class="form-control" readonly>
-			</div>
-			<div class="col-sm-5">
-				첨부파일
-				<input type="text" id="attachfile" class="form-control" readonly>
+	<h5 class="title-font" style="padding-left:20px;">
+		<i class="fa fa-search" aria-hidden="true"></i> 상세 결과 조회
+	</h5>
+	<div class="row" style="padding: 15px;">
+		<div class="col-lg-4">
+			<div class="row">
+				<div class="container-fluid">
+					<div class="col-12">
+
+						<div class="msgBox">
+							<div class="content-box">
+								<div class="form-group form-box">
+									<label>메시지제목</label>
+									<input type="text" id="subject" name="subject" class="form-control" readonly />
+								</div>
+								<div class="form-group form-box">
+									<label>전송메시지</label>
+									<textarea id="msgcontent" name="msgcontent" class="form-control no-margin" rows="10" readonly></textarea>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
+
+		<div class="col-lg-8">
+			<div class="row">
+				<div class="container-fluid">
+					<div class="col-12">
+						<div class="de">
+							전송 타입
+							<input type="text" id="sendtype" class="form-control" readonly>
+						</div>
+						<div class="de">
+							발신 번호
+							<input type="text" id="departnum" class="form-control" readonly>
+						</div>
+						<div class="de">
+							요청 일시
+							<input type="text" id="nowdate" class="form-control" readonly>
+						</div>
+						<div class="de">
+							전송 일시
+							<input type="text" id="senddate" class="form-control" readonly>
+						</div>
+						<div class="de">
+							첨부파일
+							<input type="text" id="attachfile" class="form-control" readonly>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-12 pt-4 table-responsive">
 				<table class="table table-boredered">

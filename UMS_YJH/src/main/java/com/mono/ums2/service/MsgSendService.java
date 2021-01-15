@@ -15,4 +15,8 @@ public interface MsgSendService {
 
 	Map<String, Object> findSendItems(Model model) throws Exception;
 
+	void deleteDest(String destNum) throws Exception;
+
+	void deleteADest() throws Exception;
+
 }

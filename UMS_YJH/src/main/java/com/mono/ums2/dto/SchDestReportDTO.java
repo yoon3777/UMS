@@ -11,6 +11,8 @@ public class SchDestReportDTO implements Serializable{
 		private String phone_number;
 		private String deliver_date;
 		private String report_res_date;
+		private String stime; //vms 호 연결시간
+		private String rtime; //vms 청취 시작 시간
 		private String tcs_result;
 		
 		@Override
@@ -47,6 +49,18 @@ public class SchDestReportDTO implements Serializable{
 		}
 		public void setReport_res_date(String report_res_date) {
 			this.report_res_date = report_res_date;
+		}
+		public String getStime() {
+			return stime;
+		}
+		public void setStime(String stime) {
+			this.stime = stime;
+		}
+		public String getRtime() {
+			return rtime;
+		}
+		public void setRtime(String rtime) {
+			this.rtime = rtime;
 		}
 		public String getTcs_result() {
 			return tcs_result;
