@@ -18,7 +18,6 @@
 				if (data.TOTAL_CNT > 0) {
 					$tbody.html("");
 					for (var i = 0; i < data.LIST.length; i++) {
-						/* var $tr = $("<tr onclick='deleteDest(" + tabRow + ")'>"); */
 						var $tr = $("<tr />");
 						var $tdCol1 = $("<td />");
 						var $tdCol2 = $("<td />");
@@ -50,10 +49,6 @@
 						$('#tab').find("tbody").find("td:nth-child(n)").bind('click',function(){
 							$(this).parent().siblings().css("background","white");
 							$(this).parent().css("background","#daeffd");
-							
-							/* alert($(this).parent().find('td').eq(2).text()); */
-							/* alert($(this).parent().eq(0).text()); */
-							
 							tabRow = $(this).parent().find('td').eq(2).text();
 						})
 					}

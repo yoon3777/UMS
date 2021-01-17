@@ -3,6 +3,14 @@
 	$(document).ready(function() {
 		schSendItems();
 		
+		$('#fileInput').on('change', function(){ 
+			if(window.FileReader){ 
+				var filename = $(this)[0].files[0].name;
+			} else {
+				var filename = $(this).val().split('/').pop().split('\\').pop();
+			} 
+				$('#userfile').val(filename);
+			});
 	});
 	var totalCnt;
 	var tabRow;
@@ -242,6 +250,21 @@
 			}
 		})
 	}
+	
+	function fileChk(file){
+		var filesize = file.files[0].size;
+		var size = Math.round(filesize/1024);
+		var filename = $("#fileInput").val().split('/').pop().split('\\').pop();
+		var f = filename.slice(filename.lastIndexOf(".")+1).toLowerCase();
+		if(f =='bmp' || f == 'gif' || f == 'jpg' || f == 'tif' || f == 'tiff' || f == 'doc' || f== 'docx' || f == 'xls' || f == 'xlsx' || f == 'ppt' || f == 'pptx'
+				|| f == 'htm' || f == 'html' || f == 'hwp' || f == 'pdf'){
+			$(".fileSize").text(size+"KB");
+			$(".fileNm").text(filename);
+		} else {
+			swal("불가능한 확장자 입니다.", "", "warning");
+		}
+		
+	}
 
 </script>
 <input type="hidden" id="sendType" value="${sessionScope.page}" />
@@ -346,7 +369,7 @@
 						</form>
 						<div class="row pt-3 pb-3">
 							<div class="col-12">
-									<button type="button" id="addBtn" class="btn btn-primary btn-block" onclick="addSendItem()">수신자 추가</button>
+								<button type="button" id="addBtn" class="btn btn-primary btn-block" onclick="addSendItem()">수신자 추가</button>
 							</div>
 						</div>
 					</div>
