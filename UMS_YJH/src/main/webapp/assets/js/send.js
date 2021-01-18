@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-
 	var hypenPhone = function(str) {
 		str = str.replace(/[^0-9]/g, '');
 		var tmp = '';
@@ -47,8 +46,7 @@ $(document).ready(function() {
 function ReservationRadioCheck() {
 	var Reservation = $('#ReservationRadio');
 	Reservation
-			.html("<input type=\'date\' id=\'Date\' name=\'Date\' style=\"margin-left: 60px;\" /><input type=\'time\' id=\'Time\' name=\'Time\' style=\"margin-left: 10px;\" />");
-
+			.html("<input type=\'date\' id=\'Date\' name=\'Date\' style=\"margin-left: 90px;\" /><input type=\'time\' id=\'Time\' name=\'Time\' style=\"margin-left: 10px;\" />");
 }
 function ImmediatelyRadioCheck() {
 	var Reservation = $('#ReservationRadio');

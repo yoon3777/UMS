@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.mono.ums2.dto.DestTempDTO;
 import com.mono.ums2.dto.MsgSendDTO;
@@ -106,8 +107,9 @@ public class MsgSendController {
 
 
 	@RequestMapping("/sendMsg")
-	public @ResponseBody Map<String, String> sendMsg(Model model, MsgSendDTO msgSendDTO, HttpServletResponse response) {
+	public @ResponseBody Map<String, String> sendMsg(Model model, MsgSendDTO msgSendDTO) {
 		Map<String, String> resultMap = null;
+		System.out.println("파일 :"+msgSendDTO.toString());
 		try {
 			resultMap = msgSendService.sendMsg(model, msgSendDTO);
 		} catch (Exception e) {

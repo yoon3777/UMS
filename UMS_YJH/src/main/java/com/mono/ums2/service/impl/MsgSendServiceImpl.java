@@ -94,7 +94,17 @@ public class MsgSendServiceImpl implements MsgSendService {
 			ArrayList<SchDestDTO> dlist = msgSendMapper.schDest(msgId);
 			String info = "";
 			for (SchDestDTO a : dlist) {
-				info += a.getDestNm() + '^' + a.getDestNum() + '|';
+				if(a.getVar1()==null){
+					info += a.getDestNm() + '^' + a.getDestNum() + '|';
+				} else if(a.getVar2()==null){
+					info += a.getDestNm() + '^' + a.getDestNum() + '^' + a.getVar1() + '|';
+				} else if(a.getVar3()==null){
+					info += a.getDestNm() + '^' + a.getDestNum() + '^' + a.getVar1() + '^' + a.getVar2() + '|';
+				} else if(a.getVar4()==null){
+					info += a.getDestNm() + '^' + a.getDestNum() + '^' + a.getVar1() + '^' + a.getVar2() + '^' + a.getVar3() + '|';
+				}else{
+					info += a.getDestNm() + '^' + a.getDestNum() + '^' + a.getVar1() + '^' + a.getVar2() + '^' + a.getVar3() + '^' + a.getVar4()  + '|';
+				}
 			}
 			sdkSendDTO.setDestInfo(info);
 			

@@ -54,14 +54,9 @@
 
 						$tbody.append($tr);
 						
-						
 						$('#tab').find("tbody").find("td:nth-child(n)").bind('click',function(){
 							$(this).parent().siblings().css("background","white");
 							$(this).parent().css("background","#daeffd");
-							
-							/* alert($(this).parent().find('td').eq(2).text()); */
-							/* alert($(this).parent().eq(0).text()); */
-							
 							tabRow = $(this).parent().find('td').eq(2).text();
 						})
 					}
@@ -140,7 +135,8 @@
 					schdType : $('input[name=radio]:checked').val(),
 					sendDate : s_date + s_time,
 					msgCnt : totalCnt,
-					sendType : $("#sendType").val()
+					sendType : $("#sendType").val(),
+					attachFile : $("#fileInput")[0].files[0],
 			};
 		swal({
 			  text : "메시지를 전송하시겠습니까?",
@@ -163,6 +159,8 @@
 				type : "POST",
 				url : '${contextPath}/msgsend/sendMsg',
 				data : data,
+				processData: false,
+				contentType: false,
 				success : function(data) {
 					if (data.RESULT_CODE == "1") {
 						swal("메시지 발송이 완료 되었습니다.", "성공", "success");
@@ -310,7 +308,8 @@
 
 							<div class="pt-3 form-group">
 								<label for="InputSubject1">파일첨부</label>
-								<input id="fileInput" type="file" accept="image/*" class="form-control" onchange="fileThumbnail(this)" style="width: 300px; position: absolute"; />
+								<input id="fileInput" name="fileInput" type="file" accept="image/*" 
+								enctype="multipart/form-data" class="form-control" onchange="fileThumbnail(this)" style="width: 300px; position: absolute"; />
 								<div class="input-group">
 									<input type="text" id="userfile" class="form-control" name="userfile" disabled="" />
 									<label for="fileInput" class="btn btn-default" style="border: 1px solid #ced4da">
@@ -385,7 +384,7 @@
 						</div>
 						<span id="totalCnt" style="font-size: 14px; font-weight: bold">총0건</span>
 						<div id="divBodyScroll">
-							<table class="table table-boredered">
+							<table id="tab" class="table table-boredered">
 								<colgroup>
 									<col style="width: 50px;" />
 									<col style="width: 100px;" />

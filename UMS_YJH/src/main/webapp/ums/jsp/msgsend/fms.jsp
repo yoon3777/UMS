@@ -387,7 +387,7 @@
 						</div>
 						<span id="totalCnt" style="font-size: 14px; font-weight: bold">총0건</span>
 						<div id="divBodyScroll">
-							<table class="table table-boredered">
+							<table id="tab" class="table table-boredered">
 								<colgroup>
 									<col style="width: 50px;" />
 									<col style="width: 100px;" />

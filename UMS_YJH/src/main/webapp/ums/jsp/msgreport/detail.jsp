@@ -22,6 +22,10 @@
 						var $tdCol5 = $("<td />");
 						var $tdCol6 = $("<td />");
 						var $tdCol7 = $("<td />");
+						var $tdCol8 = $("<td />");
+						var $tdCol9 = $("<td />");
+						var $tdCol10 = $("<td />");
+						var $tdCol11 = $("<td />");
 
 						$tdCol1.text(i + 1);
 						$tdCol2.text(data.LIST[i].DESTNM);
@@ -31,14 +35,19 @@
 						$tdCol6.text(data.LIST[i].SEND_STATUS);
 						if (data.LIST[i].TCS_RESULT == 0) {
 							$tdCol6.text('성공');
-							$tdCol7.text('');
 						}else if(data.LIST[i].TCS_RESULT == -2){
 							$tdCol6.text('대기');
 						}
 						else{
 							$tdCol6.text('실패');
-							$tdCol7.text('실패');
 						}
+						$tdCol7.text(data.LIST[i].VAR1);
+						$tdCol8.text(data.LIST[i].VAR2);
+						$tdCol9.text(data.LIST[i].VAR3);
+						$tdCol10.text(data.LIST[i].VAR4);
+						$tdCol11.text(data.LIST[i].TCS_RESULT);
+						
+						
 						$tr.append($tdCol1);
 						$tr.append($tdCol2);
 						$tr.append($tdCol3);
@@ -46,6 +55,10 @@
 						$tr.append($tdCol5);
 						$tr.append($tdCol6);
 						$tr.append($tdCol7);
+						$tr.append($tdCol8);
+						$tr.append($tdCol9);
+						$tr.append($tdCol10);
+						$tr.append($tdCol11);
 
 						$tbody.append($tr);
 
@@ -133,12 +146,16 @@
 			<div class="col-sm-12 pt-4 table-responsive">
 				<table class="table table-boredered">
 					<colgroup>
+						<col style="width: 40px;" />
 						<col style="width: 50px;" />
 						<col style="width: 80px;" />
 						<col style="width: 80px;" />
 						<col style="width: 80px;" />
-						<col style="width: 80px;" />
-						<col style="width: 80px;" />
+						<col style="width: 60px;" />
+						<col style="width: 50px;" />
+						<col style="width: 50px;" />
+						<col style="width: 50px;" />
+						<col style="width: 50px;" />
 						<col style="width: 150px;" />
 					</colgroup>
 					<thead>
@@ -149,6 +166,10 @@
 							<th>요청 일시</th>
 							<th>전송 일시</th>
 							<th>전송 상태</th>
+							<th>변수1</th>
+							<th>변수2</th>
+							<th>변수3</th>
+							<th>변수4</th>
 							<th>실패 사유</th>
 						</tr>
 					</thead>
