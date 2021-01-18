@@ -3,7 +3,7 @@
 	$(document).ready(function() {
 		schDetailItems();
 	});
-
+	
 	function schDetailItems() {
 		$.ajax({
 			type : "POST",
@@ -45,8 +45,22 @@
 						$tdCol8.text(data.LIST[i].VAR2);
 						$tdCol9.text(data.LIST[i].VAR3);
 						$tdCol10.text(data.LIST[i].VAR4);
-						$tdCol11.text(data.LIST[i].TCS_RESULT);
-						
+						if(data.LIST[i].TCS_RESULT == 0){
+							$tdCol11.text('');	
+						}else if(data.LIST[i].TCS_RESULT == 1){
+							$tdCol11.text('시스템장애');
+						}else if(data.LIST[i].TCS_RESULT == 2){
+							$tdCol11.text('인증실패');
+						}else if(data.LIST[i].TCS_RESULT == 3){
+							$tdCol11.text('메세지 형식 오류');
+						}else if(data.LIST[i].TCS_RESULT == 35){
+							$tdCol11.text('전화번호 오류');
+						}else if(data.LIST[i].TCS_RESULT == 92){
+							$tdCol11.text('첨부파일 오류');
+						}else if(data.LIST[i].TCS_RESULT == 115){
+							$tdCol11.text('미등록 회산번호 차단');
+						}
+						/* $tdCol11.text(data.LIST[i].TCS_RESULT); */
 						
 						$tr.append($tdCol1);
 						$tr.append($tdCol2);

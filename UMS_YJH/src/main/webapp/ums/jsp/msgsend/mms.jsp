@@ -127,7 +127,21 @@
 			var time = $('#Time').val() + '00';
 			var s_date = date.replace(/\-/g, '');
 			var s_time = time.replace(':', '');
-			}
+		}	
+			/* var formData = new FormData();
+			formData.append("subject", $("#subject").val())
+			formData.append("msgContent", $("#msgContent").val());
+			formData.append("departNum", $("#departNum").val());
+			formData.append("schdType", $('input[name=radio]:checked').val());
+			formData.append("sendDate", s_date + s_time);
+			formData.append("msgCnt", totalCnt);
+			formData.append("sendType", $("#sendType").val());
+			formData.append("attachFile", $("#fileInput")[0].files[0]);
+			
+			console.log(formData[0]); */
+			
+			/* var formData = new FormData($('#sendMsgFrm')[0]);
+			console.log(formData); */
 			data = {
 					subject : $("#subject").val(),
 					msgContent : $("#msgContent").val(),
@@ -136,7 +150,7 @@
 					sendDate : s_date + s_time,
 					msgCnt : totalCnt,
 					sendType : $("#sendType").val(),
-					attachFile : $("#fileInput")[0].files[0],
+					attachFile : $("#fileInput").val()
 			};
 		swal({
 			  text : "메시지를 전송하시겠습니까?",
@@ -159,8 +173,10 @@
 				type : "POST",
 				url : '${contextPath}/msgsend/sendMsg',
 				data : data,
-				processData: false,
-				contentType: false,
+				enctype: 'multipart/form-data',
+				dataType : 'JSON',
+				processData : false,
+				contentType : false,
 				success : function(data) {
 					if (data.RESULT_CODE == "1") {
 						swal("메시지 발송이 완료 되었습니다.", "성공", "success");
@@ -272,7 +288,7 @@
 						<h5 class="title-font">
 							<i class="fa fa-envelope"></i> 메시지작성
 						</h5>
-						<form id="sendMsgFrm" name="sendMsgFrm" method="post">
+						<form id="sendMsgFrm" name="sendMsgFrm" method="post" enctype="multipart/form-data">
 							<div class="msgBox">
 								<div class="content-box">
 									<div class="form-group form-box">
@@ -308,8 +324,7 @@
 
 							<div class="pt-3 form-group">
 								<label for="InputSubject1">파일첨부</label>
-								<input id="fileInput" name="fileInput" type="file" accept="image/*" 
-								enctype="multipart/form-data" class="form-control" onchange="fileThumbnail(this)" style="width: 300px; position: absolute"; />
+								<input id="fileInput" name="fileInput" type="file" accept="image/*" class="form-control" onchange="fileThumbnail(this)" style="width: 300px; position: absolute" ; />
 								<div class="input-group">
 									<input type="text" id="userfile" class="form-control" name="userfile" disabled="" />
 									<label for="fileInput" class="btn btn-default" style="border: 1px solid #ced4da">

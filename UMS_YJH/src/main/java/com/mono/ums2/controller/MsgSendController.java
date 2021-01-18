@@ -109,7 +109,7 @@ public class MsgSendController {
 	@RequestMapping("/sendMsg")
 	public @ResponseBody Map<String, String> sendMsg(Model model, MsgSendDTO msgSendDTO) {
 		Map<String, String> resultMap = null;
-		System.out.println("파일 :"+msgSendDTO.toString());
+		System.out.println("컨털 :"+msgSendDTO.toString());
 		try {
 			resultMap = msgSendService.sendMsg(model, msgSendDTO);
 		} catch (Exception e) {
