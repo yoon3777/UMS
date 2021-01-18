@@ -34,10 +34,9 @@
 						$tdCol4.text(data.LIST[i].SENDDATE);
 						$tdCol5.text(data.LIST[i].DEPARTNUM);
 						$tdCol6.text(data.LIST[i].SENDTYPE);
-						$tdCol7.text(data.LIST[i].SENDSTATUS);
-						$tdCol8.text(data.LIST[i].MSGCNT);
-						$tdCol9.text(data.LIST[i].SUCCCNT);
-						$tdCol10.text(data.LIST[i].FAILCNT);
+						$tdCol7.text(data.LIST[i].MSGCNT);
+						$tdCol8.text(data.LIST[i].SUCCCNT);
+						$tdCol9.text(data.LIST[i].FAILCNT);
 
 						$tr.append($tdCol1);
 						$tr.append($tdCol2);
@@ -87,7 +86,6 @@
 						var $tdCol7 = $("<td />");
 						var $tdCol8 = $("<td />");
 						var $tdCol9 = $("<td />");
-						var $tdCol10 = $("<td />");
 
 						$tdCol1.text(i + 1);
 						$tdCol2.text(data.LIST[i].SUBJECT);
@@ -95,10 +93,9 @@
 						$tdCol4.text(data.LIST[i].SENDDATE);
 						$tdCol5.text(data.LIST[i].DEPARTNUM);
 						$tdCol6.text(data.LIST[i].SENDTYPE);
-						$tdCol7.text(data.LIST[i].SENDSTATUS);
-						$tdCol8.text(data.LIST[i].MSGCNT);
-						$tdCol9.text(data.LIST[i].SUCCCNT);
-						$tdCol10.text(data.LIST[i].FAILCNT);
+						$tdCol7.text(data.LIST[i].MSGCNT);
+						$tdCol8.text(data.LIST[i].SUCCCNT);
+						$tdCol9.text(data.LIST[i].FAILCNT);
 
 						$tr.append($tdCol1);
 						$tr.append($tdCol2);
@@ -109,7 +106,6 @@
 						$tr.append($tdCol7);
 						$tr.append($tdCol8);
 						$tr.append($tdCol9);
-						$tr.append($tdCol10);
 
 						$tbody.append($tr);
 
@@ -177,7 +173,6 @@
 					<col style="width: 100px;" />
 					<col style="width: 100px;" />
 					<col style="width: 100px;" />
-					<col style="width: 100px;" />
 					<col style="width: 10px;" />
 				</colgroup>
 				<thead>
@@ -188,7 +183,6 @@
 						<th>전송 일시</th>
 						<th>발신 번호</th>
 						<th>전송 타입</th>
-						<th>전송 상태</th>
 						<th>총 건수</th>
 						<th>성공 건수</th>
 						<th>실패 건수</th>

@@ -13,6 +13,7 @@
 
 				if (data.LIST.length > 0) {
 					for (var i = 0; i < data.LIST.length; i++) {
+
 						var $tr = $("<tr />");
 						var $tdCol1 = $("<td />");
 						var $tdCol2 = $("<td />");
@@ -28,8 +29,16 @@
 						$tdCol4.text(data.LIST[i].NOW_DATE);
 						$tdCol5.text(data.LIST[i].SEND_DATE);
 						$tdCol6.text(data.LIST[i].SEND_STATUS);
-						$tdCol7.text(data.LIST[i].TCS_RESULT);
-
+						if (data.LIST[i].TCS_RESULT == 0) {
+							$tdCol6.text('성공');
+							$tdCol7.text('');
+						}else if(data.LIST[i].TCS_RESULT == -2){
+							$tdCol6.text('대기');
+						}
+						else{
+							$tdCol6.text('실패');
+							$tdCol7.text('실패');
+						}
 						$tr.append($tdCol1);
 						$tr.append($tdCol2);
 						$tr.append($tdCol3);
@@ -62,7 +71,7 @@
 </script>
 <div class="card">
 	<div class="pt-3"></div>
-	<h5 class="title-font" style="padding-left:20px;">
+	<h5 class="title-font" style="padding-left: 20px;">
 		<i class="fa fa-search" aria-hidden="true"></i> 상세 결과 조회
 	</h5>
 	<div class="row" style="padding: 15px;">

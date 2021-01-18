@@ -81,6 +81,7 @@ public class MsgReportController {
 		Map<String, Object> resultMap = null;
 		try {
 			resultMap = msgReportService.schReport(schReportDTO);
+			System.out.println(schReportDTO.toString());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
