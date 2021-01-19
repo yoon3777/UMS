@@ -20,4 +20,4 @@
 <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 
 <!-- Custom styles for this template-->
-<link href="${contextPath}/assets/css/sb-admin-2.min.css" rel="stylesheet">
+<link href="${contextPath}/assets/css/sidebar.css" rel="stylesheet">
