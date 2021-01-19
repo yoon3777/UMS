@@ -1,10 +1,10 @@
-package com.mono.ums2.mapper;
+package com.mono.ums.mapper;
 
 import java.util.List;
 import java.util.Map;
 
-import com.mono.ums2.dto.SchDestReportDTO;
-import com.mono.ums2.dto.SchReportDTO;
+import com.mono.ums.dto.SchDestReportDTO;
+import com.mono.ums.dto.SchReportDTO;
 
 public interface MsgReportMapper {
 

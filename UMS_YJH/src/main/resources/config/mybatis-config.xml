@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias alias="DestTempDTO" type="com.mono.ums2.dto.DestTempDTO" />
-		<typeAlias alias="MsgSendDTO" type="com.mono.ums2.dto.MsgSendDTO" />
-		<typeAlias alias="SDKSendDTO" type="com.mono.ums2.dto.SDKSendDTO"/>
-		<typeAlias alias="SchDestDTO" type="com.mono.ums2.dto.SchDestDTO"/>
-		<typeAlias alias="SchDestReportDTO" type="com.mono.ums2.dto.SchDestReportDTO"/>
+		<typeAlias alias="DestTempDTO" type="com.mono.ums.dto.DestTempDTO" />
+		<typeAlias alias="MsgSendDTO" type="com.mono.ums.dto.MsgSendDTO" />
+		<typeAlias alias="SDKSendDTO" type="com.mono.ums.dto.SDKSendDTO"/>
+		<typeAlias alias="SchDestDTO" type="com.mono.ums.dto.SchDestDTO"/>
+		<typeAlias alias="SchDestReportDTO" type="com.mono.ums.dto.SchDestReportDTO"/>
 	</typeAliases>
 </configuration>

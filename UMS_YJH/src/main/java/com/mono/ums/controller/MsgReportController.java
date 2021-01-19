@@ -1,4 +1,4 @@
-package com.mono.ums2.controller;
+package com.mono.ums.controller;
 
 import java.util.Map;
 
@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mono.ums2.dto.SchReportDTO;
-import com.mono.ums2.service.MsgReportService;
+import com.mono.ums.dto.SchReportDTO;
+import com.mono.ums.service.MsgReportService;
 
 @Controller
 @RequestMapping("/msgreport")

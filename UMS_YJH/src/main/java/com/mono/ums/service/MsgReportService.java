@@ -1,8 +1,8 @@
-package com.mono.ums2.service;
+package com.mono.ums.service;
 
 import java.util.Map;
 
-import com.mono.ums2.dto.SchReportDTO;
+import com.mono.ums.dto.SchReportDTO;
 
 public interface MsgReportService {
 

@@ -1,13 +1,13 @@
-package com.mono.ums2.mapper;
+package com.mono.ums.mapper;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.mono.ums2.dto.DestTempDTO;
-import com.mono.ums2.dto.MsgSendDTO;
-import com.mono.ums2.dto.SDKSendDTO;
-import com.mono.ums2.dto.SchDestDTO;
+import com.mono.ums.dto.DestTempDTO;
+import com.mono.ums.dto.MsgSendDTO;
+import com.mono.ums.dto.SDKSendDTO;
+import com.mono.ums.dto.SchDestDTO;
 
 public interface MsgSendMapper {
 

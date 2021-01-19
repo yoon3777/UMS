@@ -1,4 +1,4 @@
-package com.mono.ums2.service.impl;
+package com.mono.ums.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -8,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.mono.ums2.dto.SchDestReportDTO;
-import com.mono.ums2.dto.SchReportDTO;
-import com.mono.ums2.mapper.MsgReportMapper;
-import com.mono.ums2.service.MsgReportService;
+import com.mono.ums.dto.SchDestReportDTO;
+import com.mono.ums.dto.SchReportDTO;
+import com.mono.ums.mapper.MsgReportMapper;
+import com.mono.ums.service.MsgReportService;
 
 @Service
 @Transactional

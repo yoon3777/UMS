@@ -1,4 +1,4 @@
-package com.mono.ums2.dto;
+package com.mono.ums.dto;
 
 import java.io.Serializable;
 

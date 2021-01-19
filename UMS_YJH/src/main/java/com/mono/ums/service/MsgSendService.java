@@ -1,11 +1,11 @@
-package com.mono.ums2.service;
+package com.mono.ums.service;
 
 import java.util.Map;
 
 import org.springframework.ui.Model;
 
-import com.mono.ums2.dto.DestTempDTO;
-import com.mono.ums2.dto.MsgSendDTO;
+import com.mono.ums.dto.DestTempDTO;
+import com.mono.ums.dto.MsgSendDTO;
 
 public interface MsgSendService {
 

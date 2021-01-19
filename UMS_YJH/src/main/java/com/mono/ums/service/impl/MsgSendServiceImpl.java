@@ -1,4 +1,4 @@
-package com.mono.ums2.service.impl;
+package com.mono.ums.service.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,12 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 
-import com.mono.ums2.dto.DestTempDTO;
-import com.mono.ums2.dto.MsgSendDTO;
-import com.mono.ums2.dto.SDKSendDTO;
-import com.mono.ums2.dto.SchDestDTO;
-import com.mono.ums2.mapper.MsgSendMapper;
-import com.mono.ums2.service.MsgSendService;
+import com.mono.ums.dto.DestTempDTO;
+import com.mono.ums.dto.MsgSendDTO;
+import com.mono.ums.dto.SDKSendDTO;
+import com.mono.ums.dto.SchDestDTO;
+import com.mono.ums.mapper.MsgSendMapper;
+import com.mono.ums.service.MsgSendService;
 
 @Service
 @Transactional

@@ -1,4 +1,4 @@
-package com.mono.ums2.controller;
+package com.mono.ums.controller;
 
 import java.util.Map;
 
@@ -13,11 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
-import com.mono.ums2.dto.DestTempDTO;
-import com.mono.ums2.dto.MsgSendDTO;
-import com.mono.ums2.service.MsgSendService;
+import com.mono.ums.dto.DestTempDTO;
+import com.mono.ums.dto.MsgSendDTO;
+import com.mono.ums.service.MsgSendService;
 
 @Controller
 @RequestMapping("/msgsend")
