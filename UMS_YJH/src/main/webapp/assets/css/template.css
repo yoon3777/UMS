@@ -84,14 +84,14 @@
 	height: 100%;
 	background: #4e73df;
 }
-/* 
+
 #subMenu {
 	display: none;
 }
 
 li a:target>#subMenu {
 	display: block;
-} */
+}
 li {
 	padding: 5px;
 }

@@ -15,7 +15,7 @@ html, body {
 }
 </style>
 <script type="text/javascript">
-	/* $(document).ready(function() {
+	$(document).ready(function() {
 		// Store variables
 		var menu_head = $('li > a'), menu_body = $('#subMenu');
 		// Click function
@@ -33,7 +33,7 @@ html, body {
 				menu_body.slideUp('normal');
 			}
 		});
-	}); */
+	});
 </script>
 </head>
 <body>

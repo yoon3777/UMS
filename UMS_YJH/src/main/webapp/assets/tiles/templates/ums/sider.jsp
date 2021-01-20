@@ -3,7 +3,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/msgsend/sms">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/view">
                 <div class="sidebar-brand-icon rotate-n-15">
                   <i class="fa fa-envelope-o"></i>
                 </div>

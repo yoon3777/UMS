@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,13 +13,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.mono.ums.service.MsgLoginService;
+import com.mono.ums.service.MsgViewService;
 
 @Controller
-public class MsgLoginController {
+public class MsgViewController {
 	
 	@Autowired
-	private MsgLoginService msgLoginService;
+	private MsgViewService msgLoginService;
 
 	@ModelAttribute
 	public void common(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -49,7 +50,8 @@ public class MsgLoginController {
 	}
 	
 	@RequestMapping("/view")
-	public String view(){
-		return "layout:form:msgview/view";
+	public String view(HttpSession session){
+		session.invalidate();
+		return "layout:view:msgview/view";
 	}
 }

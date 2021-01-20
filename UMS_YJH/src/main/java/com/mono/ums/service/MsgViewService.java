@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.springframework.ui.Model;
 
-public interface MsgLoginService {
+public interface MsgViewService {
 
 	Map<String, Object> login(Model model) throws Exception;
 
