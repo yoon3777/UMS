@@ -15,8 +15,8 @@ import com.mono.ums.service.MsgViewService;
 
 @Service
 @Transactional
-public class MsgViewServiceImpl implements MsgViewService{
-	
+public class MsgViewServiceImpl implements MsgViewService {
+
 	@Autowired
 	private MsgViewMapper msgViewMapper;
 
@@ -26,21 +26,26 @@ public class MsgViewServiceImpl implements MsgViewService{
 		HttpServletRequest request = (HttpServletRequest) model.asMap().get("request");
 		String userId = request.getParameter("userId");
 		String userPw = request.getParameter("userPw");
-		
+
 		Map<String, Object> paramMap = new HashMap<String, Object>();
+
 		paramMap.put("userId", userId);
 		paramMap.put("userPw", userPw);
-		
-		int chk = msgViewMapper.login(paramMap);
-		if(chk==1){
-			resultMap.put("RESULT_CODE", "1");
-		}else{
-			resultMap.put("RESULT_CODE", "0");
+
+		int loginchk = msgViewMapper.loginChk(paramMap);
+
+		if (loginchk == 1) {
+			Map<String, Object> chk = msgViewMapper.login(paramMap);
+			if (chk.get("USERID").equals(userId) && chk.get("USERPW").equals(userPw)) {
+				resultMap.put("RESULT_CODE", "1");
+			} else if (!chk.get("USERID").equals(userId)) {
+				resultMap.put("RESULT_CODE", "2");
+			}
+			resultMap.put("USERNM", chk.get("USERNM"));
+		} else {
+			resultMap.put("RESULT_CODE", "3");
 		}
-		
+
 		return resultMap;
 	}
-	
-	
-
 }

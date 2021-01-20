@@ -4,5 +4,7 @@ import java.util.Map;
 
 public interface MsgViewMapper {
 
-	int login(Map<String, Object> paramMap);
+	Map<String, Object> login(Map<String, Object> paramMap);
+
+	int loginChk(Map<String, Object> paramMap);
 }

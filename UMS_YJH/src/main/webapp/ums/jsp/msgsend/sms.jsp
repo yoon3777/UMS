@@ -95,9 +95,9 @@
 							$(this).val("");
 						});
 					} else if(data.RESULT_CODE == "0"){
-						swal("수신대상등록에 실패하였습니다.", "미입력", "danger");
+						swal("수신대상등록에 실패하였습니다.", "미입력", "error");
 					} else if(data.RESULT_CODE == "2"){
-						swal("수신대상등록에 실패하였습니다.", "수신번호 중복", "danger");
+						swal("수신대상등록에 실패하였습니다.", "수신번호 중복", "error");
 					}
 					schSendItems();
 				},
@@ -164,7 +164,7 @@
 							$(this).val("");
 						});
 					} else {
-						swal("메시지 전송 실패.", "??", "warning");
+						swal("메시지 전송 실패.", "??", "error");
 					}
 					schSendItems();
 				},
@@ -172,7 +172,7 @@
 
 				},
 				error : function() {
-					swal("실패", "..", "warning");
+					swal("실패", "", "error");
 				}
 			});
 		}
@@ -217,7 +217,7 @@
 
 			},
 			error : function() {
-				swal("실패", "..", "warning");
+				swal("실패", "", "error");
 			}
 		})
 	}
@@ -233,7 +233,7 @@
 
 			},
 			error : function() {
-				swal("실패", "..", "warning");
+				swal("실패", "", "error");
 			}
 		})
 	}
@@ -344,8 +344,8 @@
 							<i class="fa fa-user"></i> 수신자 목록
 						</h5>
 						<div style="text-align: right !important;">
-							<button type="button" id="deleteDest" class="delete-btn" onclick="deleteDest()">수신자 삭제</button>
-							<button type="button" id="deleteADest" class="delete-btn" onclick="deleteADest()">전체 삭제</button>
+							<button type="button" id="deleteDest" class="btn-delete" onclick="deleteDest()">수신자 삭제</button>
+							<button type="button" id="deleteADest" class="btn-delete" onclick="deleteADest()">전체 삭제</button>
 						</div>
 						<span id="totalCnt" style="font-size: 14px; font-weight: bold">총0건</span>
 						<div id="divBodyScroll">

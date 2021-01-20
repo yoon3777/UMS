@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
  <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/view">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/view${sessionScope.userNm}">
                 <div class="sidebar-brand-icon rotate-n-15">
                   <i class="fa fa-envelope-o"></i>
                 </div>

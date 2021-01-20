@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -17,7 +18,7 @@ import com.mono.ums.service.MsgViewService;
 
 @Controller
 public class MsgViewController {
-	
+
 	@Autowired
 	private MsgViewService msgLoginService;
 
@@ -48,10 +49,23 @@ public class MsgViewController {
 		}
 		return resultMap;
 	}
-	
-	@RequestMapping("/view")
-	public String view(HttpSession session){
-		session.invalidate();
+
+	@RequestMapping("/logout")
+	public String logout(HttpSession session) {
+		try {
+			session.invalidate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "layout:form:msgview/login";
+	}
+
+	@RequestMapping("/view{USERNM}")
+	public String view(HttpSession session, @PathVariable String USERNM) {
+		String userNm = USERNM;
+		session.setAttribute("userNm", userNm);
+		session.setAttribute("page", "Menu");
 		return "layout:view:msgview/view";
 	}
 }
